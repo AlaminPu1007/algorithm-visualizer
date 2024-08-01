@@ -1,4 +1,3 @@
-
 /* custom tree node */
 export const NODE_POSITION = 5;
 
@@ -24,4 +23,5 @@ export const SVG_VIEW_BOX_WIDTH = 240;
 export const DFS_DELAY = 800; // 1.5 second
 
 // a default wait method
-export const Sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const Sleep = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms));
