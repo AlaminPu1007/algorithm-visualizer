@@ -1,0 +1,65 @@
+/*
+Configure eslint for nextJs
+Read more about it: https://dev.to/azadshukor/setting-up-nextjs-13-with-typescript-eslint-47an
+Read about env : https://eslint.org/docs/latest/use/configure/language-options-deprecated#using-configuration-files
+*/
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": [
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:testing-library/react", // for jest unit testing
+        "plugin:jest-dom/recommended" // for jest unit testing
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "rules": {
+        // Note: you must disable the base rule as it can report incorrect errors
+        // instead we enabled -> @typescript-eslint/no-unused-vars
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "error",
+        "react/jsx-no-bind": [
+            "error",
+            {
+                "allowArrowFunctions": true,
+                "allowBind": false,
+                "ignoreRefs": true
+            }
+        ],
+        "semi": "error",
+        "prefer-const": "error",
+        "no-console": "warn",
+        "react/no-did-update-set-state": "error",
+        "react/no-unknown-property": "error",
+        "react/no-unused-prop-types": "error",
+        "react/prop-types": "error",
+        "react/react-in-jsx-scope": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+
+        // ES6 and Beyond
+        // "arrow-body-style": ["error", "as-needed"],
+        // "arrow-parens": ["error", "always"],
+        "no-var": "error",
+        "prefer-arrow-callback": "error",
+
+        // Code Readability and Consistency
+        "indent": ["error", 2],
+        // "quotes": ["error", "single", "backtick"],
+        // "camelcase": "error",
+
+        // Error Prevention
+        "no-undef": "error",
+        "eqeqeq": "error",
+        "no-implicit-coercion": "error",
+        "no-unused-expressions": "error",
+        "no-extra-boolean-cast": "error",
+        "no-eval": "error"
+    },
+    "root": true
+}
