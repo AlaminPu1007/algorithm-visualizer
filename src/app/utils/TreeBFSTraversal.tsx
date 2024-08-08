@@ -35,8 +35,13 @@ const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
         if (currentNode.left) queue.push(currentNode.left);
         if (currentNode.right) queue.push(currentNode.right);
       }
+
       // initialize a default state
       setCurrentNode(null);
+
+      await Sleep(BFS_DELAY * 3);
+      // initialized at default state
+      setVisitedNodes(new Set());
     };
 
     traverseBFS();
