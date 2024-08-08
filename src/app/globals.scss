@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255; */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0; */
+  }
+}
+
+body {
+  background-color: #fff;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.navbar {
+  @apply dark:max-[1023px]:bg-theme-dark-bg fixed list-none flex-col duration-200 ease-in max-[1023px]:left-0 max-[1023px]:top-0 max-[1023px]:h-[100vh] max-[1023px]:w-[350px] max-[1023px]:bg-white max-[1023px]:px-4 max-[1023px]:pt-[25px] lg:static lg:ml-auto lg:flex lg:flex-row lg:flex-wrap lg:items-center;
+}
+
+.nav-list-item-link {
+  @apply text-theme-primary after:bg-theme-secondary dark:text-theme-dark-primary dark:after:bg-theme-white relative my-2 inline-block whitespace-nowrap px-1 pb-2 text-lg font-light duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:duration-200 hover:after:w-full lg:mx-[12px] lg:my-0 lg:pb-1;
+}
+
+.title-txt {
+  @apply text-theme-secondary m-0 p-0 py-3 text-[1.55rem] font-bold uppercase tracking-[.02em] sm:text-3xl dark:text-white;
+}
+
+.root-btn {
+  @apply hover:bg-theme-btn-secondary rounded-sm border px-8 py-1 text-base transition-all duration-300 hover:text-white;
+}
+
+.active-root-btn {
+  @apply bg-theme-btn-secondary text-white;
+}
+
+// after effect with animation
+.after-hover-animation {
+  @apply after:bg-theme-secondary dark:after:bg-theme-dark-secondary after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:duration-200 hover:after:w-[100%];
+}

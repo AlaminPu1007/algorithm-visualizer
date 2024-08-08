@@ -3,18 +3,7 @@
  * @return {treeNode}
  */
 
-// Define the TreeNode interface
-export interface ITreeNode {
-  left: ITreeNode | null;
-  right: ITreeNode | null;
-  parent: ITreeNode | null;
-  value: number | null;
-  id: number | null;
-  cx: number | null;
-  cy: number | null;
-  isVisited: boolean;
-  isCurrent: boolean;
-}
+import { ITreeNode } from '@/app/types/TreeTypeProps';
 
 /**
  * @param {value} this is current node data

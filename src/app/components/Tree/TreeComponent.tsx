@@ -3,20 +3,21 @@
  */
 'use client';
 
-import { DFS_DELAY, NODE_POSITION, Sleep } from '@/app/constant';
+import { DFS_DELAY } from '@/app/constant';
 import React, { useState, useEffect } from 'react';
 
 import { Tree } from '@/app/data-structure/Tree/TreeNode';
-import { calculateLinePosition } from '@/app/utils/reusable-method/calculateSvgLinePosition';
-import { ITreeNode } from '@/app/data-structure/Tree/Node';
+import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
+import TreeDFSTraversal from '@/app/utils/TreeDFSTraversal';
+import { ITreeNode } from '@/app/types/TreeTypeProps';
 
 const TreeComponent = () => {
   // define a component local memory
   const [data, setData] = useState<ITreeNode>();
-
   const [steps, setSteps] = useState<ITreeNode[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(-1);
   const [visitedNodes, setVisitedNodes] = useState<Set<number>>(new Set());
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('');
 
   useEffect(() => {
     const newTree = new Tree();
@@ -79,8 +80,20 @@ const TreeComponent = () => {
     await Sleep(DFS_DELAY);
   };
 
-  const handleButtonClick = async () => {
+  /**
+   * Perform a DFS traversal
+   *
+   * @async an async method to called recursive approach
+   * @returns {void}
+   */
+  const performDFSMethod = async () => {
+    // update button type as well
+    setActiveRootBtnType('dfs');
+
     if (data) {
+      // clear time out if it's present
+      clearAllTimeouts();
+
       const visitedNodes = new Set<number>();
       await updateTreeRecursively(data, visitedNodes);
 
@@ -91,102 +104,62 @@ const TreeComponent = () => {
   };
 
   /**
-   * A recursive approach to render the linked-list.
+   * Perform a BFS traversal
+   *
+   * @async an async method to called recursive approach
+   * @returns {void}
    */
-  const renderNode = (root: ITreeNode) => {
-    if (!root || steps.indexOf(root) === -1) return null;
+  const performBFSMethod = async () => {
+    // update button type as well
+    setActiveRootBtnType('bfs');
 
-    // get current node
-    const isCurrentNode: boolean = Boolean(steps.indexOf(root) === currentStep);
-
-    // is visited node
-    const isVisited: boolean = Boolean(visitedNodes.has(root.id!));
-
-    return (
-      <g key={root.id}>
-        {root.parent &&
-          (() => {
-            const linePos = calculateLinePosition(
-              root.parent.cx!,
-              root.parent.cy!,
-              root.cx!,
-              root.cy!,
-              NODE_POSITION
-            );
-            return (
-              <>
-                <line
-                  x1={linePos.startX}
-                  y1={linePos.startY}
-                  x2={linePos.endX}
-                  y2={linePos.endY}
-                  stroke={
-                    isCurrentNode
-                      ? 'green' // Current node color
-                      : isVisited
-                        ? 'red' // Visited node color
-                        : 'black'
-                  }
-                  strokeWidth={'0.3'}
-                >
-                  <animate
-                    attributeName='stroke-dasharray'
-                    attributeType='XML'
-                    from='0 9.375' //from='0 79.375'
-                    to='79.375 0'
-                    dur={'4s'}
-                    fill='freeze'
-                  />
-                </line>
-              </>
-            );
-          })()}
-        <circle
-          cx={root.cx!}
-          cy={root.cy!}
-          r={NODE_POSITION}
-          fill={
-            isCurrentNode
-              ? 'cyan' // Current node color
-              : isVisited
-                ? '#3B9400' // Visited node color
-                : 'white'
-          }
-          stroke={isCurrentNode ? 'white' : 'black'}
-          strokeWidth={'0.2'}
-        >
-          <animate attributeName='r' from='4' to={5} dur='1s' begin={'0s'} />
-        </circle>
-        <text
-          x={root.cx!}
-          y={root.cy!}
-          dy={2}
-          textAnchor='middle'
-          className='text-center text-[4px]'
-          fill={`${visitedNodes.has(root.id!) ? 'white' : 'black'}`}
-        >
-          {root?.value || -1}
-        </text>
-
-        {/* called it's left child if it's present */}
-        {root.left && renderNode(root.left)}
-
-        {/* called it's right child if it's present */}
-        {root.right && renderNode(root.right)}
-      </g>
-    );
+    // clear all bfs method if it's running
+    clearAllTimeouts();
+    setCurrentStep(-1);
+    setVisitedNodes(new Set());
   };
 
   return (
     <div className=''>
-      <button
-        onClick={handleButtonClick}
-        className='mb-2 h-10 w-[120px] border bg-green-500 text-white'
-      >
-        DFS
-      </button>
+      <div className='item-center flex justify-between'>
+        <div className='flex'>
+          <button
+            onClick={performDFSMethod}
+            className={`root-btn ${activeRootBtnType === 'dfs' ? 'active-root-btn' : ''}`}
+          >
+            DFS
+          </button>
+          <button
+            className={`root-btn ml-2 ${activeRootBtnType === 'bfs' ? 'active-root-btn' : ''}`}
+            onClick={performBFSMethod}
+          >
+            BFS
+          </button>
+        </div>
+        <div>
+          <button className='rounded-sm border bg-blue-500 px-3 py-1 text-sm text-white'>
+            Pre Order
+          </button>
+          <button className='mx-3 rounded-sm border bg-blue-500 px-3 py-1 text-sm text-white'>
+            In Order
+          </button>
+          <button className='rounded-sm border bg-blue-500 px-3 py-1 text-sm text-white'>
+            Post Order
+          </button>
+        </div>
+      </div>
+
       <div className=''>
-        <svg viewBox='0 20 240 150'>{data && renderNode(data)}</svg>
+        <svg viewBox='0 20 280 150'>
+          {data && (
+            <TreeDFSTraversal
+              root={data}
+              steps={steps}
+              currentStep={currentStep}
+              visitedNodes={visitedNodes}
+            />
+          )}
+        </svg>
       </div>
     </div>
   );

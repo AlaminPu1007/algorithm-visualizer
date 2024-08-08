@@ -20,8 +20,4 @@ export const RIGHT_LINE_OFFSET: number = 10;
 export const SVG_VIEW_BOX_WIDTH = 240;
 
 // delay time of each DFS traversal
-export const DFS_DELAY = 800; // 1.5 second
-
-// a default wait method
-export const Sleep = (ms: number) =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+export const DFS_DELAY = 500; // 
