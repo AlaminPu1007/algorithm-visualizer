@@ -20,4 +20,7 @@ export const RIGHT_LINE_OFFSET: number = 10;
 export const SVG_VIEW_BOX_WIDTH = 240;
 
 // delay time of each DFS traversal
-export const DFS_DELAY = 500; // 
+export const DFS_DELAY = 600;
+
+// delay time of each BFS traversal
+export const BFS_DELAY = 600;

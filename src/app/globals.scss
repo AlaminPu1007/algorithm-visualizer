@@ -27,26 +27,34 @@ body {
 }
 
 .navbar {
-  @apply dark:max-[1023px]:bg-theme-dark-bg fixed list-none flex-col duration-200 ease-in max-[1023px]:left-0 max-[1023px]:top-0 max-[1023px]:h-[100vh] max-[1023px]:w-[350px] max-[1023px]:bg-white max-[1023px]:px-4 max-[1023px]:pt-[25px] lg:static lg:ml-auto lg:flex lg:flex-row lg:flex-wrap lg:items-center;
+  @apply fixed list-none flex-col duration-200 ease-in max-[1023px]:left-0 max-[1023px]:top-0 max-[1023px]:h-[100vh] max-[1023px]:w-[350px] max-[1023px]:bg-white max-[1023px]:px-4 max-[1023px]:pt-[25px] lg:static lg:ml-auto lg:flex lg:flex-row lg:flex-wrap lg:items-center dark:max-[1023px]:bg-theme-dark-bg;
 }
 
 .nav-list-item-link {
-  @apply text-theme-primary after:bg-theme-secondary dark:text-theme-dark-primary dark:after:bg-theme-white relative my-2 inline-block whitespace-nowrap px-1 pb-2 text-lg font-light duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:duration-200 hover:after:w-full lg:mx-[12px] lg:my-0 lg:pb-1;
+  @apply relative my-2 inline-block whitespace-nowrap px-1 pb-2 text-lg font-light text-theme-primary duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-theme-secondary after:duration-200 hover:after:w-full lg:mx-[12px] lg:my-0 lg:pb-1 dark:text-theme-dark-primary dark:after:bg-theme-white;
 }
 
 .title-txt {
-  @apply text-theme-secondary m-0 p-0 py-3 text-[1.55rem] font-bold uppercase tracking-[.02em] sm:text-3xl dark:text-white;
+  @apply m-0 p-0 py-3 text-[1.55rem] font-bold uppercase tracking-[.02em] text-theme-secondary sm:text-3xl dark:text-white;
 }
 
 .root-btn {
-  @apply hover:bg-theme-btn-secondary rounded-sm border px-8 py-1 text-base transition-all duration-300 hover:text-white;
+  @apply rounded-sm border px-8 py-1 text-base transition-all duration-300 hover:bg-theme-btn-secondary hover:text-white;
 }
 
 .active-root-btn {
   @apply bg-theme-btn-secondary text-white;
 }
 
+.child-btn {
+  @apply rounded-sm border px-3 py-1 text-sm text-black transition-all duration-300 hover:bg-blue-500 hover:text-white;
+}
+
+.active-child-btn {
+  @apply bg-blue-500 text-white;
+}
+
 // after effect with animation
 .after-hover-animation {
-  @apply after:bg-theme-secondary dark:after:bg-theme-dark-secondary after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:duration-200 hover:after:w-[100%];
+  @apply after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-theme-secondary after:duration-200 hover:after:w-[100%] dark:after:bg-theme-dark-secondary;
 }

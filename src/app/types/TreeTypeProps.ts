@@ -1,3 +1,5 @@
+import { TreeNode } from '../data-structure/Tree/Node';
+
 /**
  * interface representing an Tree node
  *
@@ -33,8 +35,18 @@ export interface ITreeNode {
  * @param {visitedNodes} Set<id> - identifier of visited node
  */
 export interface TreeDFSTraversalProps {
-  root: ITreeNode;
+  root: ITreeNode | null;
   steps: ITreeNode[];
   currentStep: number;
   visitedNodes: Set<number>;
+}
+
+/**
+ * Description placeholder
+ *
+ * @export
+ * @interface TreeBFSTraversalProps
+ */
+export interface TreeBFSTraversalProps {
+  root: TreeNode | null;
 }

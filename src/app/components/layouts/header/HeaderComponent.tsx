@@ -47,7 +47,7 @@ const HeaderComponent = () => {
           <Link
             href='/'
             // className='bg-custom-gradient bg-clip-text pr-4 text-4xl font-bold tracking-wider text-transparent md:pr-0'
-            className='text-theme-secondary m-0 flex items-center p-0 pr-4 text-center text-3xl font-semibold tracking-wider sm:text-4xl md:pr-0 dark:text-white'
+            className='m-0 flex items-center p-0 pr-4 text-center text-3xl font-semibold tracking-wider text-theme-secondary sm:text-4xl md:pr-0 dark:text-white'
           >
             HOME
           </Link>
@@ -59,7 +59,7 @@ const HeaderComponent = () => {
             <li className='flex items-center justify-between lg:hidden'>
               <Link
                 href='/'
-                className={`text-theme-secondary mb-3 pr-4 text-3xl font-semibold tracking-wider sm:text-4xl md:pr-0 dark:text-white`}
+                className={`mb-3 pr-4 text-3xl font-semibold tracking-wider text-theme-secondary sm:text-4xl md:pr-0 dark:text-white`}
                 onClick={onCloseDrawerNav}
               >
                 ALAMIN
@@ -70,10 +70,10 @@ const HeaderComponent = () => {
                   className={`relative mt-2 flex h-[18px] w-[26px] cursor-pointer flex-col justify-between duration-300 ease-in`}
                 >
                   <span
-                    className={`delay-400 bg-theme-primary absolute top-0 inline h-[2px] w-full duration-300 ease-in dark:bg-white dark:opacity-70 ${isDrawerOpen ? 'rotate-[45deg]' : 'rotate-[0deg]'}`}
+                    className={`delay-400 absolute top-0 inline h-[2px] w-full bg-theme-primary duration-300 ease-in dark:bg-white dark:opacity-70 ${isDrawerOpen ? 'rotate-[45deg]' : 'rotate-[0deg]'}`}
                   ></span>
                   <span
-                    className={`delay-400 bg-theme-primary inline h-[2px] w-full duration-300 ease-in dark:bg-white dark:opacity-70 ${isDrawerOpen ? 'rotate-[-45deg]' : 'rotate-[0deg]'}`}
+                    className={`delay-400 inline h-[2px] w-full bg-theme-primary duration-300 ease-in dark:bg-white dark:opacity-70 ${isDrawerOpen ? 'rotate-[-45deg]' : 'rotate-[0deg]'}`}
                   ></span>
                 </button>
               </div>
@@ -81,7 +81,7 @@ const HeaderComponent = () => {
             <li>
               <Link
                 href='/tree'
-                className={`nav-list-item-link dark:hover:bg-initial dark:hover:text-theme-dark-primary text-center`}
+                className={`nav-list-item-link dark:hover:bg-initial text-center dark:hover:text-theme-dark-primary`}
                 onClick={onCloseDrawerNav}
               >
                 Tree
@@ -142,9 +142,9 @@ const HeaderComponent = () => {
               className='relative flex h-[18px] w-[26px] flex-col justify-between'
               onClick={openDrawerNav}
             >
-              <span className='bg-theme-primary inline h-[2px] w-full dark:bg-white dark:opacity-70'></span>
-              <span className='bg-theme-primary inline h-[2px] w-full dark:bg-white dark:opacity-70'></span>
-              <span className='bg-theme-primary inline h-[2px] w-full dark:bg-white dark:opacity-70'></span>
+              <span className='inline h-[2px] w-full bg-theme-primary dark:bg-white dark:opacity-70'></span>
+              <span className='inline h-[2px] w-full bg-theme-primary dark:bg-white dark:opacity-70'></span>
+              <span className='inline h-[2px] w-full bg-theme-primary dark:bg-white dark:opacity-70'></span>
             </button>
           </div>
         ) : null}
