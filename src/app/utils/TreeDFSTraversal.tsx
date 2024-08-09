@@ -14,9 +14,41 @@ const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({
   const isCurrentNode = steps.indexOf(root) === currentStep;
   const isVisited = visitedNodes.has(root.id!);
 
+  const renderLineToParent = () => {
+    if (root.parent ) {
+      const linePos = calculateLinePosition(
+        root.parent.cx!,
+        root.parent.cy!,
+        root.cx!,
+        root.cy!,
+        NODE_POSITION
+      );
+      return (
+        <line
+          x1={linePos.startX}
+          y1={linePos.startY}
+          x2={linePos.endX}
+          y2={linePos.endY}
+          stroke={isCurrentNode ? 'green' : isVisited ? 'red' : 'black'}
+          strokeWidth={'0.3'}
+        >
+          <animate
+            attributeName='stroke-dasharray'
+            attributeType='XML'
+            from='0 9.375'
+            to='79.375 0'
+            dur={'4s'}
+            fill='freeze'
+          />
+        </line>
+      );
+    }
+    return null;
+  };
+
   return (
     <g key={root.id}>
-      {root.parent &&
+      {/* {root.parent &&
         (() => {
           const linePos = calculateLinePosition(
             root.parent.cx!,
@@ -46,7 +78,9 @@ const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({
               </line>
             </>
           );
-        })()}
+        })()} */}
+      if()
+      {renderLineToParent()}
       <circle
         cx={root.cx!}
         cy={root.cy!}
@@ -67,7 +101,6 @@ const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({
       >
         {root?.value || -1}
       </text>
-
       {root.left && (
         <TreeDFSTraversal
           root={root.left}

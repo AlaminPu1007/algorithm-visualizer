@@ -1,9 +1,11 @@
 import { SVG_VIEW_BOX_WIDTH } from '@/app/constant';
-import { ITreeNode, TreeNode } from './Node';
+import { TreeNode } from './Node';
+import { ITreeNode } from '@/app/types/TreeTypeProps';
 
 // // Define the Tree interface
 export interface ITree {
   head: ITreeNode | null;
+  arr: (number | null)[];
   insertIntoList(value: number | undefined): void;
 }
 
@@ -14,8 +16,68 @@ export interface ITree {
 
 export class Tree implements ITree {
   head: ITreeNode | null = null;
+  arr: (number | null)[] = [];
+
+  constructor(arr: (number | null)[]) {
+    this.head = null;
+    this.arr = arr;
+    // initiate the method
+    this.insertIntoList();
+  }
 
   insertIntoList(): void {
+    if (this.arr?.length === 0) return;
+
+    this.head = new TreeNode(this.arr[0]);
+
+    const queue: TreeNode[] = [this.head];
+
+    // initialize a pointer to traverse the array from 1 to n
+    // eslint-disable-next-line prefer-const
+    let i = 1;
+
+    const maxHeight = 3; // Maximum allowed height of the tree
+    let currentLevel = 0; // Track the current level of nodes being processed
+
+    while (i < this.arr.length && currentLevel <= maxHeight) {
+      // Number of nodes at the current level
+      const levelSize = queue.length;
+
+      for (let j = 0; j < levelSize; j++) {
+        // Get the current node from the queue
+        const currentNode = queue.shift();
+
+        if (currentNode) {
+          // Insert left child if available
+          if (i < this.arr.length && this.arr[i] !== null) {
+            const left = new TreeNode(this.arr[i++]);
+            left.parent = currentNode;
+            currentNode.left = left;
+            // Insert into queue, and it will become the next level parent
+            queue.push(currentNode.left);
+          } else {
+            // Skip the current null item
+            i++;
+          }
+
+          // Insert right child if available
+          if (i < this.arr.length && this.arr[i] !== null) {
+            const right = new TreeNode(this.arr[i++]);
+            right.parent = currentNode;
+            currentNode.right = right;
+            // Insert into queue, and it will become the next level parent
+            queue.push(currentNode.right);
+          } else {
+            // Skip the current null item
+            i++;
+          }
+        }
+      }
+
+      currentLevel++; // Move to the next level
+    }
+
+    /*
     // Initialize the head node
     this.head = new TreeNode(50); // root
 
@@ -86,6 +148,7 @@ export class Tree implements ITree {
     this.head.right.right.left.right.parent = this.head.right.right.left;
     this.head.right.right.right.left.parent = this.head.right.right.right;
     this.head.right.right.right.right.parent = this.head.right.right.right;
+    */
 
     // Set a current node (example: setting the head as current)
     if (this.head) {
@@ -124,6 +187,7 @@ export class Tree implements ITree {
     if (!node) return;
     node.cx = x;
     node.cy = y;
+
     if (node.left) {
       this.calculatePositions(node.left, x - offset, y + 30, offset / 2); // Adjust the y increment to control vertical spacing
     }
