@@ -89,11 +89,11 @@ const HeaderComponent = () => {
             </li>
             <li className='lg:lg:mx-2'>
               <Link
-                href='/#about-myself'
+                href='/n-queens'
                 className='nav-list-item-link'
                 onClick={onCloseDrawerNav}
               >
-                About
+                N-Queens
               </Link>
             </li>
             <li className='lg:mx-2'>

@@ -1,3 +1,5 @@
+import { ICell } from './types/NQueensProps';
+
 /* custom tree node */
 export const NODE_POSITION = 5;
 
@@ -31,3 +33,20 @@ export const TreeArrData: (number | null)[] = [
   50, 40, 60, 30, 35, 65, 70, 25, 78, 33, 37, 63, 68, 10, 80, 20, 22, 26, 29,
   31, 34, 36, 38, 61, 64, 66, 69, 72, 76, 78, 82,
 ];
+
+// fill the check board according to the grid size
+export const fillGridArray = (
+  size: number,
+  defaultValue: number = 0
+): ICell[][] => {
+  let id = 1;
+  return Array(size)
+    .fill(0)
+    .map(() =>
+      Array(size)
+        .fill(0)
+        .map(() => ({ id: id++, value: defaultValue }))
+    );
+};
+
+export const GRID_SIZE = 4;
