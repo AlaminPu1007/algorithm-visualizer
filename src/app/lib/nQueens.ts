@@ -3,11 +3,13 @@ import { ICell } from '../types/NQueensProps';
 /**
  * To check valid or safe position to put a queen into grid
  *
+ * @reference {https://github.com/AlaminPu1007/Data-structure-Algorithm/blob/master/DataStructure%20%26%20Algorithm/Recursion/N-Queens/n_queens_without_hashing.cpp} understand more readable to check valid queen
  * @param {number} row current row index of currently putted queen
  * @param {number} col current col index of currently putted queen
  * @param {number[]} board
  * @returns {boolean}
  */
+
 export const isPutQueen = (row: number, col: number, board: number[]) => {
   for (let i = 0; i < col; i++) {
     /*
