@@ -28,9 +28,9 @@ const ChessBoard: React.FC = () => {
     // clear time-out it it's present
     clearAllTimeouts();
     // clear grid if it's present
-    if (currentItem.row !== -1 || Object.keys(highlight)?.length) {
-      setGrid(fillGridArray(Number(selectInput)));
-    }
+    // if (currentItem.row !== -1 || Object.keys(highlight)?.length) {
+    setGrid(fillGridArray(Number(selectInput)));
+    // }
     setCurrentItem({ row: -1, col: -1 });
     setHighlight({});
 
