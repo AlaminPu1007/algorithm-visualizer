@@ -55,4 +55,4 @@ export const GRID_SIZE = 4;
 export const MERGE_SORT_SVG_WIDTH = 2000;
 export const MERGE_SORT_SVG_HEIGHT = 300;
 // merge data sleep time
-export const MERGE_SLEEP_DELAY = 500;
+export const MERGE_SLEEP_DELAY = 0;

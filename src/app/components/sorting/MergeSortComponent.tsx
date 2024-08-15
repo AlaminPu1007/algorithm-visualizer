@@ -13,7 +13,9 @@ const maxValue = Math.max(...mergeSortData.map((item) => Number(item.data)));
 const columnWidth = MERGE_SORT_SVG_WIDTH / mergeSortData.length;
 const columnSpacing = 5; // Space between columns
 
-const MergeSortComponent = () => {
+const MergeSortComponent: React.FC<{ speedRange: number }> = ({
+  speedRange = 0,
+}) => {
   const [data, setData] = useState<mergeSortDataProps[]>(mergeSortData);
   const [step, setStep] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<{
@@ -27,7 +29,15 @@ const MergeSortComponent = () => {
 
   useEffect(() => {
     if (data.length) {
-      mergeSortMethod(data, setStep, setCurrentIndex, setIsSorted, setData);
+      mergeSortMethod(
+        data,
+        setStep,
+        currentIndex,
+        setCurrentIndex,
+        setIsSorted,
+        setData,
+        speedRange
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
