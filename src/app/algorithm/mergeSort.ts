@@ -22,7 +22,13 @@ export const mergeSortMethod = async (
   setCurrentIndex: React.Dispatch<React.SetStateAction<currentIndicesProps>>,
   setIsSorted: (sorted: boolean) => void,
   setData: (data: mergeSortDataProps[]) => void,
-  speedRange: number
+  speedRange: number,
+  setCurrentHalves: React.Dispatch<
+    React.SetStateAction<{
+      leftHalf: number[];
+      rightHalf: number[];
+    }>
+  >
 ) => {
   // eslint-disable-next-line prefer-const
   let low = 0;
@@ -45,9 +51,15 @@ export const mergeSortMethod = async (
     setStep,
     setCurrentIndex,
     setData,
-    speedRange
+    speedRange,
+    setCurrentHalves
   );
   setIsSorted(true);
+  // after completed merge-sort mark initial state
+  setCurrentHalves({
+    leftHalf: [],
+    rightHalf: [],
+  });
 };
 
 /**
@@ -69,7 +81,13 @@ const mergeSortDFS = async (
   setStep: React.Dispatch<React.SetStateAction<number>>,
   setCurrentIndex: React.Dispatch<React.SetStateAction<currentIndicesProps>>,
   setData: (data: mergeSortDataProps[]) => void,
-  speedRange: number
+  speedRange: number,
+  setCurrentHalves: React.Dispatch<
+    React.SetStateAction<{
+      leftHalf: number[];
+      rightHalf: number[];
+    }>
+  >
 ) => {
   if (low >= high) return;
 
@@ -84,7 +102,8 @@ const mergeSortDFS = async (
     setStep,
     setCurrentIndex,
     setData,
-    speedRange
+    speedRange,
+    setCurrentHalves
   );
 
   // called the right halves
@@ -95,8 +114,15 @@ const mergeSortDFS = async (
     setStep,
     setCurrentIndex,
     setData,
-    speedRange
+    speedRange,
+    setCurrentHalves
   );
+
+  // Update the state to indicate the current left and right halves
+  setCurrentHalves({
+    leftHalf: data.slice(low, mid + 1).map((item) => Number(item.id)), // (mid + 1) => include mid
+    rightHalf: data.slice(mid + 1, high + 1).map((item) => Number(item.id)), //  (high + 1) => ensure to include last item also
+  });
 
   // now merge both left & right halves
   await mergeMethod(data, low, mid, high, setCurrentIndex, setData, speedRange);
