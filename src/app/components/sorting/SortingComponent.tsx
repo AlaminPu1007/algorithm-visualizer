@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import MergeSortComponent from './MergeSortComponent';
 import { uid } from '@/app/lib/uidGenerator';
+import BubbleSortComponent from './BubbleSortComponent';
 
 const SortingComponent = () => {
   // define local state
@@ -66,7 +67,9 @@ const SortingComponent = () => {
         </div>
       ) : null}
       {buttonType === 'bubble-sort' ? (
-        <div className='container py-5'>{/* <MergeSortComponent /> */}</div>
+        <div className='container py-5'>
+          <BubbleSortComponent key={randomKey} speedRange={speedRange} />
+        </div>
       ) : null}
     </div>
   );

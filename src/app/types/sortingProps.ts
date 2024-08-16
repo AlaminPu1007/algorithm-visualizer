@@ -1,19 +1,17 @@
 /**
  * Interface representing the structure of each item in the merge sort data array.
- * @interface
+ *
+ * @export
+ * @interface mergeSortDataProps
+ * @typedef {mergeSortDataProps}
  */
 export interface mergeSortDataProps {
-  /**
-   * Unique identifier for the data item.
-   * @type {number | string}
-   */
   id: number | string;
-
-  /**
-   * The data value associated with the item.
-   * @type {number | string}
-   */
   data: number | string;
+  isSorted: boolean;
+  currentItem: boolean;
+  isSwapped: boolean;
+  isFinished: boolean;
 }
 
 /**
