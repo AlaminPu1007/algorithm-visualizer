@@ -58,6 +58,12 @@ const SortingComponent = () => {
             >
               Bubble sort
             </button>
+            <button
+              className={`root-btn ${buttonType === 'selection-sort' ? 'active-root-btn' : ''}`}
+              onClick={() => buttonMethod('selection-sort')}
+            >
+              Selection sort
+            </button>
           </div>
         </div>
       </div>
@@ -70,6 +76,9 @@ const SortingComponent = () => {
         <div className='container py-5'>
           <BubbleSortComponent key={randomKey} speedRange={speedRange} />
         </div>
+      ) : null}
+      {buttonType === 'selection-sort' ? (
+        <div className='container py-5'></div>
       ) : null}
     </div>
   );
