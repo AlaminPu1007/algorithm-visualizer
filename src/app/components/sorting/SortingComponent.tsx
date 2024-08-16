@@ -8,7 +8,7 @@ const SortingComponent = () => {
   // define local state
   const [buttonType, setButtonType] = useState<string>('merge-sort');
   const [randomKey, setRandomKey] = useState<string>('');
-  const [speedRange, setSpeedRange] = useState<number>(0);
+  const [speedRange, setSpeedRange] = useState<number>(500);
 
   /** updated current button with it's type */
   const buttonMethod = (type: string) => {

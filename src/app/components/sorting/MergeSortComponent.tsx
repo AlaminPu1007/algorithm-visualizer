@@ -26,7 +26,6 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
     rightIndex: -1,
   }); // State for current index
   const [isSorted, setIsSorted] = useState<boolean>(false);
-
   const [currentHalves, setCurrentHalves] = useState<{
     leftHalf: number[];
     rightHalf: number[];
@@ -34,6 +33,7 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
     leftHalf: [],
     rightHalf: [],
   });
+  const [completedItems, setCompletedItems] = useState<number[]>([]);
 
   useEffect(() => {
     if (data.length) {
@@ -45,7 +45,8 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
         setIsSorted,
         setData,
         speedRange,
-        setCurrentHalves
+        setCurrentHalves,
+        setCompletedItems
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,9 +71,15 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
             const isCurrentLeft = index === currentIndex.leftIndex;
             const isCurrentRight = index === currentIndex.rightIndex;
 
-            let fillColor = 'black'; // Default color
+            let isCompleted = false;
 
             if (isSorted) {
+              isCompleted = completedItems.includes(index);
+            }
+
+            let fillColor = 'black'; // Default color
+
+            if (isCompleted && isSorted) {
               fillColor = 'green'; // Color for completed sorting
             } else if (isCurrentLeft) {
               fillColor = 'red'; // Color for current left index
@@ -108,11 +115,17 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
             const isCurrentLeft = index === currentIndex.leftIndex;
             const isCurrentRight = index === currentIndex.rightIndex;
 
+            let isCompleted = false;
+
+            if (isSorted) {
+              isCompleted = completedItems.includes(index);
+            }
+
             return (
               <p
                 key={item.id}
                 className={`border p-2 text-[12px] ${
-                  !isSorted
+                  !(isCompleted && isCompleted)
                     ? isCurrentLeft
                       ? 'bg-red-800 text-white'
                       : isCurrentRight

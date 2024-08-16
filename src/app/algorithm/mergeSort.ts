@@ -28,7 +28,8 @@ export const mergeSortMethod = async (
       leftHalf: number[];
       rightHalf: number[];
     }>
-  >
+  >,
+  setCompletedItems: React.Dispatch<React.SetStateAction<number[]>>
 ) => {
   // eslint-disable-next-line prefer-const
   let low = 0;
@@ -52,14 +53,27 @@ export const mergeSortMethod = async (
     setCurrentIndex,
     setData,
     speedRange,
-    setCurrentHalves
+    setCurrentHalves,
+    setCompletedItems
   );
+
   setIsSorted(true);
+  await Sleep(10);
+
+  // after completed the merged properly
+  for (let i = 0; i < data?.length; i++) {
+    setCompletedItems((prv) => [...prv, i]);
+    await Sleep(0);
+  }
+
+  await Sleep(1500);
+
   // after completed merge-sort mark initial state
   setCurrentHalves({
     leftHalf: [],
     rightHalf: [],
   });
+  // setCompletedItems([]);
 };
 
 /**
@@ -87,7 +101,8 @@ const mergeSortDFS = async (
       leftHalf: number[];
       rightHalf: number[];
     }>
-  >
+  >,
+  setCompletedItems: React.Dispatch<React.SetStateAction<number[]>>
 ) => {
   if (low >= high) return;
 
@@ -103,7 +118,8 @@ const mergeSortDFS = async (
     setCurrentIndex,
     setData,
     speedRange,
-    setCurrentHalves
+    setCurrentHalves,
+    setCompletedItems
   );
 
   // called the right halves
@@ -115,7 +131,8 @@ const mergeSortDFS = async (
     setCurrentIndex,
     setData,
     speedRange,
-    setCurrentHalves
+    setCurrentHalves,
+    setCompletedItems
   );
 
   // Update the state to indicate the current left and right halves
@@ -129,6 +146,11 @@ const mergeSortDFS = async (
 
   // update counter
   setStep((prevStep) => prevStep + 1);
+
+  setCurrentHalves({
+    leftHalf: [],
+    rightHalf: [],
+  });
 };
 
 /**
