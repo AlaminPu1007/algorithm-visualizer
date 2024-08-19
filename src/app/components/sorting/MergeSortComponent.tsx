@@ -16,7 +16,9 @@ const columnSpacing = 5; // Space between columns
 const MergeSortComponent: React.FC<{ speedRange: number }> = ({
   speedRange = 0,
 }) => {
-  const [data, setData] = useState<mergeSortDataProps[]>(mergeSortData);
+  const [data, setData] = useState<mergeSortDataProps[]>(
+    JSON.parse(JSON.stringify(mergeSortData))
+  );
   const [step, setStep] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<{
     leftIndex: number | null;
@@ -54,6 +56,47 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
 
   return (
     <div>
+      <div className='mb-4 mt-0 flex items-center justify-start space-x-4'>
+        {/* Color for completed sorting */}
+        <div className='group relative'>
+          <div className='h-6 w-6 bg-green-600'></div>
+          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+            Completed Sorting (Green)
+          </span>
+        </div>
+
+        {/* Color for current left index */}
+        <div className='group relative'>
+          <div className='h-6 w-6 bg-red-600'></div>
+          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+            Current Left Index (Red)
+          </span>
+        </div>
+
+        {/* Color for current right index */}
+        <div className='group relative'>
+          <div className='h-6 w-6 bg-blue-600'></div>
+          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+            Current Right Index (Blue)
+          </span>
+        </div>
+
+        {/* Color for current left half */}
+        <div className='group relative'>
+          <div className='h-6 w-6 bg-orange-600'></div>
+          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+            Current Left Half (Orange)
+          </span>
+        </div>
+
+        {/* Color for current right half */}
+        <div className='group relative'>
+          <div className='h-6 w-6 bg-purple-600'></div>
+          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+            Current Right Half (Purple)
+          </span>
+        </div>
+      </div>
       <div className='flex items-end justify-center'>
         <svg
           viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`}
@@ -124,7 +167,7 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
             return (
               <p
                 key={item.id}
-                className={`border p-2 text-[12px] ${
+                className={`min-w-[50px] border p-2 text-[12px] ${
                   !(isCompleted && isCompleted)
                     ? isCurrentLeft
                       ? 'bg-red-800 text-white'

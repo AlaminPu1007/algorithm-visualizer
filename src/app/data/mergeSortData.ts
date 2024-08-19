@@ -8,6 +8,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 2,
@@ -16,6 +19,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 3,
@@ -24,6 +30,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 4,
@@ -32,6 +41,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 5,
@@ -40,6 +52,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 6,
@@ -48,6 +63,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 7,
@@ -56,6 +74,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 8,
@@ -64,6 +85,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 9,
@@ -72,6 +96,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 10,
@@ -80,6 +107,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 11,
@@ -88,6 +118,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 12,
@@ -96,6 +129,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 13,
@@ -104,6 +140,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 14,
@@ -112,6 +151,9 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
 //   },
 //   {
 //     id: 15,
@@ -120,7 +162,10 @@ import { mergeSortDataProps } from '../types/sortingProps';
 //     currentItem: false,
 //     isSwapped: false,
 //     isFinished: false,
-//   }
+//     isCurrentCompareAbleItem: false,
+//     isCandidate: false,
+//     isActive: false,
+//   },
 // ];
 
 export const mergeSortData: mergeSortDataProps[] = [
@@ -131,6 +176,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 2,
@@ -139,6 +187,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 3,
@@ -147,6 +198,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 4,
@@ -155,6 +209,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 5,
@@ -163,6 +220,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 6,
@@ -171,6 +231,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 7,
@@ -179,6 +242,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 8,
@@ -187,6 +253,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 9,
@@ -195,6 +264,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 10,
@@ -203,6 +275,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 11,
@@ -211,6 +286,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 12,
@@ -219,6 +297,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 13,
@@ -227,6 +308,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 14,
@@ -235,6 +319,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 15,
@@ -243,6 +330,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 16,
@@ -251,6 +341,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 17,
@@ -259,6 +352,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 18,
@@ -267,6 +363,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 19,
@@ -275,6 +374,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 20,
@@ -283,6 +385,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 21,
@@ -291,6 +396,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 22,
@@ -299,6 +407,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 23,
@@ -307,6 +418,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 24,
@@ -315,6 +429,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 25,
@@ -323,6 +440,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 26,
@@ -331,6 +451,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 27,
@@ -339,6 +462,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 28,
@@ -347,6 +473,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 29,
@@ -355,6 +484,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 30,
@@ -363,6 +495,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 31,
@@ -371,6 +506,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 32,
@@ -379,6 +517,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 33,
@@ -387,6 +528,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 34,
@@ -395,6 +539,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 35,
@@ -403,6 +550,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 36,
@@ -411,6 +561,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 37,
@@ -419,6 +572,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 38,
@@ -427,6 +583,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 39,
@@ -435,6 +594,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 40,
@@ -443,6 +605,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 41,
@@ -451,6 +616,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 42,
@@ -459,6 +627,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 43,
@@ -467,6 +638,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 44,
@@ -475,6 +649,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 45,
@@ -483,6 +660,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 46,
@@ -491,6 +671,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 47,
@@ -499,6 +682,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 48,
@@ -507,6 +693,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 49,
@@ -515,6 +704,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 50,
@@ -523,6 +715,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 51,
@@ -531,6 +726,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 52,
@@ -539,6 +737,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 53,
@@ -547,6 +748,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 54,
@@ -555,6 +759,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 55,
@@ -563,6 +770,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 56,
@@ -571,6 +781,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 57,
@@ -579,6 +792,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 58,
@@ -587,6 +803,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 59,
@@ -595,6 +814,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 60,
@@ -603,6 +825,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 61,
@@ -611,6 +836,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 62,
@@ -619,6 +847,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 63,
@@ -627,6 +858,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 64,
@@ -635,6 +869,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 65,
@@ -643,6 +880,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 66,
@@ -651,6 +891,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 67,
@@ -659,6 +902,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 68,
@@ -667,6 +913,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 69,
@@ -675,6 +924,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 70,
@@ -683,6 +935,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 71,
@@ -691,6 +946,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 72,
@@ -699,6 +957,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 73,
@@ -707,6 +968,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 74,
@@ -715,6 +979,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 75,
@@ -723,6 +990,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 76,
@@ -731,6 +1001,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 77,
@@ -739,6 +1012,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 78,
@@ -747,6 +1023,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 79,
@@ -755,6 +1034,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 80,
@@ -763,6 +1045,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 81,
@@ -771,6 +1056,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 82,
@@ -779,6 +1067,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 83,
@@ -787,6 +1078,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 84,
@@ -795,6 +1089,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 85,
@@ -803,6 +1100,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 86,
@@ -811,6 +1111,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 87,
@@ -819,6 +1122,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 88,
@@ -827,6 +1133,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 89,
@@ -835,6 +1144,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 90,
@@ -843,6 +1155,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 91,
@@ -851,6 +1166,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 92,
@@ -859,6 +1177,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 93,
@@ -867,6 +1188,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 94,
@@ -875,6 +1199,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 95,
@@ -883,6 +1210,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 96,
@@ -891,6 +1221,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 97,
@@ -899,6 +1232,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 98,
@@ -907,6 +1243,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 99,
@@ -915,6 +1254,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 100,
@@ -923,6 +1265,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 101,
@@ -931,6 +1276,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 102,
@@ -939,6 +1287,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 103,
@@ -947,6 +1298,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 104,
@@ -955,6 +1309,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 105,
@@ -963,6 +1320,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 106,
@@ -971,6 +1331,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 107,
@@ -979,6 +1342,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 108,
@@ -987,6 +1353,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 109,
@@ -995,6 +1364,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 110,
@@ -1003,6 +1375,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 111,
@@ -1011,6 +1386,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 112,
@@ -1019,6 +1397,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 113,
@@ -1027,6 +1408,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 114,
@@ -1035,6 +1419,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 115,
@@ -1043,6 +1430,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 116,
@@ -1051,6 +1441,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 117,
@@ -1059,6 +1452,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 118,
@@ -1067,6 +1463,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 119,
@@ -1075,6 +1474,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 120,
@@ -1083,6 +1485,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 121,
@@ -1091,6 +1496,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 122,
@@ -1099,6 +1507,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 123,
@@ -1107,6 +1518,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 124,
@@ -1115,6 +1529,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 125,
@@ -1123,6 +1540,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 126,
@@ -1131,6 +1551,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 127,
@@ -1139,6 +1562,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 128,
@@ -1147,6 +1573,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 129,
@@ -1155,6 +1584,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 130,
@@ -1163,6 +1595,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 131,
@@ -1171,6 +1606,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 132,
@@ -1179,6 +1617,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 133,
@@ -1187,6 +1628,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 134,
@@ -1195,6 +1639,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 135,
@@ -1203,6 +1650,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 136,
@@ -1211,6 +1661,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 137,
@@ -1219,6 +1672,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 138,
@@ -1227,6 +1683,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 139,
@@ -1235,6 +1694,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 140,
@@ -1243,6 +1705,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 141,
@@ -1251,6 +1716,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 142,
@@ -1259,6 +1727,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 143,
@@ -1267,6 +1738,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 144,
@@ -1275,6 +1749,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 145,
@@ -1283,6 +1760,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 146,
@@ -1291,6 +1771,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 147,
@@ -1299,6 +1782,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 148,
@@ -1307,6 +1793,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 149,
@@ -1315,6 +1804,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 150,
@@ -1323,6 +1815,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 151,
@@ -1331,6 +1826,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 152,
@@ -1339,6 +1837,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 153,
@@ -1347,6 +1848,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 154,
@@ -1355,6 +1859,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 155,
@@ -1363,6 +1870,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 156,
@@ -1371,6 +1881,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 157,
@@ -1379,6 +1892,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 158,
@@ -1387,6 +1903,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 159,
@@ -1395,6 +1914,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 160,
@@ -1403,6 +1925,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 161,
@@ -1411,6 +1936,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 162,
@@ -1419,6 +1947,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 163,
@@ -1427,6 +1958,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 164,
@@ -1435,6 +1969,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 165,
@@ -1443,6 +1980,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 166,
@@ -1451,6 +1991,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 167,
@@ -1459,6 +2002,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 168,
@@ -1467,6 +2013,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 169,
@@ -1475,6 +2024,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 170,
@@ -1483,6 +2035,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 171,
@@ -1491,6 +2046,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 172,
@@ -1499,6 +2057,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 173,
@@ -1507,6 +2068,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 174,
@@ -1515,6 +2079,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 175,
@@ -1523,6 +2090,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 176,
@@ -1531,6 +2101,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 177,
@@ -1539,6 +2112,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 178,
@@ -1547,6 +2123,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 179,
@@ -1555,6 +2134,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 180,
@@ -1563,6 +2145,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 181,
@@ -1571,6 +2156,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 182,
@@ -1579,6 +2167,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 183,
@@ -1587,6 +2178,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 184,
@@ -1595,6 +2189,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 185,
@@ -1603,6 +2200,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 186,
@@ -1611,6 +2211,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 187,
@@ -1619,6 +2222,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 188,
@@ -1627,6 +2233,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 189,
@@ -1635,6 +2244,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 190,
@@ -1643,6 +2255,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 191,
@@ -1651,6 +2266,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 192,
@@ -1659,6 +2277,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 193,
@@ -1667,6 +2288,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 194,
@@ -1675,6 +2299,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 195,
@@ -1683,6 +2310,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 196,
@@ -1691,6 +2321,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 197,
@@ -1699,6 +2332,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 198,
@@ -1707,6 +2343,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 199,
@@ -1715,6 +2354,9 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
   {
     id: 200,
@@ -1723,5 +2365,8 @@ export const mergeSortData: mergeSortDataProps[] = [
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
   },
 ];

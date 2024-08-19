@@ -1,4 +1,4 @@
-import { bubbleSortAlgo } from '@/app/algorithm/bubbleSort';
+import { selectionSortAlgo } from '@/app/algorithm/selectionSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
 import { mergeSortData } from '@/app/data/mergeSortData';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
@@ -12,18 +12,19 @@ const maxValue = Math.max(...mergeSortData.map((item) => Number(item.data)));
 const columnWidth = MERGE_SORT_SVG_WIDTH / mergeSortData.length;
 const columnSpacing = 5; // Space between columns
 
-const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
+const SelectionSortComponent: React.FC<{ speedRange: number }> = ({
   speedRange,
 }) => {
   /** Define component state */
   const [data, setData] = useState<mergeSortDataProps[]>(
     JSON.parse(JSON.stringify(mergeSortData))
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [step, setStep] = useState<number>(0);
 
   useEffect(() => {
     if (data.length) {
-      bubbleSortMethod();
+      selectionSortMethod();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -39,12 +40,15 @@ const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
       isSwapped: false,
       currentItem: false,
       isFinished: false,
+      isCurrentCompareAbleItem: false,
+      isCandidate: false,
+      isActive: false,
     }));
 
     setData(tempData);
   };
 
-  const bubbleSortMethod = async () => {
+  const selectionSortMethod = async () => {
     try {
       if (!data.length) {
         throw new Error('The array is undefined!');
@@ -57,7 +61,7 @@ const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
       await Sleep(100);
 
       // Call the bubble sort algorithm
-      bubbleSortAlgo(data, setData, speedRange, setStep);
+      selectionSortAlgo([...data], setData, speedRange, setStep);
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
@@ -75,7 +79,18 @@ const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
             Current Item (Red)
           </span>
         </div>
-
+        <div className='group relative'>
+          <div className='h-6 w-6 bg-purple-600'></div>
+          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+            Candidate (Purple)
+          </span>
+        </div>
+        <div className='group relative'>
+          <div className='h-6 w-6 bg-orange-600'></div>
+          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+            Current Comparable Item (Orange)
+          </span>
+        </div>
         <div className='group relative'>
           <div className='h-6 w-6 bg-green-600'></div>
           <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
@@ -95,12 +110,20 @@ const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
 
             let fillColor = 'black';
 
-            if (item.isSwapped) {
-              fillColor = 'red';
+            if (item.currentItem) {
+              fillColor = '#FF4D4D'; // Red
+            }
+
+            if (item.isCandidate) {
+              fillColor = '#6A0DAD'; // Purple
+            }
+
+            if (item.isCurrentCompareAbleItem) {
+              fillColor = '#FF8C00'; // Orange
             }
 
             if (item.isSorted) {
-              fillColor = 'green';
+              fillColor = '#28A745'; // Green
             }
 
             return (
@@ -122,13 +145,22 @@ const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
           data.map((item) => {
             let fillColor = 'bg-white';
 
-            if (item.isSwapped) {
-              fillColor = 'bg-red-600 text-white';
+            if (item.currentItem) {
+              fillColor = 'bg-red-600 text-white'; // Red
+            }
+
+            if (item.isCandidate) {
+              fillColor = 'bg-purple-600 text-white'; // Purple
+            }
+
+            if (item.isCurrentCompareAbleItem) {
+              fillColor = 'bg-orange-600 text-white'; // Orange
             }
 
             if (item.isSorted) {
-              fillColor = 'bg-green-600 text-white';
+              fillColor = 'bg-green-600 text-white'; // Green
             }
+
             return (
               <p
                 key={item.id}
@@ -146,4 +178,4 @@ const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
   );
 };
 
-export default BubbleSortComponent;
+export default SelectionSortComponent;

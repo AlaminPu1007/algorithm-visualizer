@@ -12,6 +12,9 @@ export interface mergeSortDataProps {
   currentItem: boolean;
   isSwapped: boolean;
   isFinished: boolean;
+  isCurrentCompareAbleItem: boolean;
+  isCandidate: boolean;
+  isActive: boolean;
 }
 
 /**
