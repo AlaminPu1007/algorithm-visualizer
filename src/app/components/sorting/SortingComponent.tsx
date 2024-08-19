@@ -5,12 +5,13 @@ import MergeSortComponent from './MergeSortComponent';
 import { uid } from '@/app/lib/uidGenerator';
 import BubbleSortComponent from './BubbleSortComponent';
 import SelectionSortComponent from './SelectionSortComponent';
+import InsertionSortComponent from './InsertionSortComponent';
 
 const SortingComponent = () => {
   // define local state
   const [buttonType, setButtonType] = useState<string>('merge-sort');
   const [randomKey, setRandomKey] = useState<string>('');
-  const [speedRange, setSpeedRange] = useState<number>(500);
+  const [speedRange, setSpeedRange] = useState<number>(200);
 
   /** updated current button with it's type */
   const buttonMethod = (type: string) => {
@@ -65,6 +66,12 @@ const SortingComponent = () => {
             >
               Selection sort
             </button>
+            <button
+              className={`root-btn ml-3 ${buttonType === 'insertion-sort' ? 'active-root-btn' : ''}`}
+              onClick={() => buttonMethod('insertion-sort')}
+            >
+              Insertion sort
+            </button>
           </div>
         </div>
       </div>
@@ -81,6 +88,11 @@ const SortingComponent = () => {
       {buttonType === 'selection-sort' ? (
         <div className='container py-5'>
           <SelectionSortComponent key={randomKey} speedRange={speedRange} />
+        </div>
+      ) : null}
+      {buttonType === 'insertion-sort' ? (
+        <div className='container py-5'>
+          <InsertionSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
     </div>
