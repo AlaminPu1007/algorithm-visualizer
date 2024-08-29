@@ -5,11 +5,11 @@ import MergeSortComponent from './MergeSortComponent';
 import { uid } from '@/app/lib/uidGenerator';
 import BubbleSortComponent from './BubbleSortComponent';
 import SelectionSortComponent from './SelectionSortComponent';
-import InsertionSortComponent from './InsertionSortComponent';
+import QuickSortComponent from './QuickSortComponent';
 
 const SortingComponent = () => {
   // define local state
-  const [buttonType, setButtonType] = useState<string>('merge-sort');
+  const [buttonType, setButtonType] = useState<string>('quick-sort');
   const [randomKey, setRandomKey] = useState<string>('');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
@@ -67,10 +67,10 @@ const SortingComponent = () => {
               Selection sort
             </button>
             <button
-              className={`root-btn ml-3 ${buttonType === 'insertion-sort' ? 'active-root-btn' : ''}`}
-              onClick={() => buttonMethod('insertion-sort')}
+              className={`root-btn ml-3 ${buttonType === 'quick-sort' ? 'active-root-btn' : ''}`}
+              onClick={() => buttonMethod('quick-sort')}
             >
-              Insertion sort
+              Quick sort
             </button>
           </div>
         </div>
@@ -90,9 +90,9 @@ const SortingComponent = () => {
           <SelectionSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
-      {buttonType === 'insertion-sort' ? (
+      {buttonType === 'quick-sort' ? (
         <div className='container py-5'>
-          <InsertionSortComponent key={randomKey} speedRange={speedRange} />
+          <QuickSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
     </div>
