@@ -1,25 +1,25 @@
 import React from 'react';
-import { mergeSortDataProps } from '../types/sortingProps';
+import { SortingDataProps } from '../types/sortingProps';
 import { Sleep } from '../lib/sleepMethod';
 
 /**
  * A selection algorithm visualization to sort the actual data
  *
  * @async
- * @param {mergeSortDataProps[]} data
- * @param {React.Dispatch<React.SetStateAction<mergeSortDataProps[]>>} setData
+ * @param {SortingDataProps[]} data
+ * @param {React.Dispatch<React.SetStateAction<SortingDataProps[]>>} setData
  * @param {number} speedRange
  * @param {React.Dispatch<React.SetStateAction<number>>} setStep
  * @returns {*}
  */
 export const selectionSortAlgo = async (
-  data: mergeSortDataProps[],
-  setData: React.Dispatch<React.SetStateAction<mergeSortDataProps[]>>,
+  data: SortingDataProps[],
+  setData: React.Dispatch<React.SetStateAction<SortingDataProps[]>>,
   speedRange: number,
   setStep: React.Dispatch<React.SetStateAction<number>>
 ) => {
   try {
-    const tempData: mergeSortDataProps[] = data;
+    const tempData: SortingDataProps[] = data;
 
     for (let i = 0; i < tempData.length; i++) {
       let min_idx = i;

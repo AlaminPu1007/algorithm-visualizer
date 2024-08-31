@@ -1,23 +1,23 @@
 import { selectionSortAlgo } from '@/app/algorithm/selectionSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
-import { mergeSortData } from '@/app/data/mergeSortData';
+import { sortingData } from '@/app/data/SortData';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
-import { mergeSortDataProps } from '@/app/types/sortingProps';
+import { SortingDataProps } from '@/app/types/sortingProps';
 import React, { useEffect, useState } from 'react';
 
 // Calculate the maximum value to normalize data
-const maxValue = Math.max(...mergeSortData.map((item) => Number(item.data)));
+const maxValue = Math.max(...sortingData.map((item) => Number(item.data)));
 
 // Calculate column width and spacing
-const columnWidth = MERGE_SORT_SVG_WIDTH / mergeSortData.length;
+const columnWidth = MERGE_SORT_SVG_WIDTH / sortingData.length;
 const columnSpacing = 5; // Space between columns
 
 const SelectionSortComponent: React.FC<{ speedRange: number }> = ({
   speedRange,
 }) => {
   /** Define component state */
-  const [data, setData] = useState<mergeSortDataProps[]>(
-    JSON.parse(JSON.stringify(mergeSortData))
+  const [data, setData] = useState<SortingDataProps[]>(
+    JSON.parse(JSON.stringify(sortingData))
   );
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [step, setStep] = useState<number>(0);

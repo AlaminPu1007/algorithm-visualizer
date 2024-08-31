@@ -1,26 +1,26 @@
 import React from 'react';
-import { mergeSortDataProps } from '../types/sortingProps';
+import { SortingDataProps } from '../types/sortingProps';
 import { Sleep } from '../lib/sleepMethod';
 
 /**
  * A approach of bubble sort algorithm
  *
  * @async
- * @param {mergeSortDataProps[]} data
- * @param {React.Dispatch<React.SetStateAction<mergeSortDataProps[]>>} setData
+ * @param {SortingDataProps[]} data
+ * @param {React.Dispatch<React.SetStateAction<SortingDataProps[]>>} setData
  * @param {number} speedRange
  * @param {React.Dispatch<React.SetStateAction<number>>} setStep
  * @returns {*}
  */
 
 export const bubbleSortAlgo = async (
-  data: mergeSortDataProps[],
-  setData: React.Dispatch<React.SetStateAction<mergeSortDataProps[]>>,
+  data: SortingDataProps[],
+  setData: React.Dispatch<React.SetStateAction<SortingDataProps[]>>,
   speedRange: number,
   setStep: React.Dispatch<React.SetStateAction<number>>
 ) => {
   // Create a copy of the data to work with
-  const tempData: mergeSortDataProps[] = [...data];
+  const tempData: SortingDataProps[] = [...data];
 
   for (let i = 0; i < tempData.length; i++) {
     for (let j = 0; j < tempData.length - i - 1; j++) {

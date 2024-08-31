@@ -2,10 +2,10 @@
  * Interface representing the structure of each item in the merge sort data array.
  *
  * @export
- * @interface mergeSortDataProps
- * @typedef {mergeSortDataProps}
+ * @interface SortingDataProps
+ * @typedef {SortingDataProps}
  */
-export interface mergeSortDataProps {
+export interface SortingDataProps {
   id: number | string;
   data: number | string;
   isSorted: boolean;
@@ -16,6 +16,8 @@ export interface mergeSortDataProps {
   isCandidate: boolean;
   isActive: boolean;
   xPosition: number;
+  isLeft: boolean;
+  isRight: boolean;
 }
 
 /**

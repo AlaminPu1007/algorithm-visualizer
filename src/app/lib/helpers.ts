@@ -12,4 +12,10 @@ export const getRandomObject = (size: number) =>
     currentItem: false,
     isSwapped: false,
     isFinished: false,
+    isCurrentCompareAbleItem: false,
+    isCandidate: false,
+    isActive: false,
+    xPosition: 0,
+    isLeft: false,
+    isRight: false,
   }));

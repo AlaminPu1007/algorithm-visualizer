@@ -2,22 +2,22 @@
 
 import { mergeSortMethod } from '@/app/algorithm/mergeSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
-import { mergeSortData } from '@/app/data/mergeSortData';
-import { mergeSortDataProps } from '@/app/types/sortingProps';
+import { sortingData } from '@/app/data/SortData';
+import { SortingDataProps } from '@/app/types/sortingProps';
 import React, { useEffect, useState } from 'react';
 
 // Calculate the maximum value to normalize data
-const maxValue = Math.max(...mergeSortData.map((item) => Number(item.data)));
+const maxValue = Math.max(...sortingData.map((item) => Number(item.data)));
 
 // Calculate column width and spacing
-const columnWidth = MERGE_SORT_SVG_WIDTH / mergeSortData.length;
+const columnWidth = MERGE_SORT_SVG_WIDTH / sortingData.length;
 const columnSpacing = 5; // Space between columns
 
 const MergeSortComponent: React.FC<{ speedRange: number }> = ({
   speedRange = 0,
 }) => {
-  const [data, setData] = useState<mergeSortDataProps[]>(
-    JSON.parse(JSON.stringify(mergeSortData))
+  const [data, setData] = useState<SortingDataProps[]>(
+    JSON.parse(JSON.stringify(sortingData))
   );
   const [step, setStep] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<{
