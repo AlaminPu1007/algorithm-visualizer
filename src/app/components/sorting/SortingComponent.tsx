@@ -10,13 +10,20 @@ import QuickSortComponent from './QuickSortComponent';
 const SortingComponent = () => {
   // define local state
   const [buttonType, setButtonType] = useState<string>('quick-sort');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [randomKey, setRandomKey] = useState<string>('');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
   /** updated current button with it's type */
-  const buttonMethod = (type: string) => {
-    setButtonType(type);
-    setRandomKey(uid());
+  const buttonMethod = () => setRandomKey(uid());
+
+  /**
+   * onChange method of select
+   *
+   * @param {React.ChangeEvent<HTMLSelectElement>} e
+   */
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setButtonType(e.target.value);
   };
 
   /**
@@ -25,8 +32,7 @@ const SortingComponent = () => {
    * @param {*} e
    */
   const inputRangeMethod = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-    setSpeedRange(value);
+    setSpeedRange(Number(e.target.value));
   };
 
   return (
@@ -47,7 +53,7 @@ const SortingComponent = () => {
               max='1500'
             />
           </div>
-          <div className='flex items-start'>
+          {/* <div className='flex items-start'>
             <button
               className={`root-btn ${buttonType === 'merge-sort' ? 'active-root-btn py-[500px]' : ''}`}
               onClick={() => buttonMethod('merge-sort')}
@@ -71,6 +77,26 @@ const SortingComponent = () => {
               onClick={() => buttonMethod('quick-sort')}
             >
               Quick sort
+            </button>
+          </div> */}
+          <div>
+            <select
+              // onClick={buttonMethod}
+              onChange={handleSelectChange}
+              value={buttonType}
+              className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
+            >
+              <option value='bubble-sort'>Bubble Sort</option>
+              <option value='selection-sort'>Selection Sort</option>
+              <option value='merge-sort'>Merge Sort</option>
+              <option value='quick-sort'>Quick Sort</option>
+            </select>
+
+            <button
+              onClick={buttonMethod}
+              className={`ms-3 rounded-sm bg-theme-btn-secondary p-[8px] px-4 text-sm text-white transition-all duration-300`}
+            >
+              Submit
             </button>
           </div>
         </div>
