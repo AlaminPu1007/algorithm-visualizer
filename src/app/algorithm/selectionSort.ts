@@ -34,6 +34,9 @@ export const selectionSortAlgo = async (
       await Sleep(speedRange);
 
       for (let j = i + 1; j < tempData.length; j++) {
+        // Increment step for each comparison
+        setStep((prv) => prv + 1);
+
         setData(() => {
           const updatedData = [...tempData];
           updatedData[j].isCurrentCompareAbleItem = true;
@@ -43,7 +46,7 @@ export const selectionSortAlgo = async (
         await Sleep(speedRange);
 
         if (tempData[min_idx].data > tempData[j].data) {
-          setStep((prv) => prv + 1);
+          // setStep((prv) => prv + 1);
 
           setData(() => {
             const updatedData = [...tempData];
@@ -82,6 +85,9 @@ export const selectionSortAlgo = async (
 
       // new perform a swap operation
       if (min_idx !== i) {
+        // Increment step for the swap operation
+        setStep((prev) => prev + 1);
+
         [tempData[i], tempData[min_idx]] = [tempData[min_idx], tempData[i]];
 
         setData(() => {

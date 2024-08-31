@@ -83,6 +83,7 @@ const HeaderComponent = () => {
                 href='/tree'
                 className={`nav-list-item-link dark:hover:bg-initial text-center dark:hover:text-theme-dark-primary`}
                 onClick={onCloseDrawerNav}
+                data-umami-event='Tree-Navigation'
               >
                 Tree
               </Link>
@@ -92,6 +93,7 @@ const HeaderComponent = () => {
                 href='/n-queens'
                 className='nav-list-item-link'
                 onClick={onCloseDrawerNav}
+                data-umami-event='N-Queens-Navigation'
               >
                 N-Queens
               </Link>
@@ -101,11 +103,12 @@ const HeaderComponent = () => {
                 href='/sorting'
                 className='nav-list-item-link'
                 onClick={onCloseDrawerNav}
+                data-umami-event='Sorting-Navigation'
               >
                 Sorting
               </Link>
             </li>
-            <li className='lg:mx-2'>
+            {/* <li className='lg:mx-2'>
               <Link
                 href='/#my-personal-projects'
                 className='nav-list-item-link'
@@ -132,7 +135,7 @@ const HeaderComponent = () => {
               >
                 Contact
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
 
