@@ -19,7 +19,7 @@ const SelectionSortComponent: React.FC<{ speedRange: number }> = ({
   const [data, setData] = useState<SortingDataProps[]>(
     JSON.parse(JSON.stringify(sortingData))
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [step, setStep] = useState<number>(0);
 
   useEffect(() => {

@@ -19,7 +19,7 @@ const QuickSortComponent: React.FC<{ speedRange: number }> = ({
   const [data, setData] = useState<SortingDataProps[]>(
     JSON.parse(JSON.stringify(sortingData))
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [step, setStep] = useState<number>(0);
 
   useEffect(() => {
@@ -51,6 +51,12 @@ const QuickSortComponent: React.FC<{ speedRange: number }> = ({
     setData(tempData);
   };
 
+  /**
+   * Method to perform quick sort visualization
+   *
+   * @async
+   * @returns {*}
+   */
   const quickSortMethod = async () => {
     try {
       if (!data.length) {

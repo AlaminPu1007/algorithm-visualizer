@@ -287,28 +287,32 @@ const TreeComponent = () => {
         ) : null}
       </div>
 
-      <div className=''>
-        <svg viewBox='0 20 280 150'>
-          {activeRootBtnType === 'dfs' ? (
-            data && (
+      <div>
+        {data ? (
+          <svg viewBox='-20 20 280 150'>
+            {activeRootBtnType === 'dfs' ? (
               <TreeDFSTraversal
                 root={data}
                 steps={steps}
                 currentStep={currentStep}
                 visitedNodes={visitedNodes}
               />
-            )
-          ) : activeRootBtnType === 'bfs' ? (
-            <TreeBFSTraversal root={data} key={randomKey} />
-          ) : (
-            <TreeDFSTraversal
-              root={data}
-              steps={steps}
-              currentStep={currentStep}
-              visitedNodes={visitedNodes}
-            />
-          )}
-        </svg>
+            ) : activeRootBtnType === 'bfs' ? (
+              <TreeBFSTraversal root={data} key={randomKey} />
+            ) : (
+              <TreeDFSTraversal
+                root={data}
+                steps={steps}
+                currentStep={currentStep}
+                visitedNodes={visitedNodes}
+              />
+            )}
+          </svg>
+        ) : (
+          <div className='flex min-h-[200px] w-full items-center justify-center'>
+            <h1 className='text-center text-4xl font-medium'>Loading...</h1>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -92,7 +92,7 @@ const HeapSortComponent: React.FC<{ speedRange: number }> = ({
       </div>
       <div>
         {data?.length ? (
-          <svg viewBox='0 20 300 140'>
+          <svg viewBox='-25 20 300 140'>
             {data.map((root) => {
               let fillColor = '#000'; // Default stroke color (text color and line color)
               let circleFillColor = '#fff'; // Default circle fill color
