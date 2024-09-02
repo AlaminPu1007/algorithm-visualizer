@@ -1,6 +1,6 @@
 'use client';
 import { heapify, HeapSortApproach } from '@/app/algorithm/heapSort';
-import { HeapData, NODE_POSITION } from '@/app/constant';
+import { getRandomTreeData, NODE_POSITION } from '@/app/constant';
 import { Tree } from '@/app/data-structure/Tree/TreeNode';
 import { calculateLinePosition } from '@/app/lib/calculateSvgLinePosition';
 import { HeapSortedItemProps } from '@/app/types/sortingProps';
@@ -15,7 +15,7 @@ const HeapSortComponent: React.FC<{ speedRange: number }> = ({
   const [sortedData, setSortedData] = useState<HeapSortedItemProps[]>([]);
 
   useEffect(() => {
-    const newTree = new Tree(JSON.parse(JSON.stringify(HeapData)));
+    const newTree = new Tree(JSON.parse(JSON.stringify(getRandomTreeData(31))));
     if (newTree?.linearArr?.length) {
       setData(newTree.linearArr);
     }
@@ -48,6 +48,7 @@ const HeapSortComponent: React.FC<{ speedRange: number }> = ({
     // after completed heapify the root data,
     // perform a heap sort
     toast.success('Perform a heap sort');
+    // STEP: 2, Perform a heap sort
     HeapSortApproach(tempData, n, speedRange, setData, setSortedData);
   };
 

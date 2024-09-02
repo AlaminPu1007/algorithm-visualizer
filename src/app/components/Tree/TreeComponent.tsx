@@ -4,7 +4,7 @@
  */
 'use client';
 
-import { DFS_DELAY, TreeArrData } from '@/app/constant';
+import { DFS_DELAY, getRandomTreeData } from '@/app/constant';
 import React, { useState, useEffect } from 'react';
 import { Tree } from '@/app/data-structure/Tree/TreeNode';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
@@ -24,7 +24,7 @@ const TreeComponent = () => {
   const [randomKey, setRandomKey] = useState<number>(0);
 
   useEffect(() => {
-    const newTree = new Tree(TreeArrData);
+    const newTree = new Tree(JSON.parse(JSON.stringify(getRandomTreeData(31))));
 
     if (newTree?.head) {
       setData(newTree.head);
