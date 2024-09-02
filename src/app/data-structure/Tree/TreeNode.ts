@@ -6,6 +6,7 @@ import { ITreeNode } from '@/app/types/TreeTypeProps';
 export interface ITree {
   head: ITreeNode | null;
   arr: (number | null)[];
+  linearArr: ITreeNode[];
   insertIntoList(value: number | undefined): void;
 }
 
@@ -17,6 +18,7 @@ export interface ITree {
 export class Tree implements ITree {
   head: ITreeNode | null = null;
   arr: (number | null)[] = [];
+  linearArr: ITreeNode[] = [];
 
   constructor(arr: (number | null)[]) {
     this.head = null;
@@ -31,6 +33,8 @@ export class Tree implements ITree {
     this.head = new TreeNode(this.arr[0]);
 
     const queue: TreeNode[] = [this.head];
+
+    this.linearArr.push(this.head);
 
     // initialize a pointer to traverse the array from 1 to n
     // eslint-disable-next-line prefer-const
@@ -55,6 +59,9 @@ export class Tree implements ITree {
             currentNode.left = left;
             // Insert into queue, and it will become the next level parent
             queue.push(currentNode.left);
+
+            // Add current node to linear array
+            this.linearArr.push(currentNode.left);
           } else {
             // Skip the current null item
             i++;
@@ -67,6 +74,9 @@ export class Tree implements ITree {
             currentNode.right = right;
             // Insert into queue, and it will become the next level parent
             queue.push(currentNode.right);
+
+            // Add current node to linear array
+            this.linearArr.push(currentNode.right);
           } else {
             // Skip the current null item
             i++;
@@ -77,83 +87,10 @@ export class Tree implements ITree {
       currentLevel++; // Move to the next level
     }
 
-    /*
-    // Initialize the head node
-    this.head = new TreeNode(50); // root
-
-    // Insert nodes at level 1
-    this.head.left = new TreeNode(40);
-    this.head.right = new TreeNode(60);
-    this.head.left.parent = this.head;
-    this.head.right.parent = this.head;
-
-    // Insert nodes at level 2
-    this.head.left.left = new TreeNode(30);
-    this.head.left.right = new TreeNode(35);
-    this.head.right.left = new TreeNode(65);
-    this.head.right.right = new TreeNode(70);
-    this.head.left.left.parent = this.head.left;
-    this.head.left.right.parent = this.head.left;
-    this.head.right.left.parent = this.head.right;
-    this.head.right.right.parent = this.head.right;
-
-    // Insert nodes at level 3
-    this.head.left.left.left = new TreeNode(25);
-    this.head.left.left.right = new TreeNode(28);
-    this.head.left.right.left = new TreeNode(33);
-    this.head.left.right.right = new TreeNode(37);
-    this.head.right.left.left = new TreeNode(63);
-    this.head.right.left.right = new TreeNode(68);
-    this.head.right.right.left = new TreeNode(75);
-    this.head.right.right.right = new TreeNode(80);
-    this.head.left.left.left.parent = this.head.left.left;
-    this.head.left.left.right.parent = this.head.left.left;
-    this.head.left.right.left.parent = this.head.left.right;
-    this.head.left.right.right.parent = this.head.left.right;
-    this.head.right.left.left.parent = this.head.right.left;
-    this.head.right.left.right.parent = this.head.right.left;
-    this.head.right.right.left.parent = this.head.right.right;
-    this.head.right.right.right.parent = this.head.right.right;
-
-    // Insert nodes at level 4
-    this.head.left.left.left.left = new TreeNode(20);
-    this.head.left.left.left.right = new TreeNode(22);
-    this.head.left.left.right.left = new TreeNode(26);
-    this.head.left.left.right.right = new TreeNode(29);
-    this.head.left.right.left.left = new TreeNode(31);
-    this.head.left.right.left.right = new TreeNode(34);
-    this.head.left.right.right.left = new TreeNode(36);
-    this.head.left.right.right.right = new TreeNode(38);
-    this.head.right.left.left.left = new TreeNode(61);
-    this.head.right.left.left.right = new TreeNode(64);
-    this.head.right.left.right.left = new TreeNode(66);
-    this.head.right.left.right.right = new TreeNode(69);
-    this.head.right.right.left.left = new TreeNode(72);
-    this.head.right.right.left.right = new TreeNode(76);
-    this.head.right.right.right.left = new TreeNode(78);
-    this.head.right.right.right.right = new TreeNode(82);
-    this.head.left.left.left.left.parent = this.head.left.left.left;
-    this.head.left.left.left.right.parent = this.head.left.left.left;
-    this.head.left.left.right.left.parent = this.head.left.left.right;
-    this.head.left.left.right.right.parent = this.head.left.left.right;
-    this.head.left.right.left.left.parent = this.head.left.right.left;
-    this.head.left.right.left.right.parent = this.head.left.right.left;
-    this.head.left.right.right.left.parent = this.head.left.right.right;
-    this.head.left.right.right.right.parent = this.head.left.right.right;
-    this.head.right.left.left.left.parent = this.head.right.left.left;
-    this.head.right.left.left.right.parent = this.head.right.left.left;
-    this.head.right.left.right.left.parent = this.head.right.left.right;
-    this.head.right.left.right.right.parent = this.head.right.left.right;
-    this.head.right.right.left.left.parent = this.head.right.right.left;
-    this.head.right.right.left.right.parent = this.head.right.right.left;
-    this.head.right.right.right.left.parent = this.head.right.right.right;
-    this.head.right.right.right.right.parent = this.head.right.right.right;
-    */
-
     // Set a current node (example: setting the head as current)
-    if (this.head) {
-      this.head.isCurrent = true;
-    }
+    // if (this.head) {
+    //   this.head.isCurrent = false;
+    // }
 
     // Adjust this to control the vertical spacing
     const LEVEL_HEIGHT = 30;

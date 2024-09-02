@@ -24,6 +24,8 @@ export interface ITreeNode {
   cy: number | null;
   isVisited: boolean;
   isCurrent: boolean;
+  isSwap: boolean;
+  isSorted: boolean;
 }
 
 /**

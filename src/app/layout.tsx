@@ -5,6 +5,8 @@ import React from 'react';
 import HeaderComponent from './components/layouts/header/HeaderComponent';
 import FooterComponent from './components/layouts/footer/FooterComponent';
 import Script from 'next/script';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,6 +29,7 @@ export default function RootLayout({
         <HeaderComponent />
         <main>{children}</main>
         <FooterComponent />
+        <ToastContainer />
       </body>
       <Script
         defer

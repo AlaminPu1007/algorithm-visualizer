@@ -6,10 +6,11 @@ import { uid } from '@/app/lib/uidGenerator';
 import BubbleSortComponent from './BubbleSortComponent';
 import SelectionSortComponent from './SelectionSortComponent';
 import QuickSortComponent from './QuickSortComponent';
+import HeapSortComponent from './HeapSortComponent';
 
 const SortingComponent = () => {
   // define local state
-  const [buttonType, setButtonType] = useState<string>('quick-sort');
+  const [buttonType, setButtonType] = useState<string>('heap-sort');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [randomKey, setRandomKey] = useState<string>('');
   const [speedRange, setSpeedRange] = useState<number>(200);
@@ -86,10 +87,11 @@ const SortingComponent = () => {
               value={buttonType}
               className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
             >
-              <option value='bubble-sort'>Bubble Sort</option>
-              <option value='selection-sort'>Selection Sort</option>
               <option value='merge-sort'>Merge Sort</option>
               <option value='quick-sort'>Quick Sort</option>
+              <option value='heap-sort'>Heap Sort</option>
+              <option value='bubble-sort'>Bubble Sort</option>
+              <option value='selection-sort'>Selection Sort</option>
             </select>
 
             <button
@@ -119,6 +121,11 @@ const SortingComponent = () => {
       {buttonType === 'quick-sort' ? (
         <div className='container py-5'>
           <QuickSortComponent key={randomKey} speedRange={speedRange} />
+        </div>
+      ) : null}
+      {buttonType === 'heap-sort' ? (
+        <div className='container py-5'>
+          <HeapSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
     </div>

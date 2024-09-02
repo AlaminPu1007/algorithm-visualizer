@@ -25,6 +25,8 @@ export class TreeNode implements ITreeNode {
   cy: number | null;
   isVisited: boolean;
   isCurrent: boolean;
+  isSwap: boolean;
+  isSorted: boolean;
 
   constructor(
     value: number | null = null,
@@ -38,5 +40,7 @@ export class TreeNode implements ITreeNode {
     this.cy = cy || 0;
     this.isVisited = false;
     this.isCurrent = false;
+    this.isSwap = false;
+    this.isSorted = false;
   }
 }

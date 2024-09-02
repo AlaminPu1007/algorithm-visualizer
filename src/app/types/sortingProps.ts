@@ -31,3 +31,16 @@ export interface currentIndicesProps {
   leftIndex: number | null;
   rightIndex: number | null;
 }
+
+/**
+ * a interface for heap-sorted items after perform a heapify operation
+ *
+ * @export
+ * @interface HeapSortedItemProps
+ * @typedef {HeapSortedItemProps}
+ */
+
+export interface HeapSortedItemProps {
+  data: number;
+  id: number;
+}
