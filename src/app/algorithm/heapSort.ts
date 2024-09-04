@@ -34,10 +34,7 @@ export const HeapSortApproach = async (
     setData([...tempData]);
     await Sleep(speedRange); // Delay for visualization
 
-    [tempData[0].value, tempData[i].value] = [
-      tempData[i].value,
-      tempData[0].value,
-    ];
+    [tempData[0].value, tempData[i].value] = [tempData[i].value, tempData[0].value];
 
     // Mark the last element as sorted
     tempData[0].isSwap = false;
@@ -46,10 +43,7 @@ export const HeapSortApproach = async (
     tempData[i].isCurrent = false;
 
     // stored sorted item
-    setSortedData((prv) => [
-      { data: Number(tempData[i].value), id: Number(tempData[i].id) },
-      ...prv,
-    ]);
+    setSortedData((prv) => [{ data: Number(tempData[i].value), id: Number(tempData[i].id) }, ...prv]);
 
     setData([...tempData]);
     await Sleep(speedRange); // Delay for visualization

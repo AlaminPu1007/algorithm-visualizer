@@ -8,13 +8,7 @@
  * @return {object} Result of line position
  */
 
-export const calculateLinePosition = (
-  x1: number,
-  y1: number,
-  x2: number,
-  y2: number,
-  r: number
-) => {
+export const calculateLinePosition = (x1: number, y1: number, x2: number, y2: number, r: number) => {
   // calculate dale x, and y axis
   const dx = x2 - x1;
   const dy = y2 - y1;

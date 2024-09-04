@@ -49,10 +49,7 @@ export const getRandomTreeData = (size: number = 31) =>
   Array.from({ length: size }).map(() => Math.floor(Math.random() * size + 1));
 
 // fill the check board according to the grid size
-export const fillGridArray = (
-  size: number,
-  defaultValue: number = 0
-): ICell[][] => {
+export const fillGridArray = (size: number, defaultValue: number = 0): ICell[][] => {
   let id = 1;
   return Array(size)
     .fill(0)
@@ -70,3 +67,11 @@ export const MERGE_SORT_SVG_WIDTH = 2000;
 export const MERGE_SORT_SVG_HEIGHT = 300;
 // merge data sleep time
 export const MERGE_SLEEP_DELAY = 0;
+
+/** PATH FINDING CONSTANT THING DEFINE HERE */
+
+// Directions for moving in the maze
+export const del_row = [+1, 0, 0, -1]; // Down, Left, Right, Up
+export const del_col = [0, -1, +1, 0];
+// To identify a valid path
+export const directions = ['D', 'L', 'R', 'U']; // Direction string for consistency

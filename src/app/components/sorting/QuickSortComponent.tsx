@@ -12,13 +12,9 @@ const maxValue = Math.max(...sortingData.map((item) => Number(item.data)));
 const columnWidth = MERGE_SORT_SVG_WIDTH / sortingData.length;
 const columnSpacing = 5; // Space between columns
 
-const QuickSortComponent: React.FC<{ speedRange: number }> = ({
-  speedRange,
-}) => {
+const QuickSortComponent: React.FC<{ speedRange: number }> = ({ speedRange }) => {
   /** Define component state */
-  const [data, setData] = useState<SortingDataProps[]>(
-    JSON.parse(JSON.stringify(sortingData))
-  );
+  const [data, setData] = useState<SortingDataProps[]>(JSON.parse(JSON.stringify(sortingData)));
 
   const [step, setStep] = useState<number>(0);
 
@@ -70,14 +66,7 @@ const QuickSortComponent: React.FC<{ speedRange: number }> = ({
       await Sleep(100);
 
       // Call the quick sort algorithm
-      await quickSortAlgo(
-        [...data],
-        0,
-        data.length - 1,
-        setStep,
-        setData,
-        speedRange
-      );
+      await quickSortAlgo([...data], 0, data.length - 1, setStep, setData, speedRange);
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
@@ -115,14 +104,10 @@ const QuickSortComponent: React.FC<{ speedRange: number }> = ({
         </div>
       </div>
       <div className='flex items-end justify-center'>
-        <svg
-          viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`}
-          className='border'
-        >
+        <svg viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`} className='border'>
           {data.map((item, index) => {
             const x = index * columnWidth;
-            const columnHeight =
-              (Number(item.data) / maxValue) * MERGE_SORT_SVG_HEIGHT + 15;
+            const columnHeight = (Number(item.data) / maxValue) * MERGE_SORT_SVG_HEIGHT + 15;
 
             let fillColor = 'black';
             if (item.currentItem)
@@ -160,10 +145,7 @@ const QuickSortComponent: React.FC<{ speedRange: number }> = ({
             else if (item.isSorted) fillColor = 'bg-green-600 text-white'; // Green for sorted items
 
             return (
-              <p
-                key={item.id}
-                className={`min-w-[50px] border p-2 text-[12px] ${fillColor}`}
-              >
+              <p key={item.id} className={`min-w-[50px] border p-2 text-[12px] ${fillColor}`}>
                 {item.data || ''}
               </p>
             );

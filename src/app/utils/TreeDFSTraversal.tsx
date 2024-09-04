@@ -3,12 +3,7 @@ import { calculateLinePosition } from '@/app/lib/calculateSvgLinePosition';
 import { NODE_POSITION } from '@/app/constant';
 import { TreeDFSTraversalProps } from '../types/TreeTypeProps';
 
-const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({
-  root,
-  steps,
-  currentStep,
-  visitedNodes,
-}) => {
+const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({ root, steps, currentStep, visitedNodes }) => {
   if (!root || steps.indexOf(root) === -1) return null;
 
   const isCurrentNode = steps.indexOf(root) === currentStep;
@@ -18,13 +13,7 @@ const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({
     <g key={root.id}>
       {root.parent &&
         (() => {
-          const linePos = calculateLinePosition(
-            root.parent.cx!,
-            root.parent.cy!,
-            root.cx!,
-            root.cy!,
-            NODE_POSITION
-          );
+          const linePos = calculateLinePosition(root.parent.cx!, root.parent.cy!, root.cx!, root.cy!, NODE_POSITION);
           return (
             <>
               <line
@@ -69,20 +58,10 @@ const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({
       </text>
 
       {root.left && (
-        <TreeDFSTraversal
-          root={root.left}
-          steps={steps}
-          currentStep={currentStep}
-          visitedNodes={visitedNodes}
-        />
+        <TreeDFSTraversal root={root.left} steps={steps} currentStep={currentStep} visitedNodes={visitedNodes} />
       )}
       {root.right && (
-        <TreeDFSTraversal
-          root={root.right}
-          steps={steps}
-          currentStep={currentStep}
-          visitedNodes={visitedNodes}
-        />
+        <TreeDFSTraversal root={root.right} steps={steps} currentStep={currentStep} visitedNodes={visitedNodes} />
       )}
     </g>
   );

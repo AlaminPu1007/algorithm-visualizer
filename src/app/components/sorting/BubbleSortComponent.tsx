@@ -12,13 +12,9 @@ const maxValue = Math.max(...sortingData.map((item) => Number(item.data)));
 const columnWidth = MERGE_SORT_SVG_WIDTH / sortingData.length;
 const columnSpacing = 5; // Space between columns
 
-const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
-  speedRange,
-}) => {
+const BubbleSortComponent: React.FC<{ speedRange: number }> = ({ speedRange }) => {
   /** Define component state */
-  const [data, setData] = useState<SortingDataProps[]>(
-    JSON.parse(JSON.stringify(sortingData))
-  );
+  const [data, setData] = useState<SortingDataProps[]>(JSON.parse(JSON.stringify(sortingData)));
   const [step, setStep] = useState<number>(0);
 
   useEffect(() => {
@@ -84,14 +80,10 @@ const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
         </div>
       </div>
       <div className='flex items-end justify-center'>
-        <svg
-          viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`}
-          className='border'
-        >
+        <svg viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`} className='border'>
           {data.map((item, index) => {
             const x = index * columnWidth;
-            const columnHeight =
-              (Number(item.data) / maxValue) * MERGE_SORT_SVG_HEIGHT + 15;
+            const columnHeight = (Number(item.data) / maxValue) * MERGE_SORT_SVG_HEIGHT + 15;
 
             let fillColor = 'black';
 
@@ -130,10 +122,7 @@ const BubbleSortComponent: React.FC<{ speedRange: number }> = ({
               fillColor = 'bg-green-600 text-white';
             }
             return (
-              <p
-                key={item.id}
-                className={`min-w-[50px] border p-2 text-[12px] ${fillColor}`}
-              >
+              <p key={item.id} className={`min-w-[50px] border p-2 text-[12px] ${fillColor}`}>
                 {item.data || ''}
               </p>
             );

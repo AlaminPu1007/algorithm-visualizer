@@ -31,34 +31,13 @@ export const quickSortAlgo = async (
   try {
     if (low < high) {
       // get current pivot item index
-      const pivotIdx = await partition(
-        data,
-        low,
-        high,
-        setStep,
-        setData,
-        speedRange
-      );
+      const pivotIdx = await partition(data, low, high, setStep, setData, speedRange);
 
       // called the left half
-      await quickSortAlgo(
-        data,
-        low,
-        pivotIdx - 1,
-        setStep,
-        setData,
-        speedRange
-      );
+      await quickSortAlgo(data, low, pivotIdx - 1, setStep, setData, speedRange);
 
       // called the right half
-      await quickSortAlgo(
-        data,
-        pivotIdx + 1,
-        high,
-        setStep,
-        setData,
-        speedRange
-      );
+      await quickSortAlgo(data, pivotIdx + 1, high, setStep, setData, speedRange);
     }
 
     // Mark single item as sorted

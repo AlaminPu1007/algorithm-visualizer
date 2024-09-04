@@ -96,12 +96,7 @@ export class Tree implements ITree {
     const LEVEL_HEIGHT = 30;
 
     // invoked the calculation method
-    this.calculatePositions(
-      this.head,
-      SVG_VIEW_BOX_WIDTH / 2,
-      LEVEL_HEIGHT,
-      SVG_VIEW_BOX_WIDTH / 4
-    );
+    this.calculatePositions(this.head, SVG_VIEW_BOX_WIDTH / 2, LEVEL_HEIGHT, SVG_VIEW_BOX_WIDTH / 4);
   }
 
   /**
@@ -115,12 +110,7 @@ export class Tree implements ITree {
    * @return {LinkedList}
    */
 
-  calculatePositions(
-    node: ITreeNode | null,
-    x: number,
-    y: number,
-    offset: number
-  ): void {
+  calculatePositions(node: ITreeNode | null, x: number, y: number, offset: number): void {
     if (!node) return;
     node.cx = x;
     node.cy = y;

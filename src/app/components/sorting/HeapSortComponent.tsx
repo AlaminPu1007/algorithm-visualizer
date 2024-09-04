@@ -8,9 +8,7 @@ import { ITreeNode } from '@/app/types/TreeTypeProps';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const HeapSortComponent: React.FC<{ speedRange: number }> = ({
-  speedRange,
-}) => {
+const HeapSortComponent: React.FC<{ speedRange: number }> = ({ speedRange }) => {
   const [data, setData] = useState<ITreeNode[]>([]);
   const [sortedData, setSortedData] = useState<HeapSortedItemProps[]>([]);
 
@@ -153,13 +151,7 @@ const HeapSortComponent: React.FC<{ speedRange: number }> = ({
                     stroke={fillColor}
                     strokeWidth={'0.2'}
                   >
-                    <animate
-                      attributeName='r'
-                      from='4'
-                      to={5}
-                      dur='1s'
-                      begin={'0s'}
-                    />
+                    <animate attributeName='r' from='4' to={5} dur='1s' begin={'0s'} />
                   </circle>
                   <text
                     x={root.cx!}

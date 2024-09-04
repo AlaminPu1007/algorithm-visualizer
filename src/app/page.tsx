@@ -65,14 +65,7 @@ const Graph: React.FC = () => {
         const end = nodes[edge.to];
         return (
           <g key={index}>
-            <line
-              x1={start.cx}
-              y1={start.cy}
-              x2={end.cx}
-              y2={end.cy}
-              stroke='black'
-              strokeWidth='1'
-            />
+            <line x1={start.cx} y1={start.cy} x2={end.cx} y2={end.cy} stroke='black' strokeWidth='1' />
             {/* Label the edge with its weight */}
             <text
               x={(start.cx + end.cx) / 2 + 15}
@@ -91,22 +84,9 @@ const Graph: React.FC = () => {
       {/* Draw nodes */}
       {Object.keys(nodes).map((key) => (
         <g key={key}>
-          <circle
-            cx={nodes[key].cx}
-            cy={nodes[key].cy}
-            r='15'
-            fill='#fff'
-            stroke='black'
-            strokeWidth='1.2'
-          />
+          <circle cx={nodes[key].cx} cy={nodes[key].cy} r='15' fill='#fff' stroke='black' strokeWidth='1.2' />
           {/* Label the node */}
-          <text
-            x={nodes[key].cx}
-            y={nodes[key].cy + 5}
-            fill='black'
-            fontSize='12'
-            textAnchor='middle'
-          >
+          <text x={nodes[key].cx} y={nodes[key].cy + 5} fill='black' fontSize='12' textAnchor='middle'>
             {key}
           </text>
         </g>

@@ -19,8 +19,7 @@ const TreeComponent = () => {
   const [currentStep, setCurrentStep] = useState<number>(-1);
   const [visitedNodes, setVisitedNodes] = useState<Set<number>>(new Set());
   const [activeRootBtnType, setActiveRootBtnType] = useState<string>('');
-  const [childBtnActiveType, setChildBtnActiveType] =
-    useState<string>('pre-order');
+  const [childBtnActiveType, setChildBtnActiveType] = useState<string>('pre-order');
   const [randomKey, setRandomKey] = useState<number>(0);
 
   useEffect(() => {
@@ -51,10 +50,7 @@ const TreeComponent = () => {
    * @param {Set<number>} visitedNodes
    * @returns {void}
    */
-  const updateTreeRecursively = async (
-    node: ITreeNode | null,
-    visitedNodes: Set<number>
-  ) => {
+  const updateTreeRecursively = async (node: ITreeNode | null, visitedNodes: Set<number>) => {
     // handle the base case
     if (!node) return;
 
@@ -151,10 +147,7 @@ const TreeComponent = () => {
   /**
    * Perform a in-order traversal
    */
-  const InOrderDFSTraversal = async (
-    node: ITreeNode | null,
-    visitedNodes: Set<number>
-  ) => {
+  const InOrderDFSTraversal = async (node: ITreeNode | null, visitedNodes: Set<number>) => {
     // handle the base case
     if (!node) return;
 
@@ -211,10 +204,7 @@ const TreeComponent = () => {
   /**
    * Perform a in-order traversal
    */
-  const PostOrderDFSTraversal = async (
-    node: ITreeNode | null,
-    visitedNodes: Set<number>
-  ) => {
+  const PostOrderDFSTraversal = async (node: ITreeNode | null, visitedNodes: Set<number>) => {
     // handle the base case
     if (!node) return;
 
@@ -291,21 +281,11 @@ const TreeComponent = () => {
         {data ? (
           <svg viewBox='-20 20 280 150'>
             {activeRootBtnType === 'dfs' ? (
-              <TreeDFSTraversal
-                root={data}
-                steps={steps}
-                currentStep={currentStep}
-                visitedNodes={visitedNodes}
-              />
+              <TreeDFSTraversal root={data} steps={steps} currentStep={currentStep} visitedNodes={visitedNodes} />
             ) : activeRootBtnType === 'bfs' ? (
               <TreeBFSTraversal root={data} key={randomKey} />
             ) : (
-              <TreeDFSTraversal
-                root={data}
-                steps={steps}
-                currentStep={currentStep}
-                visitedNodes={visitedNodes}
-              />
+              <TreeDFSTraversal root={data} steps={steps} currentStep={currentStep} visitedNodes={visitedNodes} />
             )}
           </svg>
         ) : (

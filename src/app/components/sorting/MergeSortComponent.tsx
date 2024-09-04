@@ -13,12 +13,8 @@ const maxValue = Math.max(...sortingData.map((item) => Number(item.data)));
 const columnWidth = MERGE_SORT_SVG_WIDTH / sortingData.length;
 const columnSpacing = 5; // Space between columns
 
-const MergeSortComponent: React.FC<{ speedRange: number }> = ({
-  speedRange = 0,
-}) => {
-  const [data, setData] = useState<SortingDataProps[]>(
-    JSON.parse(JSON.stringify(sortingData))
-  );
+const MergeSortComponent: React.FC<{ speedRange: number }> = ({ speedRange = 0 }) => {
+  const [data, setData] = useState<SortingDataProps[]>(JSON.parse(JSON.stringify(sortingData)));
   const [step, setStep] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<{
     leftIndex: number | null;
@@ -98,19 +94,13 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
         </div>
       </div>
       <div className='flex items-end justify-center'>
-        <svg
-          viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`}
-          className='border'
-        >
+        <svg viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`} className='border'>
           {data.map((item, index) => {
             const x = index * columnWidth;
-            const columnHeight =
-              (Number(item.data) / maxValue) * MERGE_SORT_SVG_HEIGHT + 15;
+            const columnHeight = (Number(item.data) / maxValue) * MERGE_SORT_SVG_HEIGHT + 15;
 
             const isLeftHalf = currentHalves.leftHalf.includes(Number(item.id));
-            const isRightHalf = currentHalves.rightHalf.includes(
-              Number(item.id)
-            );
+            const isRightHalf = currentHalves.rightHalf.includes(Number(item.id));
             const isCurrentLeft = index === currentIndex.leftIndex;
             const isCurrentRight = index === currentIndex.rightIndex;
 
@@ -151,9 +141,7 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({
         {data?.length &&
           data.map((item, index) => {
             const isLeftHalf = currentHalves.leftHalf.includes(Number(item.id));
-            const isRightHalf = currentHalves.rightHalf.includes(
-              Number(item.id)
-            );
+            const isRightHalf = currentHalves.rightHalf.includes(Number(item.id));
 
             const isCurrentLeft = index === currentIndex.leftIndex;
             const isCurrentRight = index === currentIndex.rightIndex;

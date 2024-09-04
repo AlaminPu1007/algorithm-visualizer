@@ -41,9 +41,7 @@ const SortingComponent = () => {
       <div className='container'>
         <div className='flex items-start justify-between'>
           <div className='me-6 w-[160px]'>
-            <p className='m-0 mb-1 p-0 text-sm'>
-              Speed: {speedRange} (0 to 1500)
-            </p>
+            <p className='m-0 mb-1 p-0 text-sm'>Speed: {speedRange} (0 to 1500)</p>
             <input
               value={speedRange}
               onChange={inputRangeMethod}

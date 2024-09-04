@@ -23,9 +23,7 @@ export const Sleep = (ms: number): Promise<void> => {
 
 export const clearAllTimeouts = () => {
   if (timeoutIds?.length) {
-    timeoutIds.forEach((timeoutId) =>
-      clearTimeout(timeoutId as unknown as number)
-    );
+    timeoutIds.forEach((timeoutId) => clearTimeout(timeoutId as unknown as number));
     // Type assertion
     timeoutIds = [];
   }

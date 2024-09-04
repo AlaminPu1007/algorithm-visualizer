@@ -24,9 +24,7 @@ const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
         // Update the state to trigger a re-render
         setCurrentNode(currentNode);
 
-        setVisitedNodes((prevVisitedNodes) =>
-          new Set(prevVisitedNodes).add(currentNode.id!)
-        );
+        setVisitedNodes((prevVisitedNodes) => new Set(prevVisitedNodes).add(currentNode.id!));
         setCurrentNodes([...bfsNodes]);
 
         // Introduce a delay
@@ -69,9 +67,7 @@ const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
                     y1={linePos.startY}
                     x2={linePos.endX}
                     y2={linePos.endY}
-                    stroke={
-                      isCurrentNode ? 'green' : isVisited ? 'red' : 'black'
-                    }
+                    stroke={isCurrentNode ? 'green' : isVisited ? 'red' : 'black'}
                     strokeWidth={'0.3'}
                   >
                     <animate
@@ -93,13 +89,7 @@ const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
               stroke={isCurrentNode ? 'white' : 'black'}
               strokeWidth={'0.2'}
             >
-              <animate
-                attributeName='r'
-                from='4'
-                to={5}
-                dur='1s'
-                begin={'0s'}
-              />
+              <animate attributeName='r' from='4' to={5} dur='1s' begin={'0s'} />
             </circle>
             <text
               x={node.cx!}

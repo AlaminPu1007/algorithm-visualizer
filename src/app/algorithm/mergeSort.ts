@@ -142,16 +142,7 @@ const mergeSortDFS = async (
   });
 
   // now merge both left & right halves
-  await mergeMethod(
-    data,
-    low,
-    mid,
-    high,
-    setCurrentIndex,
-    setData,
-    setStep,
-    speedRange
-  );
+  await mergeMethod(data, low, mid, high, setCurrentIndex, setData, setStep, speedRange);
 
   setCurrentHalves({
     leftHalf: [],

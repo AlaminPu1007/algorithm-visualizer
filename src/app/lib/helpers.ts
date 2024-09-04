@@ -19,3 +19,15 @@ export const getRandomObject = (size: number) =>
     isLeft: false,
     isRight: false,
   }));
+
+/**
+ * Get a valid grid move
+ *
+ * @param {number} row
+ * @param {number} col
+ * @param {number} n
+ * @param {number} m
+ * @returns {boolean}
+ */
+export const isValidDirection = (row: number, col: number, n: number, m: number) =>
+  row >= 0 && row < n && col >= 0 && col < m;

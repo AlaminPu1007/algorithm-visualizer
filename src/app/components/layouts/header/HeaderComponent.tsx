@@ -108,16 +108,20 @@ const HeaderComponent = () => {
                 Sorting
               </Link>
             </li>
+            {process.env.NODE_ENV === 'development' ? (
+              <li className='lg:mx-2'>
+                <Link
+                  href='/path-finding'
+                  className='nav-list-item-link'
+                  onClick={onCloseDrawerNav}
+                  data-umami-event='Sorting-Navigation'
+                >
+                  Path finding
+                </Link>
+              </li>
+            ) : null}
+
             {/* <li className='lg:mx-2'>
-              <Link
-                href='/#my-personal-projects'
-                className='nav-list-item-link'
-                onClick={onCloseDrawerNav}
-              >
-                Projects
-              </Link>
-            </li>
-            <li className='lg:mx-2'>
               <Link
                 href='/blog'
                 className='nav-list-item-link'
@@ -141,10 +145,7 @@ const HeaderComponent = () => {
 
         {!isDrawerOpen ? (
           <div className='absolute right-[2%] top-[30px] flex duration-200 ease-in lg:hidden'>
-            <button
-              className='relative flex h-[18px] w-[26px] flex-col justify-between'
-              onClick={openDrawerNav}
-            >
+            <button className='relative flex h-[18px] w-[26px] flex-col justify-between' onClick={openDrawerNav}>
               <span className='inline h-[2px] w-full bg-theme-primary dark:bg-white dark:opacity-70'></span>
               <span className='inline h-[2px] w-full bg-theme-primary dark:bg-white dark:opacity-70'></span>
               <span className='inline h-[2px] w-full bg-theme-primary dark:bg-white dark:opacity-70'></span>

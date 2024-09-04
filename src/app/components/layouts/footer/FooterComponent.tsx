@@ -6,8 +6,10 @@ const FooterComponent = () => (
     <div className='container duration-200 md:mt-[80px]'>
       <div className='my-[25px] flex items-center'>
         <Link
-          href='/'
+          target='_blank'
+          href='https://showcase-alamin.vercel.app'
           className='pr-2 text-2xl text-theme-secondary sm:pr-4 sm:text-4xl md:pr-0 dark:text-theme-dark-primary'
+          data-umami-event={`personal-portfolio`}
         >
           Alamin
         </Link>
@@ -20,17 +22,8 @@ const FooterComponent = () => (
             alamin66.sit@gmail.com
           </Link>
 
-          <Link
-            href='mailto:alamin66.sit@gmail.com'
-            className='group me-[25px] block cursor-pointer md:hidden'
-          >
-            <svg
-              width='26'
-              height='26'
-              viewBox='0 0 26 26'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
+          <Link href='mailto:alamin66.sit@gmail.com' className='group me-[25px] block cursor-pointer md:hidden'>
+            <svg width='26' height='26' viewBox='0 0 26 26' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 fillRule='evenodd'
                 clipRule='evenodd'
@@ -48,14 +41,7 @@ const FooterComponent = () => (
             data-testid='github-link-item'
             data-umami-event={`button-github-from-footer-section`}
           >
-            <svg
-              width='24'
-              height='24'
-              viewBox='0 0 24 24'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-              className=''
-            >
+            <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg' className=''>
               <path
                 fillRule='evenodd'
                 clipRule='evenodd'
@@ -70,13 +56,7 @@ const FooterComponent = () => (
             target='_blank'
             className='group me-3 cursor-pointer sm:me-4'
           >
-            <svg
-              width='30'
-              height='30'
-              viewBox='0 0 30 30'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
+            <svg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 d='M15 25C17.6522 25 20.1957 23.9464 22.0711 22.0711C23.9464 20.1957 25 17.6522 25 15C25 12.3478 23.9464 9.80429 22.0711 7.92893C20.1957 6.05357 17.6522 5 15 5C12.3478 5 9.80429 6.05357 7.92893 7.92893C6.05357 9.80429 5 12.3478 5 15C5 17.6522 6.05357 20.1957 7.92893 22.0711C9.80429 23.9464 12.3478 25 15 25ZM15 27.5C8.09625 27.5 2.5 21.9037 2.5 15C2.5 8.09625 8.09625 2.5 15 2.5C21.9037 2.5 27.5 8.09625 27.5 15C27.5 21.9037 21.9037 27.5 15 27.5Z'
                 fill='#42446E'
@@ -95,18 +75,8 @@ const FooterComponent = () => (
             </svg>
           </Link>
 
-          <Link
-            href={'https://twitter.com/Alamin66Sit'}
-            target='_blank'
-            className='group me-4 cursor-pointer sm:me-5'
-          >
-            <svg
-              width='25'
-              height='25'
-              viewBox='0 0 25 25'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
+          <Link href={'https://twitter.com/Alamin66Sit'} target='_blank' className='group me-4 cursor-pointer sm:me-5'>
+            <svg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 d='M12.875 0.875C6.24821 0.875 0.875 6.24821 0.875 12.875C0.875 19.5018 6.24821 24.875 12.875 24.875C19.5018 24.875 24.875 19.5018 24.875 12.875C24.875 6.24821 19.5018 0.875 12.875 0.875ZM18.642 9.92054C18.65 10.0464 18.65 10.1777 18.65 10.3063C18.65 14.2384 15.6554 18.7679 10.183 18.7679C8.49554 18.7679 6.93125 18.2777 5.61339 17.4339C5.85446 17.4607 6.08482 17.4714 6.33125 17.4714C7.72411 17.4714 9.00446 17 10.025 16.2018C8.71786 16.175 7.61964 15.3179 7.24464 14.1393C7.70268 14.2063 8.11518 14.2063 8.58661 14.0857C7.91355 13.949 7.30859 13.5834 6.87451 13.0512C6.44042 12.519 6.20398 11.8529 6.20536 11.1661V11.1286C6.59911 11.3509 7.0625 11.4875 7.54732 11.5062C7.13976 11.2346 6.80551 10.8666 6.57423 10.4349C6.34294 10.0032 6.22176 9.52103 6.22143 9.03125C6.22143 8.47679 6.36607 7.97054 6.62589 7.53125C7.37295 8.4509 8.30517 9.20306 9.36196 9.73884C10.4187 10.2746 11.5764 10.582 12.7598 10.6411C12.3393 8.61875 13.85 6.98214 15.6661 6.98214C16.5232 6.98214 17.2946 7.34107 17.8384 7.91964C18.5107 7.79375 19.1536 7.54196 19.7268 7.20446C19.5045 7.89286 19.0384 8.47411 18.4196 8.84107C19.0196 8.77679 19.5982 8.61071 20.1339 8.37768C19.7295 8.97232 19.2232 9.5 18.642 9.92054V9.92054Z'
                 fill='#42446E'
@@ -114,18 +84,8 @@ const FooterComponent = () => (
               />
             </svg>
           </Link>
-          <Link
-            href={'https://www.linkedin.com/in/md-alamin66/'}
-            target='_blank'
-            className='group cursor-pointer'
-          >
-            <svg
-              width='25'
-              height='25'
-              viewBox='0 0 25 25'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
+          <Link href={'https://www.linkedin.com/in/md-alamin66/'} target='_blank' className='group cursor-pointer'>
+            <svg width='25' height='25' viewBox='0 0 25 25' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
                 d='M12.6 0.599976C5.97251 0.599976 0.600006 5.97248 0.600006 12.6C0.600006 19.2275 5.97251 24.6 12.6 24.6C19.2275 24.6 24.6 19.2275 24.6 12.6C24.6 5.97248 19.2275 0.599976 12.6 0.599976ZM9.66251 17.5737H7.23251V9.75373H9.66251V17.5737ZM8.43251 8.79373C7.66501 8.79373 7.16876 8.24998 7.16876 7.57748C7.16876 6.89123 7.68001 6.36373 8.46376 6.36373C9.24751 6.36373 9.72751 6.89123 9.74251 7.57748C9.74251 8.24998 9.24751 8.79373 8.43251 8.79373ZM18.5375 17.5737H16.1075V13.24C16.1075 12.2312 15.755 11.5462 14.8763 11.5462C14.205 11.5462 13.8063 12.01 13.63 12.4562C13.565 12.615 13.5488 12.84 13.5488 13.0637V17.5725H11.1175V12.2475C11.1175 11.2712 11.0863 10.455 11.0538 9.75248H13.165L13.2763 10.8387H13.325C13.645 10.3287 14.4288 9.57623 15.74 9.57623C17.3388 9.57623 18.5375 10.6475 18.5375 12.95V17.5737V17.5737Z'
                 fill='#42446E'
@@ -163,10 +123,16 @@ const FooterComponent = () => (
 
         <p className='mt-[25px] pb-1 text-center text-sm text-theme-primary lg:mt-0 dark:text-theme-dark-primary'>
           Designed and built by{' '}
-          <span className='footer-txt-gradient'>Alamin</span>
+          <Link
+            target='_blank'
+            href='https://showcase-alamin.vercel.app'
+            className='footer-txt-gradient'
+            data-umami-event={`personal-portfolio`}
+          >
+            Alamin
+          </Link>
           &nbsp;with&nbsp;
-          <span className='footer-txt-gradient'>Love </span> &{' '}
-          <span className='footer-txt-gradient'>Coffee</span>
+          <span className='footer-txt-gradient'>Love </span> & <span className='footer-txt-gradient'>Coffee</span>
         </p>
       </div>
     </div>
