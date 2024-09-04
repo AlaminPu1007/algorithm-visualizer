@@ -31,3 +31,18 @@ export const getRandomObject = (size: number) =>
  */
 export const isValidDirection = (row: number, col: number, n: number, m: number) =>
   row >= 0 && row < n && col >= 0 && col < m;
+
+/**
+ * get a valid row, col size for select
+ *
+ * @param {number} [maxSize=12]
+ * @returns {array} - a list of valid grid size
+ */
+export const gridRowColSize = (maxSize: number = 12) => {
+  return Array.from({ length: maxSize }).map((item, i) => {
+    return {
+      id: i + 1,
+      value: i + 4,
+    };
+  });
+};

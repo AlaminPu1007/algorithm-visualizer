@@ -3,18 +3,26 @@
 import { DFSFindUniquePathMethod } from '@/app/algorithm/uniquePath';
 import { UNIQUE_PATH_GRID_SIZE, UNIQUE_PATH_SVG_ICON_SIZE } from '@/app/constant';
 import { createGridWithPath } from '@/app/data/PathFindingGridData';
-import { Sleep } from '@/app/lib/sleepMethod';
+import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { GridProps } from '@/app/types/uniquePathProps';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const UniquePath: React.FC<{ speedRange: number }> = ({ speedRange }) => {
+interface PageProps {
+  speedRange: number;
+  gridSize: { rowSize: number; colSize: number };
+}
+
+const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
   const [data, setData] = useState<GridProps[][]>([]);
 
   useEffect(() => {
-    // setData(createGridWithPath(12, 24));
-    setData(createGridWithPath(5, 5));
-  }, []);
+    if (Object.keys(gridSize)?.length) {
+      // create each new row, clear it's all previous states
+      clearAllTimeouts();
+      setData(createGridWithPath(gridSize.rowSize, gridSize.colSize));
+    }
+  }, [gridSize]);
 
   useEffect(() => {
     const Time: number = 0;
@@ -92,7 +100,7 @@ const UniquePath: React.FC<{ speedRange: number }> = ({ speedRange }) => {
       {data?.length ? (
         <div className='item-center flex flex-col justify-start'>
           {data.map((row, rowIndex) => (
-            <div key={rowIndex} className='flex'>
+            <div key={rowIndex} className='flex items-center justify-center'>
               {row.map((col, colIndex) => {
                 // active rat or ball
                 const isBallActive = Boolean(col.isCurrent || (rowIndex === 0 && colIndex === 0));

@@ -41,7 +41,7 @@ export const DFSFindUniquePathMethod = async (
     // Reached the destination
     paths.push(path);
 
-    toast.success(`One valid path is found ${path}`);
+    toast.success(`One valid path is found ${path}`, { autoClose: 1500, position: 'top-left' });
 
     // Trace back the valid path to visualize
     let current = { rowIdx: row, colIdx: col };

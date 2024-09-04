@@ -31,7 +31,8 @@ export const createGridWithPath = (rows: number, cols: number): GridProps[][] =>
         if (r === rows - 1 || c === cols - 1) {
           grid[r][c].data = 1; // Ensure the last row and column are walkable
         } else {
-          grid[r][c].data = Math.random() > 0.2 ? 1 : 0; // Random obstacles
+          // 0.3 -> if we increase this, it will create more most obstacles or brick
+          grid[r][c].data = Math.random() > 0.3 ? 1 : 0; // Random obstacles
         }
       }
     }
