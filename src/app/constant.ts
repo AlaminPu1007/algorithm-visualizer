@@ -75,3 +75,5 @@ export const del_row = [+1, 0, 0, -1]; // Down, Left, Right, Up
 export const del_col = [0, -1, +1, 0];
 // To identify a valid path
 export const directions = ['D', 'L', 'R', 'U']; // Direction string for consistency
+export const UNIQUE_PATH_SVG_ICON_SIZE = `h-[20px] w-[20px]`;
+export const UNIQUE_PATH_GRID_SIZE = `h-[50px] w-[50px]`;

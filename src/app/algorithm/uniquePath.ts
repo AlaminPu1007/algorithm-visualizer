@@ -1,9 +1,9 @@
 import { toast } from 'react-toastify';
-import { GridProps } from '../data/PathFindingGridData';
 import { Sleep } from '../lib/sleepMethod';
 import { del_col, del_row, directions } from '../constant';
 import { isValidDirection } from '../lib/helpers';
 import React from 'react';
+import { GridProps } from '../types/uniquePathProps';
 
 /**
  * Finds unique paths from the top-left to the bottom-right corner of a grid using Depth-First Search (DFS).
