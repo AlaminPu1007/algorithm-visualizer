@@ -1,7 +1,7 @@
 'use client';
-import { del_col, del_row, directions } from '@/app/constant';
+
+import { DFSFindUniquePathMethod } from '@/app/algorithm/uniquePath';
 import { GridProps, pathFindingGridData } from '@/app/data/PathFindingGridData';
-import { isValidDirection } from '@/app/lib/helpers';
 import { Sleep } from '@/app/lib/sleepMethod';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -15,41 +15,70 @@ const PathFind = () => {
     setData(pathFindingGridData);
   }, []);
 
-  const perFormMazeRunnerDFS = async () => {
+  useEffect(() => {
+    const Time: number = 0;
+    if (data?.length) {
+      setTimeout(() => {
+        perFormMazeRunnerDFS(data);
+      }, 300);
+    }
+    return () => {
+      clearTimeout(Time);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.length]);
+
+  /**
+   * Performs a Depth-First Search (DFS) to find unique paths in a maze from the top-left corner to the bottom-right corner.
+   *
+   * This function initializes the maze state, sets the starting cell as visited, and invokes the `DFSFindUniquePathMethod`
+   * to find all possible unique paths. It handles state updates and provides feedback through toasts based on whether
+   * paths are found or not.
+   *
+   * @async
+   * @function
+   * @returns {Promise<void>} A promise that resolves when the DFS traversal is complete and paths are found.
+   *
+   * @throws {Error} Throws an error if there is an issue during the DFS traversal.
+   */
+  const perFormMazeRunnerDFS = async (data: GridProps[][]) => {
     try {
-      const n = data?.length,
-        m = data[0]?.length;
+      // Get the dimensions of the maze
+      const n = data?.length;
+      const m = data[0]?.length;
 
+      // Create a copy of the maze data to manipulate during DFS
       const tempData = [...data];
-      const paths: string[] = [];
+      const paths: string[] = []; // Array to store the unique paths found
 
+      // Mark the starting cell as visited
       tempData[0][0].isCurrent = true;
       tempData[0][0].isVisit = true;
 
+      // Update the state with the initial cell marked
       setData([...tempData]);
 
+      // Delay for visualization purposes
       await Sleep(speedRange);
 
       // Start DFS from the top-left corner of the maze
-      await dfs(tempData, paths, n, m, 0, 0, '');
+      await DFSFindUniquePathMethod(tempData, paths, n, m, 0, 0, '', speedRange, setData);
 
+      // Reset the starting cell after DFS is complete
       tempData[0][0].isCurrent = false;
       tempData[0][0].isVisit = false;
 
+      // Update the state with the reset starting cell
       setData([...tempData]);
 
-      // Check if any paths were found
+      // Provide feedback based on whether any paths were found
       if (paths.length > 0) {
-        if (process.env.NODE_ENV === 'development') {
-          // eslint-disable-next-line no-console
-          console.log(paths);
-        }
-
         toast.success(`Found ${paths.length} unique path(s)!`);
       } else {
         toast.error('No valid paths found');
       }
     } catch (error) {
+      // Log error in development environment
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
         console.log(error, 'from catch');
@@ -57,97 +86,8 @@ const PathFind = () => {
     }
   };
 
-  const dfs = async (
-    tempData: GridProps[][],
-    paths: string[],
-    n: number,
-    m: number,
-    row: number,
-    col: number,
-    path: string
-  ) => {
-    if (row === n - 1 && col === m - 1) {
-      // Reached the destination
-      paths.push(path);
-
-      toast.success(`One valid path is found ${path}`);
-
-      // Trace back the valid path
-      let current = { rowIdx: row, colIdx: col };
-
-      // Create a deep copy to trace path
-      const pathData = tempData.map((row) => row.map((item) => ({ ...item })));
-
-      while (current.rowIdx !== -1 && current.colIdx !== -1) {
-        pathData[current.rowIdx][current.colIdx].isValidPath = true;
-        current = tempData[current.rowIdx][current.colIdx].parent;
-
-        setData([...pathData]);
-        await Sleep(speedRange);
-      }
-
-      await Sleep(speedRange + speedRange);
-
-      // Reset all `isValidPath` to false
-      current = { rowIdx: row, colIdx: col }; // Reset current to the end of the path
-
-      while (current.rowIdx !== -1 && current.colIdx !== -1) {
-        pathData[current.rowIdx][current.colIdx].isValidPath = false;
-        current = pathData[current.rowIdx][current.colIdx].parent;
-
-        setData([...pathData]); // Update state with reset pathData
-        await Sleep(speedRange);
-      }
-
-      return;
-    }
-
-    for (let i = 0; i < 4; i++) {
-      const new_row = del_row[i] + row;
-      const new_col = del_col[i] + col;
-
-      if (isValidDirection(new_row, new_col, n, m) && !tempData[new_row][new_col].isVisit) {
-        if (!tempData[new_row][new_col].data) {
-          //
-        }
-
-        // Only move to cells with data === 1)
-        else {
-          tempData[new_row][new_col].isVisit = true;
-          tempData[new_row][new_col].isCurrent = true;
-
-          // Set parent for backtracking
-          tempData[new_row][new_col].parent = {
-            rowIdx: row,
-            colIdx: col,
-          };
-
-          setData([...tempData]);
-          await Sleep(speedRange);
-
-          // Use a local path variable
-          const newPath = path + directions[i % 4];
-
-          // Recur for DFS
-          await dfs(tempData, paths, n, m, new_row, new_col, newPath);
-
-          // Backtrack
-          tempData[new_row][new_col].isCurrent = false;
-          tempData[new_row][new_col].isVisit = false;
-
-          setData([...tempData]);
-        }
-      }
-    }
-  };
-
   return (
     <div className='container'>
-      <div className='pb-5 pt-2'>
-        <button className='root-btn' onClick={perFormMazeRunnerDFS}>
-          Click
-        </button>
-      </div>
       {data?.length ? (
         <div className='item-center flex flex-col justify-start'>
           {data.map((row, rowIndex) => (
@@ -236,7 +176,11 @@ const PathFind = () => {
             </div>
           ))}
         </div>
-      ) : null}
+      ) : (
+        <div className='flex min-h-[200px] w-full items-center justify-center'>
+          <h1 className='text-center text-4xl font-medium'>Loading...</h1>
+        </div>
+      )}
     </div>
   );
 };
