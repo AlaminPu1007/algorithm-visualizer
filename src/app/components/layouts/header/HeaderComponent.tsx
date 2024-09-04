@@ -108,18 +108,17 @@ const HeaderComponent = () => {
                 Sorting
               </Link>
             </li>
-            {process.env.NODE_ENV === 'development' ? (
-              <li className='lg:mx-2'>
-                <Link
-                  href='/path-finding'
-                  className='nav-list-item-link'
-                  onClick={onCloseDrawerNav}
-                  data-umami-event='Sorting-Navigation'
-                >
-                  Path finding
-                </Link>
-              </li>
-            ) : null}
+
+            <li className='lg:mx-2'>
+              <Link
+                href='/path-finding'
+                className='nav-list-item-link'
+                onClick={onCloseDrawerNav}
+                data-umami-event='Sorting-Navigation'
+              >
+                Path finding
+              </Link>
+            </li>
 
             {/* <li className='lg:mx-2'>
               <Link
