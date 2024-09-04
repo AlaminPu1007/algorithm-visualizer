@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MergeSortComponent from './MergeSortComponent';
 import { uid } from '@/app/lib/uidGenerator';
 import BubbleSortComponent from './BubbleSortComponent';
 import SelectionSortComponent from './SelectionSortComponent';
 import QuickSortComponent from './QuickSortComponent';
 import HeapSortComponent from './HeapSortComponent';
+import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 
 const SortingComponent = () => {
   // define local state
@@ -14,6 +15,13 @@ const SortingComponent = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [randomKey, setRandomKey] = useState<string>('');
   const [speedRange, setSpeedRange] = useState<number>(200);
+
+  // clear times out before component unmount
+  useEffect(() => {
+    return () => {
+      clearAllTimeouts();
+    };
+  }, []);
 
   /** updated current button with it's type */
   const buttonMethod = () => setRandomKey(uid());

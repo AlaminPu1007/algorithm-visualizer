@@ -34,14 +34,17 @@ export const DFSFindUniquePathMethod = async (
   col: number,
   path: string,
   speedRange: number,
-  setData: React.Dispatch<React.SetStateAction<GridProps[][]>>
+  setData: React.Dispatch<React.SetStateAction<GridProps[][]>>,
+  setValidPaths: React.Dispatch<React.SetStateAction<{ path: string; id: number }[]>>
 ) => {
   // Handle the base case: if the destination is reached
   if (row === n - 1 && col === m - 1) {
     // Reached the destination
-    paths.push(path);
+    paths.push(path.slice(0, path?.length - 2));
+    toast.success(`One valid path is found`, { autoClose: 1500, position: 'top-left' });
 
-    toast.success(`One valid path is found ${path}`, { autoClose: 1500, position: 'top-left' });
+    // store into state also
+    setValidPaths((prv) => [...prv, { id: Math.random() * 99999, path: path.slice(0, path?.length - 2) }]);
 
     // Trace back the valid path to visualize
     let current = { rowIdx: row, colIdx: col };
@@ -98,10 +101,21 @@ export const DFSFindUniquePathMethod = async (
         await Sleep(speedRange);
 
         // Use a local path variable to track the current path
-        const newPath = path + directions[i % 4];
+        const newPath = path + directions[i % 4] + '->';
 
         // Recursively explore further
-        await DFSFindUniquePathMethod(tempData, paths, n, m, new_row, new_col, newPath, speedRange, setData);
+        await DFSFindUniquePathMethod(
+          tempData,
+          paths,
+          n,
+          m,
+          new_row,
+          new_col,
+          newPath,
+          speedRange,
+          setData,
+          setValidPaths
+        );
 
         // Backtrack: Reset the state of the current cell
         tempData[new_row][new_col].isCurrent = false;

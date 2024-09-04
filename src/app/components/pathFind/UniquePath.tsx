@@ -15,6 +15,7 @@ interface PageProps {
 
 const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
   const [data, setData] = useState<GridProps[][]>([]);
+  const [validPaths, setValidPaths] = useState<{ path: string; id: number }[]>([]);
 
   useEffect(() => {
     if (Object.keys(gridSize)?.length) {
@@ -25,14 +26,15 @@ const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
   }, [gridSize]);
 
   useEffect(() => {
-    const Time: number = 0;
+    let Time: number = 0;
     if (data?.length) {
-      setTimeout(() => {
+      Time = window.setTimeout(() => {
         perFormMazeRunnerDFS(data);
       }, 300);
     }
     return () => {
       clearTimeout(Time);
+      clearAllTimeouts();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.length]);
@@ -71,7 +73,7 @@ const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
       await Sleep(speedRange);
 
       // Start DFS from the top-left corner of the maze
-      await DFSFindUniquePathMethod(tempData, paths, n, m, 0, 0, '', speedRange, setData);
+      await DFSFindUniquePathMethod(tempData, paths, n, m, 0, 0, '', speedRange, setData, setValidPaths);
 
       // Reset the starting cell after DFS is complete
       tempData[0][0].isCurrent = false;
@@ -197,6 +199,20 @@ const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
           <h1 className='text-center text-4xl font-medium'>Loading...</h1>
         </div>
       )}
+      {validPaths?.length ? (
+        <div className='my-2 flex flex-wrap items-center'>
+          {validPaths.map((item) => {
+            return (
+              <p
+                className='me-2 mt-1 break-all rounded border-[1px] bg-green-400 px-3 py-1 text-sm text-white'
+                key={item.id}
+              >
+                {item.path}
+              </p>
+            );
+          })}
+        </div>
+      ) : null}
     </div>
   );
 };

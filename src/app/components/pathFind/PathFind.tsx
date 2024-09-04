@@ -1,9 +1,10 @@
 'use client';
 
 import { uid } from '@/app/lib/uidGenerator';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UniquePath from './UniquePath';
 import { gridRowColSize } from '@/app/lib/helpers';
+import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 
 const PathFind = () => {
   // define local state
@@ -13,6 +14,13 @@ const PathFind = () => {
   const [speedRange, setSpeedRange] = useState<number>(200);
   const [gridSize, setGridSize] = useState<{ rowSize: number; colSize: number }>({ rowSize: 4, colSize: 4 });
   const [submittedGridSize, setSubmittedGridSize] = useState<{ rowSize: number; colSize: number }>(gridSize);
+
+  // clear times out before component unmount
+  useEffect(() => {
+    return () => {
+      clearAllTimeouts();
+    };
+  }, []);
 
   /** updated current button with it's type */
   const buttonMethod = () => {
