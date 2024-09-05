@@ -107,22 +107,26 @@ const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
                 // active rat or ball
                 const isBallActive = Boolean(col.isCurrent || (rowIndex === 0 && colIndex === 0));
 
-                let BG_COLOR = col.data !== 1 ? 'bg-gray-600 text-white' : 'bg-white';
-
+                let BG_COLOR = col.data !== 1 ? 'bg-[#575C6B] text-white' : 'bg-white';
                 if (col.isInvalid) BG_COLOR = 'bg-red-600 text-white';
-
-                if (col.isCurrent) {
-                  BG_COLOR = 'bg-blue-600 text-white';
-                }
-
+                if (col.isCurrent) BG_COLOR = 'bg-blue-600 text-white';
                 if (col.isMarked) BG_COLOR = 'bg-pink-600 text-white';
-
                 if (col.isValidPath) BG_COLOR = 'bg-green-600 text-white'; // Color for valid path
 
-                const b = `border-[0.5px] border-gray-500`; // border-b-[0.5px] border-r-[0px] border-rose-400`;
+                let b = `border-b-[0.5px] border-r-[0.5px] border-[#575C6B]`;
 
-                // if (rowIndex === data?.length - 1)
-                //   b = `border-[1px] border-b-[0.5px] border-r-[0.5px] border-rose-400`;
+                if (rowIndex === 0) {
+                  b += ` border-t-[0.2px]`;
+                }
+                if (rowIndex === data?.length - 1) {
+                  b += ` border-b-[0.22px]`;
+                }
+                if (colIndex === 0) {
+                  b += ` border-l-[0.2px]`;
+                }
+                if (colIndex === data[0]?.length - 1) {
+                  b += ` border-r-[0.2px]`;
+                }
 
                 return (
                   <div
