@@ -21,7 +21,7 @@ const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
     if (Object.keys(gridSize)?.length) {
       // create each new row, clear it's all previous states
       clearAllTimeouts();
-      setData(createGridWithPath(gridSize.rowSize, gridSize.colSize));
+      setData(JSON.parse(JSON.stringify(createGridWithPath(gridSize.rowSize, gridSize.colSize))));
     }
   }, [gridSize]);
 
