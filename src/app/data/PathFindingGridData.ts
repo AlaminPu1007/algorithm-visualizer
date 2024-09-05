@@ -7,7 +7,7 @@ import { GridProps } from '../types/uniquePathProps';
  * @param {number} cols
  * @returns {GridProps[][]}
  */
-export const createGridWithPath = (rows: number, cols: number): GridProps[][] => {
+export const createGridWithUniquePath = (rows: number, cols: number, threshold: number = 0.3): GridProps[][] => {
   const grid = Array.from({ length: rows }, (_, rowIdx) =>
     Array.from({ length: cols }, (_, colIdx) => ({
       id: rowIdx * cols + colIdx + 1,
@@ -32,7 +32,7 @@ export const createGridWithPath = (rows: number, cols: number): GridProps[][] =>
           grid[r][c].data = 1; // Ensure the last row and column are walkable
         } else {
           // 0.3 -> if we increase this, it will create more most obstacles or brick
-          grid[r][c].data = Math.random() > 0.3 ? 1 : 0; // Random obstacles
+          grid[r][c].data = Math.random() > threshold ? 1 : 0; // Random obstacles
         }
       }
     }

@@ -2,42 +2,46 @@
 
 import { DFSFindUniquePathMethod } from '@/app/algorithm/uniquePath';
 import { UNIQUE_PATH_GRID_SIZE, UNIQUE_PATH_SVG_ICON_SIZE } from '@/app/constant';
-import { createGridWithPath } from '@/app/data/PathFindingGridData';
+import { createGridWithUniquePath } from '@/app/data/PathFindingGridData';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { GridProps } from '@/app/types/uniquePathProps';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 interface PageProps {
+  useRandomKey: string;
   speedRange: number;
   gridSize: { rowSize: number; colSize: number };
 }
 
-const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
+const UniquePath: React.FC<PageProps> = ({ useRandomKey, speedRange, gridSize }) => {
   const [data, setData] = useState<GridProps[][]>([]);
   const [validPaths, setValidPaths] = useState<{ path: string; id: number }[]>([]);
 
   useEffect(() => {
+    let Time: number = 0;
+
     if (Object.keys(gridSize)?.length) {
       // create each new row, clear it's all previous states
       clearAllTimeouts();
-      setData(JSON.parse(JSON.stringify(createGridWithPath(gridSize.rowSize, gridSize.colSize))));
-    }
-  }, [gridSize]);
 
-  useEffect(() => {
-    let Time: number = 0;
-    if (data?.length) {
-      Time = window.setTimeout(() => {
-        perFormMazeRunnerDFS(data);
-      }, 300);
+      const tempData = JSON.parse(JSON.stringify(createGridWithUniquePath(gridSize.rowSize, gridSize.colSize, 0.3)));
+      setData([...tempData]);
+      setValidPaths([]);
+
+      if (tempData?.length) {
+        Time = window.setTimeout(() => {
+          perFormMazeRunnerDFS(tempData);
+        }, 300);
+      }
     }
+
     return () => {
       clearTimeout(Time);
       clearAllTimeouts();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.length]);
+  }, [gridSize, useRandomKey]);
 
   /**
    * Performs a Depth-First Search (DFS) to find unique paths in a maze from the top-left corner to the bottom-right corner.
@@ -116,16 +120,16 @@ const UniquePath: React.FC<PageProps> = ({ speedRange, gridSize }) => {
                 let b = `border-b-[0.5px] border-r-[0.5px] border-[#575C6B]`;
 
                 if (rowIndex === 0) {
-                  b += ` border-t-[0.2px]`;
+                  b += ` border-t-[0.5px]`;
                 }
                 if (rowIndex === data?.length - 1) {
-                  b += ` border-b-[0.22px]`;
+                  b += ` border-b-[0.5px]`;
                 }
                 if (colIndex === 0) {
-                  b += ` border-l-[0.2px]`;
+                  b += ` border-l-[0.5px]`;
                 }
                 if (colIndex === data[0]?.length - 1) {
-                  b += ` border-r-[0.2px]`;
+                  b += ` border-r-[0.5px]`;
                 }
 
                 return (

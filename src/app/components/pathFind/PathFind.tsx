@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import UniquePath from './UniquePath';
 import { gridRowColSize } from '@/app/lib/helpers';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
+import NoOfIslands from './NoOfIslands';
 
 const PathFind = () => {
   // define local state
@@ -123,6 +124,7 @@ const PathFind = () => {
                 className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
               >
                 <option value='unique-path'>Unique Path</option>
+                <option value='no-of-island'>No of island</option>
               </select>
 
               <button
@@ -137,7 +139,12 @@ const PathFind = () => {
       </div>
       {buttonType === 'unique-path' ? (
         <div className='container py-5'>
-          <UniquePath key={randomKey} speedRange={speedRange} gridSize={submittedGridSize} />
+          <UniquePath useRandomKey={randomKey} speedRange={speedRange} gridSize={submittedGridSize} />
+        </div>
+      ) : null}
+      {buttonType === 'no-of-island' ? (
+        <div className='container py-5'>
+          <NoOfIslands useRandomKey={randomKey} speedRange={speedRange} gridSize={submittedGridSize} />
         </div>
       ) : null}
     </div>
