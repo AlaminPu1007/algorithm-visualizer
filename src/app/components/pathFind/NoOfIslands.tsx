@@ -49,7 +49,8 @@ const NoOfIslands: React.FC<PageProps> = ({ useRandomKey, speedRange, gridSize }
 
   const findNoOfIslands = async (data: GridProps[][]) => {
     try {
-      console.log(data, 'dddddddddddddd');
+      // eslint-disable-next-line no-console
+      // console.log(data, 'dddddddddddddd');
       // create a shallow copy of root data
       const tempData = [...data];
       // create a shallow copy of root queue
