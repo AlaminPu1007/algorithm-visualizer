@@ -34,7 +34,7 @@ const FooterComponent = () => (
             </svg>
           </Link>
 
-          <Link
+          {/* <Link
             href='https://github.com/AlaminPu1007'
             target='_blank'
             className='group me-4 cursor-pointer sm:me-5'
@@ -92,13 +92,13 @@ const FooterComponent = () => (
                 className='duration-200 group-hover:fill-theme-btn dark:fill-theme-btn dark:group-hover:fill-white'
               />
             </svg>
-          </Link>
+          </Link> */}
         </div>
       </div>
       <div className='block h-[0.5px] bg-[#E2E1E5] opacity-80 duration-200 dark:bg-theme-dark-primary dark:opacity-50' />
 
-      <div className='my-[25px] flex flex-col items-center justify-between lg:flex-row'>
-        <ul className='flex w-full flex-wrap items-center justify-center lg:w-auto lg:justify-start'>
+      <div className='my-[25px] flex flex-col items-center justify-center'>
+        {/* <ul className='flex w-full flex-wrap items-center justify-center lg:w-auto lg:justify-start'>
           <li>
             <Link href={'/'} className='footer-nav-link me-4'>
               Home
@@ -119,7 +119,7 @@ const FooterComponent = () => (
               Sorting
             </Link>
           </li>
-        </ul>
+        </ul> */}
 
         <p className='mt-[25px] pb-1 text-center text-sm text-theme-primary lg:mt-0 dark:text-theme-dark-primary'>
           Designed and built by{' '}
