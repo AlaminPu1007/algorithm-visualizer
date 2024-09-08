@@ -11,6 +11,7 @@ import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import TreeDFSTraversal from '@/app/utils/TreeDFSTraversal';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
 import TreeBFSTraversal from '@/app/utils/TreeBFSTraversal';
+import { PostOrderDFSTraversal } from '@/app/algorithm/treePostOrderTraversal';
 
 const TreeComponent = () => {
   // define a component local memory
@@ -193,44 +194,12 @@ const TreeComponent = () => {
       await Sleep(DFS_DELAY);
 
       const visitedNodes = new Set<number>();
-      await PostOrderDFSTraversal(data, visitedNodes);
+      await PostOrderDFSTraversal(data, visitedNodes, setCurrentStep, setVisitedNodes, steps);
 
       // initialized with default value
       setCurrentStep(-1);
       setVisitedNodes(new Set());
     }
-  };
-
-  /**
-   * Perform a in-order traversal
-   */
-  const PostOrderDFSTraversal = async (node: ITreeNode | null, visitedNodes: Set<number>) => {
-    // handle the base case
-    if (!node) return;
-
-    // Traverse left subtree
-    if (node.left) {
-      await PostOrderDFSTraversal(node.left, visitedNodes);
-    }
-
-    // Traverse right subtree
-    if (node.right) {
-      await PostOrderDFSTraversal(node.right, visitedNodes);
-    }
-
-    // mark this node as visited
-    if (node.id !== null) {
-      visitedNodes.add(node.id);
-    }
-
-    // Mark the current node
-    setCurrentStep(steps.indexOf(node));
-
-    // update state of visited
-    setVisitedNodes(new Set(visitedNodes));
-
-    // wait until completed the current node
-    await Sleep(DFS_DELAY);
   };
 
   return (
