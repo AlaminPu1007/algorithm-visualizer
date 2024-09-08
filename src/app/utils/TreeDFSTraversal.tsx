@@ -21,7 +21,7 @@ const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({ root, steps, curren
                 y1={linePos.startY}
                 x2={linePos.endX}
                 y2={linePos.endY}
-                stroke={isCurrentNode ? 'green' : isVisited ? 'red' : 'black'}
+                stroke={isCurrentNode ? 'red' : isVisited ? 'green' : 'black'}
                 strokeWidth={'0.3'}
               >
                 <animate
@@ -40,7 +40,7 @@ const TreeDFSTraversal: React.FC<TreeDFSTraversalProps> = ({ root, steps, curren
         cx={root.cx!}
         cy={root.cy!}
         r={NODE_POSITION}
-        fill={isCurrentNode ? 'cyan' : isVisited ? '#3B9400' : 'white'}
+        fill={isCurrentNode ? 'red' : isVisited ? '#3B9400' : 'white'}
         stroke={isCurrentNode ? 'white' : 'black'}
         strokeWidth={'0.2'}
       >

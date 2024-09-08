@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { calculateLinePosition } from '@/app/lib/calculateSvgLinePosition';
-import { BFS_DELAY, NODE_POSITION } from '@/app/constant';
+import { NODE_POSITION } from '@/app/constant';
 import { TreeNode } from '../data-structure/Tree/Node';
-import { Sleep } from '../lib/sleepMethod';
 import { TreeBFSTraversalProps } from '../types/TreeTypeProps';
+import { traverseBFS } from '../algorithm/treeTraversalTechnique/bfsTraversal';
 
 const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
   const [currentNodes, setCurrentNodes] = useState<TreeNode[]>([]);
@@ -11,38 +11,10 @@ const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
   const [visitedNodes, setVisitedNodes] = useState<Set<number>>(new Set());
 
   useEffect(() => {
-    if (!root) return;
-
-    const traverseBFS = async () => {
-      const queue = [root];
-      const bfsNodes: TreeNode[] = [];
-
-      while (queue.length > 0) {
-        const currentNode = queue.shift()!;
-        bfsNodes.push(currentNode);
-
-        // Update the state to trigger a re-render
-        setCurrentNode(currentNode);
-
-        setVisitedNodes((prevVisitedNodes) => new Set(prevVisitedNodes).add(currentNode.id!));
-        setCurrentNodes([...bfsNodes]);
-
-        // Introduce a delay
-        await Sleep(BFS_DELAY);
-
-        if (currentNode.left) queue.push(currentNode.left);
-        if (currentNode.right) queue.push(currentNode.right);
-      }
-
-      // initialize a default state
-      setCurrentNode(null);
-
-      await Sleep(BFS_DELAY * 3);
-      // initialized at default state
-      setVisitedNodes(new Set());
-    };
-
-    traverseBFS();
+    if (root) {
+      traverseBFS(root, currentNode, setCurrentNode, setVisitedNodes, setCurrentNodes);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [root]);
 
   return (
@@ -67,7 +39,7 @@ const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
                     y1={linePos.startY}
                     x2={linePos.endX}
                     y2={linePos.endY}
-                    stroke={isCurrentNode ? 'green' : isVisited ? 'red' : 'black'}
+                    stroke={isCurrentNode ? 'red' : isVisited ? 'green' : 'black'}
                     strokeWidth={'0.3'}
                   >
                     <animate
@@ -85,7 +57,7 @@ const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
               cx={node.cx!}
               cy={node.cy!}
               r={NODE_POSITION}
-              fill={isCurrentNode ? 'cyan' : isVisited ? '#3B9400' : 'white'}
+              fill={isCurrentNode ? 'red' : isVisited ? '#3B9400' : 'white'}
               stroke={isCurrentNode ? 'white' : 'black'}
               strokeWidth={'0.2'}
             >

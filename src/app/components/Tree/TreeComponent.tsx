@@ -11,7 +11,9 @@ import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import TreeDFSTraversal from '@/app/utils/TreeDFSTraversal';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
 import TreeBFSTraversal from '@/app/utils/TreeBFSTraversal';
-import { PostOrderDFSTraversal } from '@/app/algorithm/treePostOrderTraversal';
+import { InOrderDFSTraversal } from '@/app/algorithm/treeTraversalTechnique/inOrderTraversal';
+import { PostOrderDFSTraversal } from '@/app/algorithm/treeTraversalTechnique/postOrderTraversal';
+import { preOrderTraversal } from '@/app/algorithm/treeTraversalTechnique/preOrderTraversal';
 
 const TreeComponent = () => {
   // define a component local memory
@@ -24,12 +26,19 @@ const TreeComponent = () => {
   const [randomKey, setRandomKey] = useState<number>(0);
 
   useEffect(() => {
+    /**
+     * Initializes the tree with random data and collects nodes in an in-order traversal manner.
+     *
+     * The new tree data is generated using `getRandomTreeData(31)` and then processed to extract
+     * all nodes in an in-order traversal. The nodes are collected and stored in the `steps` state.
+     */
     const newTree = new Tree(JSON.parse(JSON.stringify(getRandomTreeData(31))));
 
     if (newTree?.head) {
+      // Set the tree data to state
       setData(newTree.head);
 
-      // recursively put each node in (In-order traversal manner).
+      // Recursively collect each node in an in-order traversal manner
       const nodes: ITreeNode[] = [];
       const collectNodes = (node: ITreeNode | null) => {
         if (node) {
@@ -39,164 +48,122 @@ const TreeComponent = () => {
         }
       };
       collectNodes(newTree.head);
+
+      // Store collected nodes in the steps state
       setSteps(nodes);
     }
   }, []);
 
   /**
-   * A recursive approach to traverse the tree (Pre-order[ex: root, left, right])
+   * Performs a Pre-Order Depth First Search (DFS) traversal of the tree.
+   *
+   * This method sets the active root button type to 'dfs', clears any timeouts,
+   * and initiates the pre-order DFS traversal on the tree. Once the traversal is complete,
+   * it resets the current step and visited nodes to their default state.
    *
    * @async
-   * @param {(ITreeNode | null)} node
-   * @param {Set<number>} visitedNodes
-   * @returns {void}
-   */
-  const updateTreeRecursively = async (node: ITreeNode | null, visitedNodes: Set<number>) => {
-    // handle the base case
-    if (!node) return;
-
-    // mark this node as visited
-    if (node.id !== null) {
-      visitedNodes.add(node.id);
-    }
-
-    // Mark the current node
-    setCurrentStep(steps.indexOf(node));
-
-    // update state of visited
-    setVisitedNodes(new Set(visitedNodes));
-
-    // wait until completed the current node
-    await Sleep(DFS_DELAY);
-
-    // Traverse left subtree
-    if (node.left) {
-      await updateTreeRecursively(node.left, visitedNodes);
-    }
-
-    // Backtrack to current node
-    setCurrentStep(steps.indexOf(node));
-    await Sleep(DFS_DELAY);
-
-    // Traverse right subtree
-    if (node.right) {
-      await updateTreeRecursively(node.right, visitedNodes);
-    }
-
-    // Backtrack to current node
-    setCurrentStep(steps.indexOf(node));
-    await Sleep(DFS_DELAY);
-  };
-
-  /**
-   * Perform a DFS traversal
-   *
-   * @async an async method to called recursive approach
-   * @returns {void}
+   * @function performDFSMethod
+   * @returns {Promise<void>} A promise that resolves when the traversal is complete.
    */
   const performDFSMethod = async () => {
-    // update button type as well
+    // Set the button type to 'dfs'
     setActiveRootBtnType('dfs');
 
     if (data) {
-      // clear time out if it's present
+      // Clear any existing timeouts
       clearAllTimeouts();
 
       const visitedNodes = new Set<number>();
-      await updateTreeRecursively(data, visitedNodes);
+      // Perform pre-order traversal
+      await preOrderTraversal(data, visitedNodes, setCurrentStep, setVisitedNodes, steps);
 
-      // initialized with default value
+      // Reset current step and visited nodes
       setCurrentStep(-1);
       setVisitedNodes(new Set());
     }
   };
 
   /**
-   * Perform a BFS traversal
+   * Initializes and triggers a Breadth-First Search (BFS) traversal of the tree.
    *
-   * @async an async method to called recursive approach
+   * This method sets the active root button type to 'bfs', generates a random key,
+   * and resets the visualization states.
+   *
+   * @function performBFSMethod
    * @returns {void}
    */
   const performBFSMethod = () => {
-    // update button type as well
+    // Set the button type to 'bfs'
     setActiveRootBtnType('bfs');
-    // update key value
+    // Generate a random key to trigger re-render
     setRandomKey(Math.random() * 9999);
   };
 
-  // active button as per as in-order clicked
+  /**
+   * Performs an In-Order Depth First Search (DFS) traversal of the tree.
+   *
+   * This method sets the child button type to 'in-order', clears any timeouts,
+   * and resets states. It then performs the in-order traversal and resets the states
+   * after traversal is complete.
+   *
+   * @async
+   * @function inOrderTechniqueBtnMethod
+   * @returns {Promise<void>} A promise that resolves when the traversal is complete.
+   */
   const inOrderTechniqueBtnMethod = async () => {
+    // Set the button type to 'in-order'
     setChildBtnActiveType('in-order');
 
     if (data) {
-      // clear time out if it's present
+      // Clear any existing timeouts
       clearAllTimeouts();
+      // Reset current step and visited nodes
       setCurrentStep(-1);
       setVisitedNodes(new Set());
 
+      // Add a delay before starting the traversal
       await Sleep(DFS_DELAY);
 
       const visitedNodes = new Set<number>();
-      await InOrderDFSTraversal(data, visitedNodes);
+      // Perform in-order traversal
+      await InOrderDFSTraversal(data, visitedNodes, setCurrentStep, setVisitedNodes, steps);
 
-      // initialized with default value
+      // Reset current step and visited nodes after traversal
       setCurrentStep(-1);
       setVisitedNodes(new Set());
     }
   };
 
   /**
-   * Perform a in-order traversal
+   * Performs a Post-Order Depth First Search (DFS) traversal of the tree.
+   *
+   * This method sets the child button type to 'post-order', clears any timeouts,
+   * and resets states. It performs the post-order traversal and resets the states
+   * once traversal is complete.
+   *
+   * @async
+   * @function postOrderTechniqueBtnMethod
+   * @returns {Promise<void>} A promise that resolves when the traversal is complete.
    */
-  const InOrderDFSTraversal = async (node: ITreeNode | null, visitedNodes: Set<number>) => {
-    // handle the base case
-    if (!node) return;
-
-    // Traverse left subtree
-    if (node.left) {
-      await InOrderDFSTraversal(node.left, visitedNodes);
-    }
-
-    // mark this node as visited
-    if (node.id !== null) {
-      visitedNodes.add(node.id);
-    }
-
-    // Mark the current node
-    setCurrentStep(steps.indexOf(node));
-
-    // update state of visited
-    setVisitedNodes(new Set(visitedNodes));
-
-    // wait until completed the current node
-    await Sleep(DFS_DELAY);
-
-    // Traverse right subtree
-    if (node.right) {
-      await InOrderDFSTraversal(node.right, visitedNodes);
-    }
-
-    // Backtrack to current node
-    setCurrentStep(steps.indexOf(node));
-    await Sleep(DFS_DELAY);
-  };
-
-  // active button as per as in-order clicked
   const postOrderTechniqueBtnMethod = async () => {
+    // Set the button type to 'post-order'
     setChildBtnActiveType('post-order');
 
     if (data) {
-      // clear time out if it's present
+      // Clear any existing timeouts
       clearAllTimeouts();
+      // Reset current step and visited nodes
       setCurrentStep(-1);
       setVisitedNodes(new Set());
 
+      // Add a delay before starting the traversal
       await Sleep(DFS_DELAY);
 
       const visitedNodes = new Set<number>();
+      // Perform post-order traversal
       await PostOrderDFSTraversal(data, visitedNodes, setCurrentStep, setVisitedNodes, steps);
 
-      // initialized with default value
+      // Reset current step and visited nodes after traversal
       setCurrentStep(-1);
       setVisitedNodes(new Set());
     }

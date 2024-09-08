@@ -1,7 +1,7 @@
 import React from 'react';
-import { DFS_DELAY } from '../constant';
-import { Sleep } from '../lib/sleepMethod';
-import { ITreeNode } from '../types/TreeTypeProps';
+import { DFS_DELAY } from '../../constant';
+import { Sleep } from '../../lib/sleepMethod';
+import { ITreeNode } from '../../types/TreeTypeProps';
 
 /**
  * Performs a Post-Order Depth First Search (DFS) traversal on a binary tree.
