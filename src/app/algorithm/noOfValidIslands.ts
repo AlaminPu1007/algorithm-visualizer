@@ -1,5 +1,5 @@
 import React from 'react';
-import { GridProps } from '../types/uniquePathProps';
+import { GridProps, PathFindingQueueProps } from '../types/uniquePathProps';
 import { Sleep } from '../lib/sleepMethod';
 import { del_col, del_row } from '../constant';
 import { isValidDirection } from '../lib/helpers';
@@ -26,7 +26,7 @@ export const findNoOfIslands = async (
   data: GridProps[][],
   queue: { rowIdx: number; colIdx: number }[],
   setData: React.Dispatch<React.SetStateAction<GridProps[][]>>,
-  setQueue: React.Dispatch<React.SetStateAction<{ rowIdx: number; colIdx: number }[]>>,
+  setQueue: React.Dispatch<React.SetStateAction<PathFindingQueueProps[]>>,
   speedRange: number
 ): Promise<void> => {
   try {

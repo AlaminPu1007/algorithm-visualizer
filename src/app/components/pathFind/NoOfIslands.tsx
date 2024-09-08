@@ -4,20 +4,15 @@ import { findNoOfIslands } from '@/app/algorithm/noOfValidIslands';
 import { UNIQUE_PATH_GRID_SIZE } from '@/app/constant';
 import { createGridWithUniquePath } from '@/app/data/PathFindingGridData';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
-import { GridProps } from '@/app/types/uniquePathProps';
+import { GridProps, PathFindingQueueProps, UniquePathPageProps } from '@/app/types/uniquePathProps';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-interface PageProps {
-  useRandomKey: string;
-  speedRange: number;
-  gridSize: { rowSize: number; colSize: number };
-}
-
-const NoOfIslands: React.FC<PageProps> = ({ useRandomKey, speedRange, gridSize }) => {
+const NoOfIslands: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, gridSize }) => {
   // define component local state
   const [data, setData] = useState<GridProps[][]>([]);
-  const [, setQueue] = useState<{ rowIdx: number; colIdx: number }[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [queue, setQueue] = useState<PathFindingQueueProps[]>([]);
   const [countIslands, setCountIslands] = useState<number>(0);
 
   useEffect(() => {

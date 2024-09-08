@@ -1,5 +1,5 @@
 /**
- * Represents a single cell in the grid for pathfinding visualization.
+ * Represents a single cell in the grid for path finding visualization.
  *
  * @interface GridProps
  * @property {number} id - A unique identifier for the cell.
@@ -36,7 +36,32 @@ export interface GridProps {
   isValidPath: boolean;
 }
 
+/**
+ * Represents an entry in the queue for path finding algorithms.
+ * This entry contains the row and column indices of the current position in the grid.
+ *
+ * @export
+ * @interface PathFindingQueueProps
+ * @property {number} rowIdx - The row index of the current position in the grid.
+ * @property {number} colIdx - The column index of the current position in the grid.
+ */
 export interface PathFindingQueueProps {
   rowIdx: number;
   colIdx: number;
+}
+
+/**
+ * Interface representing the props for the Unique Path page component.
+ *
+ * @interface UniquePathPageProps
+ * @property {string} useRandomKey - A unique key used to trigger re-rendering or other component behavior.
+ * @property {number} speedRange - The speed at which animations or algorithms should run, typically in milliseconds.
+ * @property {{ rowSize: number; colSize: number }} gridSize - An object representing the dimensions of the grid.
+ * @property {number} gridSize.rowSize - The number of rows in the grid.
+ * @property {number} gridSize.colSize - The number of columns in the grid.
+ */
+export interface UniquePathPageProps {
+  useRandomKey: string;
+  speedRange: number;
+  gridSize: { rowSize: number; colSize: number };
 }

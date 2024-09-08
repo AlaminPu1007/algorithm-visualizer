@@ -4,17 +4,11 @@ import { DFSFindUniquePathMethod } from '@/app/algorithm/uniquePath';
 import { UNIQUE_PATH_GRID_SIZE, UNIQUE_PATH_SVG_ICON_SIZE } from '@/app/constant';
 import { createGridWithUniquePath } from '@/app/data/PathFindingGridData';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
-import { GridProps } from '@/app/types/uniquePathProps';
+import { GridProps, UniquePathPageProps } from '@/app/types/uniquePathProps';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-interface PageProps {
-  useRandomKey: string;
-  speedRange: number;
-  gridSize: { rowSize: number; colSize: number };
-}
-
-const UniquePath: React.FC<PageProps> = ({ useRandomKey, speedRange, gridSize }) => {
+const UniquePath: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, gridSize }) => {
   const [data, setData] = useState<GridProps[][]>([]);
   const [validPaths, setValidPaths] = useState<{ path: string; id: number }[]>([]);
 
@@ -103,60 +97,90 @@ const UniquePath: React.FC<PageProps> = ({ useRandomKey, speedRange, gridSize })
 
   return (
     <div className='container'>
-      {data?.length ? (
-        <div className='item-center flex flex-col justify-start'>
-          {data.map((row, rowIndex) => (
-            <div key={rowIndex} className='flex items-center justify-center'>
-              {row.map((col, colIndex) => {
-                // active rat or ball
-                const isBallActive = Boolean(col.isCurrent || (rowIndex === 0 && colIndex === 0));
+      <div className='flex items-start justify-between'>
+        <div className='mb-4 mt-0 flex items-center justify-start space-x-4'>
+          <div className='group relative'>
+            <div className='h-6 w-6 bg-[#575C6B]'></div>
+            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+              Bricks
+            </span>
+          </div>
+          <div className='group relative'>
+            <div className='h-6 w-6 border-[1px] bg-white'></div>
+            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+              Valid path
+            </span>
+          </div>
+          <div className='group relative'>
+            <div className='h-6 w-6 bg-blue-600'></div>
+            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+              Current item
+            </span>
+          </div>
+          <div className='group relative'>
+            <div className='h-6 w-6 bg-green-600'></div>
+            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+              valid island
+            </span>
+          </div>
+        </div>
+        <p className='m-0 p-0 text-lg text-black'>No of unique paths : {validPaths?.length}</p>
+      </div>
+      <div>
+        {data?.length ? (
+          <div className='item-center flex flex-col justify-start'>
+            {data.map((row, rowIndex) => (
+              <div key={rowIndex} className='flex items-center justify-center'>
+                {row.map((col, colIndex) => {
+                  // active rat or ball
+                  const isBallActive = Boolean(col.isCurrent || (rowIndex === 0 && colIndex === 0));
 
-                let BG_COLOR = col.data !== 1 ? 'bg-[#575C6B] text-white' : 'bg-white';
-                if (col.isInvalid) BG_COLOR = 'bg-red-600 text-white';
-                if (col.isCurrent) BG_COLOR = 'bg-blue-600 text-white';
-                if (col.isMarked) BG_COLOR = 'bg-pink-600 text-white';
-                if (col.isValidPath) BG_COLOR = 'bg-green-600 text-white'; // Color for valid path
+                  let BG_COLOR = col.data !== 1 ? 'bg-[#575C6B] text-white' : 'bg-white';
+                  if (col.isInvalid) BG_COLOR = 'bg-red-600 text-white';
+                  if (col.isCurrent) BG_COLOR = 'bg-blue-600 text-white';
+                  if (col.isMarked) BG_COLOR = 'bg-pink-600 text-white';
+                  if (col.isValidPath) BG_COLOR = 'bg-green-600 text-white'; // Color for valid path
 
-                let b = `border-b-[0.5px] border-r-[0.5px] border-[#575C6B]`;
+                  let b = `border-b-[0.5px] border-r-[0.5px] border-[#575C6B]`;
 
-                if (rowIndex === 0) {
-                  b += ` border-t-[0.5px]`;
-                }
-                if (rowIndex === data?.length - 1) {
-                  b += ` border-b-[0.5px]`;
-                }
-                if (colIndex === 0) {
-                  b += ` border-l-[0.5px]`;
-                }
-                if (colIndex === data[0]?.length - 1) {
-                  b += ` border-r-[0.5px]`;
-                }
+                  if (rowIndex === 0) {
+                    b += ` border-t-[0.5px]`;
+                  }
+                  if (rowIndex === data?.length - 1) {
+                    b += ` border-b-[0.5px]`;
+                  }
+                  if (colIndex === 0) {
+                    b += ` border-l-[0.5px]`;
+                  }
+                  if (colIndex === data[0]?.length - 1) {
+                    b += ` border-r-[0.5px]`;
+                  }
 
-                return (
-                  <div
-                    className={`flex items-center justify-center ${UNIQUE_PATH_GRID_SIZE} ${b} ${BG_COLOR}`}
-                    key={col.id}
-                  >
-                    {rowIndex === data?.length - 1 && colIndex === data[0].length - 1 ? (
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='16'
-                        height='16'
-                        fill='#FFD700'
-                        className={`${UNIQUE_PATH_SVG_ICON_SIZE}`}
-                        viewBox='0 0 16 16'
-                      >
-                        <path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z' />
-                      </svg>
-                    ) : isBallActive ? (
-                      <svg
-                        fill={col.isCurrent ? '#fff' : '#000'}
-                        viewBox='0 0 463 463'
-                        className={`${UNIQUE_PATH_SVG_ICON_SIZE}`}
-                      >
-                        <g>
-                          <path
-                            d='M395.195,67.805C351.471,24.08,293.336,0,231.5,0S111.529,24.08,67.805,67.805S0,169.664,0,231.5
+                  return (
+                    <div
+                      className={`flex items-center justify-center ${UNIQUE_PATH_GRID_SIZE} ${b} ${BG_COLOR}`}
+                      key={col.id}
+                    >
+                      {rowIndex === data?.length - 1 && colIndex === data[0].length - 1 ? (
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width='16'
+                          height='16'
+                          fill='#FFD700'
+                          className={`${UNIQUE_PATH_SVG_ICON_SIZE}`}
+                          viewBox='0 0 16 16'
+                        >
+                          <path d='M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z' />
+                        </svg>
+                      ) : isBallActive ? (
+                        <svg
+                          fill={col.isCurrent ? '#fff' : '#000'}
+                          viewBox='0 0 463 463'
+                          className={`${UNIQUE_PATH_SVG_ICON_SIZE}`}
+                        >
+                          <g>
+                            <path
+                              d='M395.195,67.805C351.471,24.08,293.336,0,231.5,0S111.529,24.08,67.805,67.805S0,169.664,0,231.5
                             s24.08,119.971,67.805,163.695S169.664,463,231.5,463s119.971-24.08,163.695-67.805S463,293.336,463,231.5
                             S438.92,111.529,395.195,67.805z M409.648,108.393h-37.117L307.12,56.752L296.8,24.988c32.77,10.32,62.799,28.434,87.789,53.424
                             C393.919,87.741,402.28,97.779,409.648,108.393z M78.411,78.411c24.99-24.99,55.019-43.103,87.789-53.424L155.88,56.752
@@ -173,54 +197,55 @@ const UniquePath: React.FC<PageProps> = ({ useRandomKey, speedRange, gridSize })
                             c-1.309,0.951-2.274,2.299-2.754,3.843l-23.674,76.22c-0.46,1.481-0.45,3.068,0.029,4.542l14.77,45.456
                             C392.827,375.992,388.812,380.366,384.589,384.589z M407.793,357.237l-10.908-33.569l22.229-71.565l28.882-20.984
                             c0,0.127,0.005,0.253,0.005,0.38C448,277.23,433.906,320.789,407.793,357.237z'
-                          />
-                          <path
-                            d='M321.098,196.503l-85.189-61.894c-2.629-1.91-6.188-1.91-8.816,0l-85.189,61.894c-2.629,1.91-3.729,5.295-2.725,8.385
+                            />
+                            <path
+                              d='M321.098,196.503l-85.189-61.894c-2.629-1.91-6.188-1.91-8.816,0l-85.189,61.894c-2.629,1.91-3.729,5.295-2.725,8.385
                             l32.539,100.146c1.004,3.09,3.884,5.183,7.133,5.183H284.15c3.249,0,6.129-2.092,7.133-5.183l32.539-100.146
                             C324.826,201.798,323.727,198.413,321.098,196.503z M278.701,295.217h-94.402l-29.172-89.782l76.373-55.488l76.373,55.488
                             L278.701,295.217z'
-                          />
-                        </g>
-                      </svg>
-                    ) : null}
+                            />
+                          </g>
+                        </svg>
+                      ) : null}
 
-                    {col.isInvalid && (
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        width='16'
-                        height='16'
-                        fill='#fff'
-                        className={`${UNIQUE_PATH_SVG_ICON_SIZE}`}
-                        viewBox='0 0 16 16'
-                      >
-                        <path d='M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z' />
-                      </svg>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className='flex min-h-[200px] w-full items-center justify-center'>
-          <h1 className='text-center text-4xl font-medium'>Loading...</h1>
-        </div>
-      )}
-      {validPaths?.length ? (
-        <div className='my-2 flex flex-wrap items-center'>
-          {validPaths.map((item) => {
-            return (
-              <p
-                className='me-2 mt-1 break-all rounded border-[1px] bg-green-400 px-3 py-1 text-sm text-white'
-                key={item.id}
-              >
-                {item.path}
-              </p>
-            );
-          })}
-        </div>
-      ) : null}
+                      {col.isInvalid && (
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          width='16'
+                          height='16'
+                          fill='#fff'
+                          className={`${UNIQUE_PATH_SVG_ICON_SIZE}`}
+                          viewBox='0 0 16 16'
+                        >
+                          <path d='M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z' />
+                        </svg>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className='flex min-h-[200px] w-full items-center justify-center'>
+            <h1 className='text-center text-4xl font-medium'>Loading...</h1>
+          </div>
+        )}
+        {validPaths?.length ? (
+          <div className='my-2 flex flex-wrap items-center'>
+            {validPaths.map((item) => {
+              return (
+                <p
+                  className='me-2 mt-1 break-all rounded border-[1px] bg-green-400 px-3 py-1 text-sm text-white'
+                  key={item.id}
+                >
+                  {item.path}
+                </p>
+              );
+            })}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
