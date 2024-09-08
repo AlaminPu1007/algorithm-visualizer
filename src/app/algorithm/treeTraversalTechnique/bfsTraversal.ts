@@ -1,4 +1,3 @@
-import { BFS_DELAY } from '@/app/constant';
 import { TreeNode } from '@/app/data-structure/Tree/Node';
 import { Sleep } from '@/app/lib/sleepMethod';
 import React from 'react';
@@ -27,7 +26,8 @@ export const traverseBFS = async (
   currentNode: TreeNode | null,
   setCurrentNode: React.Dispatch<React.SetStateAction<TreeNode | null>>,
   setVisitedNodes: React.Dispatch<React.SetStateAction<Set<number>>>,
-  setCurrentNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>
+  setCurrentNodes: React.Dispatch<React.SetStateAction<TreeNode[]>>,
+  speedRange: number
 ) => {
   // Queue to manage the BFS order
   const queue = [root];
@@ -48,7 +48,7 @@ export const traverseBFS = async (
     setCurrentNodes([...bfsNodes]);
 
     // Introduce a delay to visualize the BFS traversal step by step
-    await Sleep(BFS_DELAY);
+    await Sleep(speedRange);
 
     // Enqueue the left and right children for future traversal
     if (currentNode.left) queue.push(currentNode.left);
@@ -59,7 +59,7 @@ export const traverseBFS = async (
   setCurrentNode(null);
 
   // Additional delay to show the last node before resetting the visited nodes
-  await Sleep(BFS_DELAY * 3);
+  await Sleep(speedRange * 3);
 
   // Reset the visited nodes set after the traversal is done
   setVisitedNodes(new Set());

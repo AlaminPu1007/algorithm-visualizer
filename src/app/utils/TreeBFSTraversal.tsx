@@ -1,22 +1,69 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { calculateLinePosition } from '@/app/lib/calculateSvgLinePosition';
-import { NODE_POSITION } from '@/app/constant';
+import { getRandomTreeData, NODE_POSITION } from '@/app/constant';
 import { TreeNode } from '../data-structure/Tree/Node';
-import { TreeBFSTraversalProps } from '../types/TreeTypeProps';
+import { ITreeNode } from '../types/TreeTypeProps';
 import { traverseBFS } from '../algorithm/treeTraversalTechnique/bfsTraversal';
+import { clearAllTimeouts } from '../lib/sleepMethod';
+import { Tree } from '../data-structure/Tree/TreeNode';
 
-const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
+const TreeBFSTraversal: React.FC<{ speedRange: number }> = ({ speedRange }) => {
   const [currentNodes, setCurrentNodes] = useState<TreeNode[]>([]);
   const [currentNode, setCurrentNode] = useState<TreeNode | null>(null);
   const [visitedNodes, setVisitedNodes] = useState<Set<number>>(new Set());
+  const [data, setData] = useState<ITreeNode | null>(null);
 
   useEffect(() => {
-    if (root) {
-      traverseBFS(root, currentNode, setCurrentNode, setVisitedNodes, setCurrentNodes);
+    /**
+     * Initializes the tree with random data and collects nodes in an in-order traversal manner.
+     *
+     * The new tree data is generated using `getRandomTreeData(31)` and then processed to extract
+     * all nodes in an in-order traversal. The nodes are collected and stored in the `steps` state.
+     */
+    const newTree = new Tree(JSON.parse(JSON.stringify(getRandomTreeData(31))));
+
+    if (newTree?.head) {
+      // Set the tree data to state
+      setData(newTree.head);
+
+      // Recursively collect each node in an in-order traversal manner
+      const nodes: ITreeNode[] = [];
+      const collectNodes = (node: ITreeNode | null) => {
+        if (node) {
+          nodes.push(node);
+          collectNodes(node.left);
+          collectNodes(node.right);
+        }
+      };
+      collectNodes(newTree.head);
+    }
+
+    return () => {
+      clearAllTimeouts();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      traverseBFS(data, currentNode, setCurrentNode, setVisitedNodes, setCurrentNodes, speedRange);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [root]);
+  }, [data]);
 
+  return <RecursiveApproach currentNodes={currentNodes} currentNode={currentNode} visitedNodes={visitedNodes} />;
+};
+
+export default TreeBFSTraversal;
+
+interface TreeBFSRecursiveTraversalProps {
+  currentNodes: TreeNode[];
+  currentNode: TreeNode | null;
+  visitedNodes: Set<number>;
+}
+
+const RecursiveApproach: React.FC<TreeBFSRecursiveTraversalProps> = ({ currentNodes, currentNode, visitedNodes }) => {
   return (
     <>
       {currentNodes.map((node) => {
@@ -79,5 +126,3 @@ const TreeBFSTraversal: React.FC<TreeBFSTraversalProps> = ({ root }) => {
     </>
   );
 };
-
-export default TreeBFSTraversal;

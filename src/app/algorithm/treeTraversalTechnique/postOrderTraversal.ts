@@ -1,5 +1,4 @@
 import React from 'react';
-import { DFS_DELAY } from '../../constant';
 import { Sleep } from '../../lib/sleepMethod';
 import { ITreeNode } from '../../types/TreeTypeProps';
 
@@ -27,19 +26,20 @@ export const PostOrderDFSTraversal = async (
   visitedNodes: Set<number>,
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>,
   setVisitedNodes: React.Dispatch<React.SetStateAction<Set<number>>>,
-  steps: ITreeNode[]
+  steps: ITreeNode[],
+  speedRange: number
 ) => {
   // Base case: If the node is null, stop recursion
   if (!node) return;
 
   // Traverse the left subtree first
   if (node.left) {
-    await PostOrderDFSTraversal(node.left, visitedNodes, setCurrentStep, setVisitedNodes, steps);
+    await PostOrderDFSTraversal(node.left, visitedNodes, setCurrentStep, setVisitedNodes, steps, speedRange);
   }
 
   // Traverse the right subtree next
   if (node.right) {
-    await PostOrderDFSTraversal(node.right, visitedNodes, setCurrentStep, setVisitedNodes, steps);
+    await PostOrderDFSTraversal(node.right, visitedNodes, setCurrentStep, setVisitedNodes, steps, speedRange);
   }
 
   // Mark the current node as visited if its id is valid
@@ -55,5 +55,5 @@ export const PostOrderDFSTraversal = async (
   setVisitedNodes(new Set(visitedNodes));
 
   // Introduce a delay to visualize the traversal process
-  await Sleep(DFS_DELAY);
+  await Sleep(speedRange);
 };
