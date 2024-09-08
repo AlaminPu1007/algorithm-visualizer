@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import { del_col, del_row, UNIQUE_PATH_GRID_SIZE } from '@/app/constant';
+import { findNoOfIslands } from '@/app/algorithm/noOfValidIslands';
+import { UNIQUE_PATH_GRID_SIZE } from '@/app/constant';
 import { createGridWithUniquePath } from '@/app/data/PathFindingGridData';
-import { isValidDirection } from '@/app/lib/helpers';
-import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
+import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import { GridProps } from '@/app/types/uniquePathProps';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -16,97 +15,73 @@ interface PageProps {
 }
 
 const NoOfIslands: React.FC<PageProps> = ({ useRandomKey, speedRange, gridSize }) => {
+  // define component local state
   const [data, setData] = useState<GridProps[][]>([]);
-  const [queue, setQueue] = useState<{ rowIdx: number; colIdx: number }[]>([]);
-
-  useEffect(() => {
-    if (Object.keys(gridSize)?.length) {
-      // create each new row, clear it's all previous states
-      clearAllTimeouts();
-      setData(
-        JSON.parse(
-          JSON.stringify(
-            createGridWithUniquePath(gridSize.rowSize, gridSize.colSize, gridSize?.rowSize > 8 ? 0.4 : 0.3)
-          )
-        )
-      );
-    }
-  }, [gridSize, useRandomKey]);
+  const [, setQueue] = useState<{ rowIdx: number; colIdx: number }[]>([]);
+  const [countIslands, setCountIslands] = useState<number>(0);
 
   useEffect(() => {
     let Time: number = 0;
-    if (data?.length) {
-      Time = window.setTimeout(() => {
-        findNoOfIslands(data);
-      }, 300);
+
+    if (Object.keys(gridSize)?.length) {
+      // create each new row, clear it's all previous states
+      clearAllTimeouts();
+
+      const tempData = JSON.parse(JSON.stringify(createGridWithUniquePath(gridSize.rowSize, gridSize.colSize, 0.3)));
+
+      setData([...tempData]);
+      setQueue([]);
+      setCountIslands(0);
+
+      if (tempData?.length) {
+        Time = window.setTimeout(() => {
+          noOfIslandsMethod(tempData, []);
+        }, 300);
+      }
     }
+
     return () => {
       clearTimeout(Time);
       clearAllTimeouts();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.length]);
+  }, [gridSize, useRandomKey]);
 
-  const findNoOfIslands = async (data: GridProps[][]) => {
+  /**
+   * Method to perform BFS on the grid to find all valid islands.
+   * An island is defined as a connected group of cells with value `1`.
+   * For each island found, the method marks it as visited and increments the island count.
+   *
+   * @async
+   * @function noOfIslandsMethod
+   * @param {GridProps[][]} data - The grid representing land (1) and water (0) cells.
+   * @param {{ rowIdx: number; colIdx: number }[]} queue - The queue used for BFS traversal.
+   * @returns {Promise<void>} A Promise that resolves once all islands are found and counted.
+   */
+  const noOfIslandsMethod = async (data: GridProps[][], queue: { rowIdx: number; colIdx: number }[]) => {
     try {
-      // eslint-disable-next-line no-console
-      // console.log(data, 'dddddddddddddd');
-      // create a shallow copy of root data
+      const n = data.length; // Number of rows in the grid
+      const m = data[0]?.length; // Number of columns in the grid
+
+      // Clone data and queue to avoid mutating the original state
       const tempData = [...data];
-      // create a shallow copy of root queue
       const tempQueue = [...queue];
 
-      // tempQueue.shift({ row, col });
-
-      // for (let i = 0; i < 4; i++) {
-      //   const new_row = del_row[i] + row;
-      //   const new_col = del_col[i] + col;
-
-      //   // Check if the new cell is within bounds and not visited
-      //   if (isValidDirection(new_row, new_col, n, m) && !tempData[new_row][new_col].isVisit) {
-      //     if (!tempData[new_row][new_col].data) {
-      //       // Handle cells with no data if needed
-      //     } else {
-      //       // Move to cells with data
-      //       tempData[new_row][new_col].isVisit = true;
-      //       tempData[new_row][new_col].isCurrent = true;
-
-      //       // Set parent for backtracking
-      //       tempData[new_row][new_col].parent = {
-      //         rowIdx: row,
-      //         colIdx: col,
-      //       };
-
-      //       setData([...tempData]);
-      //       await Sleep(speedRange);
-
-      //       // Use a local path variable to track the current path
-      //       const newPath = path + directions[i % 4] + '->';
-
-      //       // Recursively explore further
-      //       await DFSFindUniquePathMethod(
-      //         tempData,
-      //         paths,
-      //         n,
-      //         m,
-      //         new_row,
-      //         new_col,
-      //         newPath,
-      //         speedRange,
-      //         setData,
-      //         setValidPaths
-      //       );
-
-      //       // Backtrack: Reset the state of the current cell
-      //       tempData[new_row][new_col].isCurrent = false;
-      //       tempData[new_row][new_col].isVisit = false;
-
-      //       setData([...tempData]);
-      //     }
-      //   }
-      // }
+      // Traverse the grid to find unvisited land cells (islands)
+      for (let row = 0; row < n; row++) {
+        for (let col = 0; col < m; col++) {
+          // If the cell is land (1) and hasn't been visited yet, initiate BFS to explore the island
+          if (tempData[row][col].data === 1 && !tempData[row][col].isVisit) {
+            // Perform BFS to find and mark the entire island
+            await findNoOfIslands(row, col, tempData, tempQueue, setData, setQueue, speedRange);
+            // Show a success toast message indicating that a valid island was found
+            toast.success('One valid island is found', { position: 'top-left' });
+            // Increment the island count
+            setCountIslands((prev) => prev + 1);
+          }
+        }
+      }
     } catch (error) {
-      // Log error in development environment
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
         console.log(error, 'from catch');
@@ -116,49 +91,80 @@ const NoOfIslands: React.FC<PageProps> = ({ useRandomKey, speedRange, gridSize }
 
   return (
     <div className='container'>
-      {data?.length ? (
-        <div className='item-center flex flex-col justify-start'>
-          {data.map((row, rowIndex) => (
-            <div key={rowIndex} className='flex items-center justify-center'>
-              {row.map((col, colIndex) => {
-                let BG_COLOR = col.data === 1 ? 'bg-[#ff6060] text-black' : 'bg-[#1ca3ec] text-white';
-                if (col.isInvalid) BG_COLOR = 'bg-red-600 text-white';
-                if (col.isCurrent) BG_COLOR = 'bg-blue-600 text-white';
-                if (col.isMarked) BG_COLOR = 'bg-pink-600 text-white';
-                if (col.isValidPath) BG_COLOR = 'bg-green-600 text-white'; // Color for valid path
-
-                let b = `border-b-[0.5px] border-r-[0.5px] border-[#575C6B] text-xl`;
-
-                if (rowIndex === 0) {
-                  b += ` border-t-[0.5px]`;
-                }
-                if (rowIndex === data?.length - 1) {
-                  b += ` border-b-[0.5px]`;
-                }
-                if (colIndex === 0) {
-                  b += ` border-l-[0.5px]`;
-                }
-                if (colIndex === data[0]?.length - 1) {
-                  b += ` border-r-[0.5px]`;
-                }
-
-                return (
-                  <div
-                    className={`flex items-center justify-center ${UNIQUE_PATH_GRID_SIZE} ${b} ${BG_COLOR}`}
-                    key={col.id}
-                  >
-                    <span>{col.data}</span>
-                  </div>
-                );
-              })}
-            </div>
-          ))}
+      <div className='flex items-start justify-between'>
+        <div className='mb-4 mt-0 flex items-center justify-start space-x-4'>
+          <div className='group relative'>
+            <div className='h-6 w-6 bg-[#1ca3ec]'></div>
+            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+              Water
+            </span>
+          </div>
+          <div className='group relative'>
+            <div className='h-6 w-6 bg-[#E99F0C]'></div>
+            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+              Island
+            </span>
+          </div>
+          <div className='group relative'>
+            <div className='h-6 w-6 bg-blue-600'></div>
+            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+              Current item
+            </span>
+          </div>
+          <div className='group relative'>
+            <div className='h-6 w-6 bg-green-600'></div>
+            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
+              valid island
+            </span>
+          </div>
         </div>
-      ) : (
-        <div className='flex min-h-[200px] w-full items-center justify-center'>
-          <h1 className='text-center text-4xl font-medium'>Loading...</h1>
-        </div>
-      )}
+        <p className='m-0 p-0 text-lg text-black'>No of islands : {countIslands}</p>
+      </div>
+      <div>
+        {data?.length ? (
+          <div className='item-center flex flex-col justify-start'>
+            {data.map((row, rowIndex) => (
+              <div key={rowIndex} className='flex items-center justify-center'>
+                {row.map((col, colIndex) => {
+                  let BG_COLOR = col.data === 0 ? 'bg-[#1ca3ec] text-white' : 'bg-[#E99F0C] text-black';
+                  if (col.isInvalid) BG_COLOR = 'bg-red-600 text-white';
+                  if (col.isCurrent) BG_COLOR = 'bg-blue-600 text-white';
+                  if (col.isMarked) BG_COLOR = 'bg-pink-600 text-white';
+                  if (col.isValidPath) BG_COLOR = 'bg-green-600 text-white';
+
+                  let borderStyles = `border-b-[0.5px] border-r-[0.5px] border-[#575C6B] text-xl`;
+
+                  if (rowIndex === 0) {
+                    borderStyles += ` border-t-[0.5px]`;
+                  }
+                  if (rowIndex === data?.length - 1) {
+                    borderStyles += ` border-b-[0.5px]`;
+                  }
+                  if (colIndex === 0) {
+                    borderStyles += ` border-l-[0.5px]`;
+                  }
+                  if (colIndex === data[0]?.length - 1) {
+                    borderStyles += ` border-r-[0.5px]`;
+                  }
+
+                  return (
+                    <div
+                      className={`flex items-center justify-center ${UNIQUE_PATH_GRID_SIZE} ${borderStyles} ${BG_COLOR}`}
+                      key={col.id}
+                    >
+                      <span>{col.data}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className='flex min-h-[200px] w-full items-center justify-center'>
+            <h1 className='text-center text-4xl font-medium'>Loading...</h1>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
