@@ -11,7 +11,7 @@ export const Sleep = (ms: number): Promise<void> => {
   return new Promise((resolve) => {
     const timeoutId = setTimeout(() => {
       resolve();
-    }, ms);
+    }, 1500-ms);
     timeoutIds.push(timeoutId as unknown as number);
   });
 };
