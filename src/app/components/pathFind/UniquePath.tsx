@@ -97,8 +97,8 @@ const UniquePath: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, g
 
   return (
     <div className='container'>
-      <div className='flex items-start justify-between'>
-        <div className='mb-4 mt-0 flex items-center justify-start space-x-4'>
+      <div className='items-start justify-between sm:flex'>
+        <div className='mb-2 mt-0 flex items-center justify-center space-x-4 sm:mb-4 sm:justify-start'>
           <div className='group relative'>
             <div className='h-6 w-6 bg-[#575C6B]'></div>
             <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
@@ -124,7 +124,9 @@ const UniquePath: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, g
             </span>
           </div>
         </div>
-        <p className='m-0 p-0 text-lg text-black'>No of unique paths : {validPaths?.length}</p>
+        <p className='m-0 mb-2 p-0 text-center text-lg text-black sm:mb-0 sm:text-end'>
+          No of unique paths : {validPaths?.length}
+        </p>
       </div>
       <div>
         {data?.length ? (

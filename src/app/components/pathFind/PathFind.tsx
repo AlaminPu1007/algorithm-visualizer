@@ -68,7 +68,7 @@ const PathFind = () => {
   return (
     <div className='pb-5'>
       <div className='container'>
-        <div className='flex items-start justify-between'>
+        <div className='items-start justify-between sm:flex'>
           <div className='me-6 w-[160px]'>
             <p className='m-0 mb-1 p-0 text-sm'>Speed: {speedRange} (0 to 1500)</p>
             <input
@@ -81,14 +81,14 @@ const PathFind = () => {
               max='1500'
             />
           </div>
-          <div className='flex items-end'>
+          <div className='items-end min-[410px]:flex'>
             <div className='flex'>
-              <div>
+              <div className='max-[410px]:w-[45%]'>
                 <p className='text-md m-0 p-0 font-medium'>Row</p>
                 <select
                   onChange={handleSelectChangeForRow}
                   value={gridSize.rowSize}
-                  className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
+                  className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-full'
                 >
                   {[...gridRowColSize(9)].map((item) => {
                     return (
@@ -99,12 +99,12 @@ const PathFind = () => {
                   })}
                 </select>
               </div>
-              <div className='mx-3'>
+              <div className='mx-3 max-[410px]:w-[45%]'>
                 <p className='text-md m-0 p-0 font-medium'>Col</p>
                 <select
                   onChange={handleSelectChangeForCol}
                   value={gridSize.colSize}
-                  className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
+                  className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-full'
                 >
                   {[...gridRowColSize(21)].map((item) => {
                     return (
@@ -116,12 +116,12 @@ const PathFind = () => {
                 </select>
               </div>
             </div>
-            <div>
+            <div className='max-[410px]:mt-3'>
               <p className='text-md m-0 p-0 font-medium'>Select type</p>
               <select
                 onChange={handleSelectChange}
                 value={buttonType}
-                className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
+                className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-[60%]'
               >
                 <option value='unique-path'>Unique Path</option>
                 <option value='no-of-island'>No of island</option>
