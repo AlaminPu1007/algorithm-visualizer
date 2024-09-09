@@ -16,7 +16,7 @@ const ChessBoard: React.FC = () => {
   });
   const [selectInput, setSelectInput] = useState<string>(String(SIZE));
   const [highlight, setHighlight] = useState<{ [key: string]: boolean }>({});
-  const [speedRange, setSpeedRange] = useState<number>(0);
+  const [speedRange, setSpeedRange] = useState<number>(200);
 
   /**
    * Root Method to perform n-queen visualization
