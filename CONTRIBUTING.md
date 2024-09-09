@@ -1,6 +1,5 @@
 # Contributing to Algorithm Visualizations
 
-```markdown
 Thank you for considering contributing to the Algorithm Visualizations project! Here are a few guidelines to help you get started:
 
 ## How to Contribute
@@ -30,7 +29,4 @@ Thank you for considering contributing to the Algorithm Visualizations project! 
 
 Thank you for helping to improve the project!
 
----
-
 **Happy Contributing!** 🎉
-```
