@@ -127,6 +127,7 @@ const HeaderComponent = () => {
                 className='group me-4 cursor-pointer sm:me-5'
                 data-testid='github-link-item'
                 data-umami-event={`nav-github-repo`}
+                onClick={onCloseDrawerNav}
               >
                 <svg
                   width='24'
