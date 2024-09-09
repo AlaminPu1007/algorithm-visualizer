@@ -52,7 +52,13 @@ const TreeBFSTraversal: React.FC<{ speedRange: number }> = ({ speedRange }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  return <RecursiveApproach currentNodes={currentNodes} currentNode={currentNode} visitedNodes={visitedNodes} />;
+  return (
+    <>
+      <svg viewBox='-20 20 280 138'>
+        <RecursiveApproach currentNodes={currentNodes} currentNode={currentNode} visitedNodes={visitedNodes} />
+      </svg>
+    </>
+  );
 };
 
 export default TreeBFSTraversal;

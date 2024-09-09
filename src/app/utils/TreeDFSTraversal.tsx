@@ -169,7 +169,9 @@ const TreeDFSTraversal: React.FC<PageProps> = ({ speedRange, childBtnActiveType 
 
   return (
     <>
-      <RecursiveApproach root={data} steps={steps} currentStep={currentStep} visitedNodes={visitedNodes} />
+      <svg viewBox='-20 20 280 138'>
+        <RecursiveApproach root={data} steps={steps} currentStep={currentStep} visitedNodes={visitedNodes} />
+      </svg>
     </>
   );
 };

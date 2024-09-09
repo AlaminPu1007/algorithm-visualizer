@@ -115,7 +115,7 @@ const TreeComponent = () => {
             </div>
           ) : null}
         </div>
-        <div className='mt-4 flex justify-between md:mt-0 md:justify-start'>
+        <div className='mt-4 justify-between min-[455px]:flex md:mt-0 md:justify-start'>
           <div className='me-6 flex w-[160px] flex-col justify-end'>
             <p className='m-0 mb-1 p-0 text-sm'>Speed: {speedRange} (0 to 1500)</p>
             <input
@@ -128,7 +128,7 @@ const TreeComponent = () => {
               max='1500'
             />
           </div>
-          <div>
+          <div className='max-[455px]:my-3'>
             <p className='text-md m-0 p-0 font-medium'>Select type</p>
             <select
               onChange={handleSelectChange}
@@ -151,13 +151,9 @@ const TreeComponent = () => {
 
       <div>
         {activeRootBtnType === 'dfs' ? (
-          <svg viewBox='-20 20 280 135'>
-            <TreeDFSTraversal speedRange={speedRange} key={randomKey} childBtnActiveType={childBtnActiveType} />
-          </svg>
+          <TreeDFSTraversal speedRange={speedRange} key={randomKey} childBtnActiveType={childBtnActiveType} />
         ) : activeRootBtnType === 'bfs' ? (
-          <svg viewBox='-20 20 280 135'>
-            <TreeBFSTraversal key={randomKey} speedRange={speedRange} />
-          </svg>
+          <TreeBFSTraversal key={randomKey} speedRange={speedRange} />
         ) : null}
       </div>
     </div>
