@@ -67,11 +67,21 @@ const SortingComponent = () => {
               value={buttonType}
               className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[500px]:w-[60%]'
             >
-              <option value='merge-sort'>Merge Sort</option>
-              <option value='quick-sort'>Quick Sort</option>
-              <option value='heap-sort'>Heap Sort</option>
-              <option value='bubble-sort'>Bubble Sort</option>
-              <option value='selection-sort'>Selection Sort</option>
+              <option data-umami-event='selection-from-sorting-merge-sort' value='merge-sort'>
+                Merge Sort
+              </option>
+              <option data-umami-event='selection-from-sorting-quick-sort' value='quick-sort'>
+                Quick Sort
+              </option>
+              <option data-umami-event='selection-from-sorting-heap-sort' value='heap-sort'>
+                Heap Sort
+              </option>
+              <option data-umami-event='selection-from-sorting-bubble-sort' value='bubble-sort'>
+                Bubble Sort
+              </option>
+              <option data-umami-event='selection-from-sorting-selection-sort' value='selection-sort'>
+                Selection Sort
+              </option>
             </select>
 
             <button

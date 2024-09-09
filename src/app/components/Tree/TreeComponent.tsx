@@ -135,8 +135,12 @@ const TreeComponent = () => {
               value={activeRootBtnType}
               className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
             >
-              <option value='dfs'>DFS Traversal</option>
-              <option value='bfs'>BFS Traversal</option>
+              <option data-umami-event='selection-from-tree-dfs-traversal' value='dfs'>
+                DFS Traversal
+              </option>
+              <option data-umami-event='selection-from-tree-bfs-traversal' value='bfs'>
+                BFS Traversal
+              </option>
             </select>
 
             <button

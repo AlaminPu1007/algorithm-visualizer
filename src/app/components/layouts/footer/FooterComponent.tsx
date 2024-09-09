@@ -9,7 +9,7 @@ const FooterComponent = () => (
           target='_blank'
           href='https://showcase-alamin.vercel.app'
           className='pr-2 text-2xl text-theme-secondary sm:pr-4 sm:text-4xl md:pr-0 dark:text-theme-dark-primary'
-          data-umami-event={`personal-portfolio`}
+          data-umami-event={`visits-personal-portfolio`}
         >
           Alamin
         </Link>
@@ -18,6 +18,7 @@ const FooterComponent = () => (
           <Link
             href='mailto:alamin66.sit@gmail.com'
             className='after-hover-animation relative mb-[2px] me-[40px] hidden text-base text-theme-secondary duration-200 md:inline-block lg:text-lg dark:text-theme-dark-secondary'
+            data-umami-event-email={`clicks-on-my-personal-email`}
           >
             alamin66.sit@gmail.com
           </Link>
@@ -44,7 +45,7 @@ const FooterComponent = () => (
             target='_blank'
             href='https://showcase-alamin.vercel.app'
             className='footer-txt-gradient'
-            data-umami-event={`personal-portfolio`}
+            data-umami-event={`visits-personal-portfolio`}
           >
             Alamin
           </Link>

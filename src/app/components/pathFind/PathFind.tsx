@@ -123,8 +123,12 @@ const PathFind = () => {
                 value={buttonType}
                 className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-[60%]'
               >
-                <option value='unique-path'>Unique Path</option>
-                <option value='no-of-island'>No of island</option>
+                <option data-umami-event='selection-from-path-finding-unique-path' value='unique-path'>
+                  Unique Path
+                </option>
+                <option data-umami-event='selection-from-path-finding-no-of-islands' value='no-of-island'>
+                  No of island
+                </option>
               </select>
 
               <button
