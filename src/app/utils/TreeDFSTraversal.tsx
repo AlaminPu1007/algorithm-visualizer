@@ -30,6 +30,8 @@ const TreeDFSTraversal: React.FC<PageProps> = ({ speedRange, childBtnActiveType 
      * all nodes in an in-order traversal. The nodes are collected and stored in the `steps` state.
      */
     const newTree = new Tree(JSON.parse(JSON.stringify(getRandomTreeData(31))));
+    // created a valid tree
+    newTree.insertIntoList();
 
     if (newTree?.head) {
       // Set the tree data to state
