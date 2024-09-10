@@ -23,21 +23,12 @@ const TreeBFSTraversal: React.FC<{ speedRange: number }> = ({ speedRange }) => {
      * all nodes in an in-order traversal. The nodes are collected and stored in the `steps` state.
      */
     const newTree = new Tree(JSON.parse(JSON.stringify(getRandomTreeData(31))));
+    // created a valid tree
+    newTree.insertIntoList();
 
     if (newTree?.head) {
       // Set the tree data to state
       setData(newTree.head);
-
-      // Recursively collect each node in an in-order traversal manner
-      const nodes: ITreeNode[] = [];
-      const collectNodes = (node: ITreeNode | null) => {
-        if (node) {
-          nodes.push(node);
-          collectNodes(node.left);
-          collectNodes(node.right);
-        }
-      };
-      collectNodes(newTree.head);
     }
 
     return () => {
