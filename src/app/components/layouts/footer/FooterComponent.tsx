@@ -39,7 +39,7 @@ const FooterComponent = () => (
       <div className='block h-[0.5px] bg-[#E2E1E5] opacity-80 duration-200 dark:bg-theme-dark-primary dark:opacity-50' />
 
       <div className='flex flex-col items-center justify-center'>
-        <p className='mt-[25px] pb-1 text-center text-sm text-theme-primary dark:text-theme-dark-primary'>
+        <p className='my-[25px] pb-1 text-center text-sm text-theme-primary dark:text-theme-dark-primary'>
           Designed and built by{' '}
           <Link
             target='_blank'

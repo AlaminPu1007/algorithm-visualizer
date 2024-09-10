@@ -29,17 +29,6 @@ const TreeBFSTraversal: React.FC<{ speedRange: number }> = ({ speedRange }) => {
     if (newTree?.head) {
       // Set the tree data to state
       setData(newTree.head);
-
-      // Recursively collect each node in an in-order traversal manner
-      const nodes: ITreeNode[] = [];
-      const collectNodes = (node: ITreeNode | null) => {
-        if (node) {
-          nodes.push(node);
-          collectNodes(node.left);
-          collectNodes(node.right);
-        }
-      };
-      collectNodes(newTree.head);
     }
 
     return () => {

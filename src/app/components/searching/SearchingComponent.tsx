@@ -4,15 +4,23 @@
  */
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { uid } from '@/app/lib/uidGenerator';
 import BinarySearchTreeComponent from './BinarySearchTreeComponent';
+import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 
 const SearchingComponent = () => {
   // define a component local memory
   const [activeRootBtnType, setActiveRootBtnType] = useState<string>('bst');
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
+
+  // ensure clear all timeout after component un-mount
+  useEffect(() => {
+    return () => {
+      clearAllTimeouts();
+    };
+  }, []);
 
   /** submit method to perform current task from start */
   const submitMethod = () => {

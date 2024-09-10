@@ -2,42 +2,22 @@ import { ICell } from './types/NQueensProps';
 
 /* custom tree node */
 export const NODE_POSITION = 5;
-
 // node radius
 export const RADIUS: number = 8;
-
 // Space between children
 export const CHILD_SPACING: number = 45;
-
 // Height of the line connecting nodes
 export const LINE_HEIGHT: number = 45;
-
 // Offset to shift the left child line
 export const LEFT_LINE_OFFSET: number = 10;
-
 // Offset to shift the right child line
 export const RIGHT_LINE_OFFSET: number = 10;
-
 // Svg view box with
 export const SVG_VIEW_BOX_WIDTH = 240;
-
 // delay time of each DFS traversal
 export const DFS_DELAY = 600;
-
 // delay time of each BFS traversal
 export const BFS_DELAY = 600;
-
-// create a dummy array of node value,
-// using this array we will create a binary tree
-// export const TreeArrData: (number | null)[] = [
-//   50, 40, 60, 30, 35, 65, 70, 25, 78, 33, 37, 63, 68, 10, 80, 20, 22, 26, 29,
-//   31, 34, 36, 38, 61, 64, 66, 69, 72, 76, 78, 82,
-// ];
-
-// export const HeapData: (number | null)[] = [
-//   50, 40, 60, 30, 35, 65, 70, 25, 78, 33, 37, 63, 68, 10, 80, 20, 22, 26, 29,
-//   31, 34, 36, 38, 61, 64, 66, 69, 72, 76, 78, 82,
-// ];
 
 /**
  * Get random data to create a tree
@@ -46,7 +26,7 @@ export const BFS_DELAY = 600;
  * @returns {*}
  */
 export const getRandomTreeData = (size: number = 31) =>
-  Array.from({ length: size }).map(() => Math.floor(Math.random() * size + 1));
+  Array.from({ length: size }).map(() => Math.floor(Math.random() * 500 + 1));
 
 // fill the check board according to the grid size
 export const fillGridArray = (size: number, defaultValue: number = 0): ICell[][] => {
@@ -69,7 +49,6 @@ export const MERGE_SORT_SVG_HEIGHT = 300;
 export const MERGE_SLEEP_DELAY = 0;
 
 /** PATH FINDING CONSTANT THING DEFINE HERE */
-
 // Directions for moving in the maze
 export const del_row = [+1, 0, 0, -1]; // Down, Left, Right, Up
 export const del_col = [0, -1, +1, 0];
