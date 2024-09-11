@@ -108,6 +108,7 @@ const NoOfIslands: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, 
                   if (col.isCurrent) BG_COLOR = 'bg-blue-600 text-white';
                   if (col.isMarked) BG_COLOR = 'bg-pink-600 text-white';
                   if (col.isValidPath) BG_COLOR = 'bg-green-600 text-white';
+                  if (col.islandColor?.length) BG_COLOR = col.islandColor;
 
                   let borderStyles = `border-b-[0.5px] border-r-[0.5px] border-[#575C6B] text-xl`;
 

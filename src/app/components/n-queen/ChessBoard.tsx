@@ -3,6 +3,7 @@
 import { fillGridArray, GRID_SIZE } from '@/app/constant';
 import { gridStyle, isPutQueen, updateGrid } from '@/app/lib/nQueens';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
+import { ChessBoardGridInlineStyleProps } from '@/app/types/commonProps';
 import { CurrentItemProps, ICell } from '@/app/types/NQueensProps';
 import React, { useMemo, useState } from 'react';
 
@@ -125,7 +126,7 @@ const ChessBoard: React.FC = () => {
    *
    * @type {*}
    */
-  const memoizedGridStyle = useMemo(() => gridStyle(selectInput), [selectInput]);
+  const memoizedGridStyle: ChessBoardGridInlineStyleProps = useMemo(() => gridStyle(selectInput), [selectInput]);
 
   return (
     <div>

@@ -167,7 +167,7 @@ export const uniquePathFindingSortColorsData: StatusColorsDataProps[] = [
   {
     id: 2,
     title: 'Valid path',
-    bg_color: 'bg-white border-[1px]',
+    bg_color: 'bg-black border-[1px]',
   },
   {
     id: 3,
@@ -197,14 +197,42 @@ export const noOfIslandsSortColorsData: StatusColorsDataProps[] = [
     title: 'Island',
     bg_color: 'bg-[#E99F0C]',
   },
-  {
-    id: 3,
-    title: 'Current Item',
-    bg_color: 'bg-blue-600',
-  },
-  {
-    id: 4,
-    title: 'valid island',
-    bg_color: 'bg-green-600',
-  },
+  // {
+  //   id: 3,
+  //   title: 'Current Item',
+  //   bg_color: 'bg-blue-600',
+  // },
+  // {
+  //   id: 4,
+  //   title: 'valid island',
+  //   bg_color: 'bg-green-600',
+  // },
+];
+
+/**
+ * A list of colors plate for islands
+ *
+ * @type {string[]}
+ */
+export const islandColorsPlate: string[] = [
+  'bg-[#8A2BE2] text-white', // BlueViolet (dark, white text)
+  'bg-[#5F9EA0] text-white', // CadetBlue (muted, white text)
+  'bg-[#D2691E] text-white', // Chocolate (earthy brown, white text)
+  'bg-[#8B008B] text-white', // DarkMagenta (dark purple, white text)
+  'bg-[#556B2F] text-white', // DarkOliveGreen (dark green, white text)
+  'bg-[#FF8C00] text-black', // DarkOrange (bright, black text)
+  'bg-[#9932CC] text-white', // DarkOrchid (dark purple, white text)
+  'bg-[#8B4513] text-white', // SaddleBrown (dark brown, white text)
+  'bg-[#2E8B57] text-white', // SeaGreen (dark green, white text)
+  'bg-[#FFD700] text-black', // Gold (bright gold, black text)
+  'bg-[#DAA520] text-black', // GoldenRod (muted gold, black text)
+  'bg-[#4B0082] text-white', // Indigo (dark, white text)
+  'bg-[#696969] text-white', // DimGray (dark gray, white text)
+  'bg-[#708090] text-white', // SlateGray (muted gray, white text)
+  'bg-[#B8860B] text-white', // DarkGoldenRod (rich gold-brown, white text)
+  'bg-[#A52A2A] text-white', // Brown (dark brown, white text)
+  'bg-[#6A5ACD] text-white', // SlateBlue (dark blue-purple, white text)
+  'bg-[#483D8B] text-white', // DarkSlateBlue (dark, white text)
+  'bg-[#7FFF00] text-black', // Chartreuse (bright, black text)
+  'bg-[#DDA0DD] text-black', // Plum (light purple, black text)
 ];

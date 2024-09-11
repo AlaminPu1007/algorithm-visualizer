@@ -13,15 +13,9 @@
  * @property {boolean} isMarked - Indicates if the cell is marked in the visualization.
  * @property {PathFindingQueueProps} parent - The parent cell's coordinates from which this cell was reached.
  * @property {boolean} isValidPath - Indicates if the cell is part of a valid path from the start to the end.
+ * @property {boolean} islandColor - Indicates each valid islands with different color
  */
 
-/**
- * Represents the coordinates of a cell in the grid for path finding operations.
- *
- * @interface PathFindingQueueProps
- * @property {number} rowIdx - The row index of the cell in the grid.
- * @property {number} colIdx - The column index of the cell in the grid.
- */
 export interface GridProps {
   id: number;
   data: number;
@@ -34,6 +28,7 @@ export interface GridProps {
   isMarked: boolean;
   parent: PathFindingQueueProps;
   isValidPath: boolean;
+  islandColor?: string;
 }
 
 /**

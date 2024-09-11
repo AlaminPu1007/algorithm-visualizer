@@ -3,6 +3,9 @@ import { GridProps, PathFindingQueueProps } from '../types/uniquePathProps';
 import { Sleep } from '../lib/sleepMethod';
 import { del_col, del_row } from '../constant';
 import { isValidDirection } from '../lib/helpers';
+import { islandColorsPlate } from '../data/mockData';
+
+let counter = 0;
 
 /**
  * Performs a Breadth-First Search (BFS) to find and mark islands in a grid.
@@ -37,6 +40,11 @@ export const findNoOfIslands = async (
     const tempData = [...data];
     const tempQueue = [...queue];
 
+    // Generate a unique color for this island
+    const islandColor = islandColorsPlate[counter % 20];
+    // update counter
+    counter++;
+
     // Add the starting cell to the queue
     const newElement = { rowIdx: row, colIdx: col };
     tempQueue.unshift(newElement);
@@ -44,6 +52,7 @@ export const findNoOfIslands = async (
     // Mark the starting cell as visited and as part of a valid path
     tempData[row][col].isVisit = true;
     tempData[row][col].isValidPath = true;
+    tempData[row][col].islandColor = islandColor;
 
     // Update the state with the new grid and queue
     setData([...tempData]);
@@ -80,6 +89,8 @@ export const findNoOfIslands = async (
               rowIdx: row,
               colIdx: col,
             };
+            // Assign the same color to the entire island
+            tempData[new_row][new_col].islandColor = islandColor;
 
             // Add the new cell to the queue for further exploration
             tempQueue.unshift({ rowIdx: new_row, colIdx: new_col });

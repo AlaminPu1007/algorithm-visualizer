@@ -11,3 +11,21 @@ export interface StatusColorsDataProps {
   title: string;
   bg_color: string;
 }
+
+/**
+ * N-Queens grid inline styles types props
+ *
+ * @interface ChessBoardGridInlineStyleProps
+ * @property {string} display - css property
+ * @property {string} gap - css grid property
+ * @property {string} gridTemplateColumns - css grid property
+ * @property {width} display - css to control the width property
+ * @property {string} height - css to control the hight property
+ */
+export interface ChessBoardGridInlineStyleProps {
+  display: string;
+  gap: string;
+  gridTemplateColumns: string;
+  width: string;
+  height: string;
+}
