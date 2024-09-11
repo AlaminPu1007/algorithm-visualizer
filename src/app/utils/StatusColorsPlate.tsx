@@ -19,7 +19,7 @@ const StatusColorsPlate: React.FC<StatusColorsPlateProps> = ({ data = [] }) => {
       {data.map((item) => {
         return (
           <div key={item.id} className='group relative'>
-            <div className={`h-6 w-6 ${item.bg_color}`}></div>
+            <div className={`h-5 w-5 ${item.bg_color}`}></div>
             <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
               {item.title}
             </span>

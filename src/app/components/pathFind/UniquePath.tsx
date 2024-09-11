@@ -2,9 +2,11 @@
 
 import { DFSFindUniquePathMethod } from '@/app/algorithm/uniquePath';
 import { UNIQUE_PATH_GRID_SIZE, UNIQUE_PATH_SVG_ICON_SIZE } from '@/app/constant';
+import { uniquePathFindingSortColorsData } from '@/app/data/mockData';
 import { createGridWithUniquePath } from '@/app/data/PathFindingGridData';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { GridProps, UniquePathPageProps } from '@/app/types/uniquePathProps';
+import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -97,32 +99,9 @@ const UniquePath: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, g
 
   return (
     <div className='container'>
-      <div className='items-start justify-between sm:flex'>
-        <div className='mb-2 mt-0 flex items-center justify-center space-x-4 sm:mb-4 sm:justify-start'>
-          <div className='group relative'>
-            <div className='h-6 w-6 bg-[#575C6B]'></div>
-            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-              Bricks
-            </span>
-          </div>
-          <div className='group relative'>
-            <div className='h-6 w-6 border-[1px] bg-white'></div>
-            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-              Valid path
-            </span>
-          </div>
-          <div className='group relative'>
-            <div className='h-6 w-6 bg-blue-600'></div>
-            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-              Current item
-            </span>
-          </div>
-          <div className='group relative'>
-            <div className='h-6 w-6 bg-green-600'></div>
-            <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-              valid island
-            </span>
-          </div>
+      <div className='items-start justify-between pb-1 pt-3 sm:flex'>
+        <div className='flex items-center justify-center sm:block'>
+          <StatusColorsPlate data={uniquePathFindingSortColorsData} />
         </div>
         <p className='m-0 mb-2 p-0 text-center text-lg text-black sm:mb-0 sm:text-end'>
           No of unique paths : {validPaths?.length}

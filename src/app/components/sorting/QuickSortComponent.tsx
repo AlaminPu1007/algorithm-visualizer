@@ -1,8 +1,10 @@
 import { quickSortAlgo } from '@/app/algorithm/quickSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
 import { sortingData } from '@/app/data//SortData';
+import { quickSortColorsData } from '@/app/data/mockData';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { SortingDataProps } from '@/app/types/sortingProps';
+import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { useEffect, useState } from 'react';
 
 // Calculate the maximum value to normalize data
@@ -77,32 +79,10 @@ const QuickSortComponent: React.FC<{ speedRange: number }> = ({ speedRange }) =>
 
   return (
     <div>
-      <div className='mb-4 mt-0 flex items-center justify-start space-x-4'>
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-red-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Pivot
-          </span>
-        </div>
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-purple-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Less than pivot
-          </span>
-        </div>
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-orange-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Greater than pivot
-          </span>
-        </div>
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-green-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Sorted
-          </span>
-        </div>
+      <div className='mb-3 mt-3 sm:mt-0'>
+        <StatusColorsPlate data={quickSortColorsData} />
       </div>
+
       <div className='flex items-end justify-center'>
         <svg viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`} className='border'>
           {data.map((item, index) => {

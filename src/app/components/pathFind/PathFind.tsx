@@ -68,7 +68,7 @@ const PathFind = () => {
   return (
     <div className='pb-5'>
       <div className='container'>
-        <div className='items-start justify-between sm:flex'>
+        <div className='items-end justify-between sm:flex'>
           <div className='me-6 w-[160px]'>
             <p className='m-0 mb-1 p-0 text-sm'>Speed: {speedRange} (0 to 1500)</p>
             <input
@@ -142,12 +142,12 @@ const PathFind = () => {
         </div>
       </div>
       {buttonType === 'unique-path' ? (
-        <div className='container py-5'>
+        <div className='container'>
           <UniquePath useRandomKey={randomKey} speedRange={speedRange} gridSize={submittedGridSize} />
         </div>
       ) : null}
       {buttonType === 'no-of-island' ? (
-        <div className='container py-5'>
+        <div className='container'>
           <NoOfIslands useRandomKey={randomKey} speedRange={speedRange} gridSize={submittedGridSize} />
         </div>
       ) : null}

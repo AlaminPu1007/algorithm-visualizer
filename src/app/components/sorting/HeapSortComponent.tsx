@@ -2,9 +2,11 @@
 import { heapify, HeapSortApproach } from '@/app/algorithm/heapSort';
 import { getRandomTreeData, NODE_POSITION } from '@/app/constant';
 import { Tree } from '@/app/data-structure/Tree/TreeNode';
+import { heapSortColorsData } from '@/app/data/mockData';
 import { calculateLinePosition } from '@/app/lib/calculateSvgLinePosition';
 import { HeapSortedItemProps } from '@/app/types/sortingProps';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
+import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -54,26 +56,10 @@ const HeapSortComponent: React.FC<{ speedRange: number }> = ({ speedRange }) => 
 
   return (
     <>
-      <div className='mb-2 mt-0 flex items-center justify-start space-x-4'>
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-red-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Will be sorted
-          </span>
-        </div>
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-purple-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Swap
-          </span>
-        </div>
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-green-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Sorted
-          </span>
-        </div>
+      <div className='mb-3 mt-3 sm:mt-0'>
+        <StatusColorsPlate data={heapSortColorsData} />
       </div>
+
       <div>
         {sortedData?.length ? (
           <div className='flex flex-wrap items-center justify-end xl:flex-nowrap'>

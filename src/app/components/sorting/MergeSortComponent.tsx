@@ -2,8 +2,10 @@
 
 import { mergeSortMethod } from '@/app/algorithm/mergeSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
+import { mergeSortColorsData } from '@/app/data/mockData';
 import { sortingData } from '@/app/data/SortData';
 import { SortingDataProps } from '@/app/types/sortingProps';
+import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { useEffect, useState } from 'react';
 
 // Calculate the maximum value to normalize data
@@ -52,47 +54,10 @@ const MergeSortComponent: React.FC<{ speedRange: number }> = ({ speedRange = 0 }
 
   return (
     <div>
-      <div className='mb-4 mt-0 flex items-center justify-start space-x-4'>
-        {/* Color for completed sorting */}
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-green-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Completed Sorting (Green)
-          </span>
-        </div>
-
-        {/* Color for current left index */}
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-red-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Current Left Index (Red)
-          </span>
-        </div>
-
-        {/* Color for current right index */}
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-blue-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Current Right Index (Blue)
-          </span>
-        </div>
-
-        {/* Color for current left half */}
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-orange-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Current Left Half (Orange)
-          </span>
-        </div>
-
-        {/* Color for current right half */}
-        <div className='group relative'>
-          <div className='h-6 w-6 bg-purple-600'></div>
-          <span className='absolute bottom-full mb-2 hidden rounded bg-gray-800 p-2 text-xs text-white group-hover:block'>
-            Current Right Half (Purple)
-          </span>
-        </div>
+      <div className='mb-3 mt-3 sm:mt-0'>
+        <StatusColorsPlate data={mergeSortColorsData} />
       </div>
+
       <div className='flex items-end justify-center'>
         <svg viewBox={`0 0 ${MERGE_SORT_SVG_WIDTH} ${MERGE_SORT_SVG_HEIGHT}`} className='border'>
           {data.map((item, index) => {

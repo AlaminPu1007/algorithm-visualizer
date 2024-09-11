@@ -45,7 +45,7 @@ const SortingComponent = () => {
   };
 
   return (
-    <div className='pb-5'>
+    <div className='py-5'>
       <div className='container'>
         <div className='items-start justify-between min-[500px]:flex'>
           <div className='me-6 w-[160px]'>
@@ -94,27 +94,27 @@ const SortingComponent = () => {
         </div>
       </div>
       {buttonType === 'merge-sort' ? (
-        <div className='container py-5'>
+        <div className='container'>
           <MergeSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
       {buttonType === 'bubble-sort' ? (
-        <div className='container py-5'>
+        <div className='container'>
           <BubbleSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
       {buttonType === 'selection-sort' ? (
-        <div className='container py-5'>
+        <div className='container'>
           <SelectionSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
       {buttonType === 'quick-sort' ? (
-        <div className='container py-5'>
+        <div className='container'>
           <QuickSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
       {buttonType === 'heap-sort' ? (
-        <div className='container py-5'>
+        <div className='container'>
           <HeapSortComponent key={randomKey} speedRange={speedRange} />
         </div>
       ) : null}
