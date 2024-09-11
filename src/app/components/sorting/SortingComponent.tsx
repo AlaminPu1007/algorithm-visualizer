@@ -47,7 +47,7 @@ const SortingComponent = () => {
   return (
     <div className='pb-5'>
       <div className='container'>
-        <div className='flex items-start justify-between'>
+        <div className='items-start justify-between min-[500px]:flex'>
           <div className='me-6 w-[160px]'>
             <p className='m-0 mb-1 p-0 text-sm'>Speed: {speedRange} (0 to 1500)</p>
             <input
@@ -60,44 +60,28 @@ const SortingComponent = () => {
               max='1500'
             />
           </div>
-          {/* <div className='flex items-start'>
-            <button
-              className={`root-btn ${buttonType === 'merge-sort' ? 'active-root-btn py-[500px]' : ''}`}
-              onClick={() => buttonMethod('merge-sort')}
-            >
-              Merge sort
-            </button>
-            <button
-              className={`root-btn mx-3 ${buttonType === 'bubble-sort' ? 'active-root-btn' : ''}`}
-              onClick={() => buttonMethod('bubble-sort')}
-            >
-              Bubble sort
-            </button>
-            <button
-              className={`root-btn ${buttonType === 'selection-sort' ? 'active-root-btn' : ''}`}
-              onClick={() => buttonMethod('selection-sort')}
-            >
-              Selection sort
-            </button>
-            <button
-              className={`root-btn ml-3 ${buttonType === 'quick-sort' ? 'active-root-btn' : ''}`}
-              onClick={() => buttonMethod('quick-sort')}
-            >
-              Quick sort
-            </button>
-          </div> */}
-          <div>
+          <div className='max-[500px]:mt-2'>
             <select
               // onClick={buttonMethod}
               onChange={handleSelectChange}
               value={buttonType}
-              className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
+              className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[500px]:w-[60%]'
             >
-              <option value='merge-sort'>Merge Sort</option>
-              <option value='quick-sort'>Quick Sort</option>
-              <option value='heap-sort'>Heap Sort</option>
-              <option value='bubble-sort'>Bubble Sort</option>
-              <option value='selection-sort'>Selection Sort</option>
+              <option data-umami-event='selection-from-sorting-merge-sort' value='merge-sort'>
+                Merge Sort
+              </option>
+              <option data-umami-event='selection-from-sorting-quick-sort' value='quick-sort'>
+                Quick Sort
+              </option>
+              <option data-umami-event='selection-from-sorting-heap-sort' value='heap-sort'>
+                Heap Sort
+              </option>
+              <option data-umami-event='selection-from-sorting-bubble-sort' value='bubble-sort'>
+                Bubble Sort
+              </option>
+              <option data-umami-event='selection-from-sorting-selection-sort' value='selection-sort'>
+                Selection Sort
+              </option>
             </select>
 
             <button

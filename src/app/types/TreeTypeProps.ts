@@ -26,6 +26,8 @@ export interface ITreeNode {
   isCurrent: boolean;
   isSwap: boolean;
   isSorted: boolean;
+  isTarget: boolean;
+  isInvalid: boolean;
 }
 
 /**

@@ -14,6 +14,8 @@ const HeapSortComponent: React.FC<{ speedRange: number }> = ({ speedRange }) => 
 
   useEffect(() => {
     const newTree = new Tree(JSON.parse(JSON.stringify(getRandomTreeData(31))));
+    // created a valid tree
+    newTree.insertIntoList();
     if (newTree?.linearArr?.length) {
       setData(newTree.linearArr);
     }
