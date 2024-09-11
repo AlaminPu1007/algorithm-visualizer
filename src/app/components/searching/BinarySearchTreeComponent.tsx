@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { calculateLinePosition } from '@/app/lib/calculateSvgLinePosition';
 import { getRandomTreeData, NODE_POSITION } from '@/app/constant';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
 import { Tree } from '@/app/data-structure/Tree/TreeNode';
-import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
+import { clearAllTimeouts } from '@/app/lib/sleepMethod';
+import { performBST } from '@/app/algorithm/binarySearch';
+import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
+import { bstSearchColorsData } from '@/app/data/mockData';
 
 const ARRAY_SIZE = 31;
 
@@ -14,6 +17,7 @@ const BinarySearchTreeComponent: React.FC<{ speedRange: number }> = ({ speedRang
   // define component local state
   const [data, setData] = useState<ITreeNode | null>(null);
   const [target, setTarget] = useState<number>(0);
+  const isSearching = useRef(false); // Ref to track if the search is already running
 
   useEffect(() => {
     /**
@@ -22,7 +26,7 @@ const BinarySearchTreeComponent: React.FC<{ speedRange: number }> = ({ speedRang
      * The new tree data is generated using `getRandomTreeData(31)` and then processed to extract
      * all nodes in an in-order traversal. The nodes are collected and stored in the `steps` state.
      */
-    const tempArr = JSON.parse(JSON.stringify(getRandomTreeData(ARRAY_SIZE)));
+    const tempArr = getRandomTreeData(ARRAY_SIZE);
     // store the target item
     setTarget(tempArr[Math.floor(Math.random() * 31 + 1)]);
     const newTree = new Tree(tempArr);
@@ -37,68 +41,38 @@ const BinarySearchTreeComponent: React.FC<{ speedRange: number }> = ({ speedRang
     return () => {
       clearAllTimeouts();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const performBST = async () => {
-    try {
-      if (!data) return;
-
-      const updatedData = { ...data }; // Clone the data to force re-render
-
-      // Helper function to perform binary search in BST
-      const searchBST = async (node: ITreeNode | null, target: number) => {
-        if (!node) return null;
-
-        // Update the node's status and trigger a state update
-        node.isCurrent = true;
-        setData({ ...updatedData }); // Trigger re-render with updated node
-        await Sleep(speedRange);
-
-        if (node.value === target) return node;
-
-        if (target < Number(node.value)) {
-          markInvalid(node.right);
-          setData({ ...updatedData });
-          await Sleep(speedRange);
-
-          return await searchBST(node.left, target);
-        } else {
-          markInvalid(node.left);
-          setData({ ...updatedData });
-          await Sleep(speedRange);
-
-          return await searchBST(node.right, target);
-        }
-      };
-
-      // Start the search from the root
-      await searchBST(updatedData, target);
-    } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
-        // eslint-disable-next-line no-console
-        console.error(error, 'from bst cath error');
-      }
+  useEffect(() => {
+    // Trigger performBST only when data and target are set and search isn't in progress
+    if (data && target && !isSearching.current) {
+      isSearching.current = true; // Mark search as in progress
+      performBST(data, setData, speedRange, target);
     }
-  };
-
-  const markInvalid = async (node: ITreeNode | null) => {
-    if (!node) return;
-
-    node.isInvalid = true;
-
-    if (node.left) markInvalid(node.left);
-    if (node.right) markInvalid(node.right);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, target]);
 
   return (
     <>
-      <button onClick={performBST}>CLICK</button>
-      <p className='m-0 mt-2 p-0 text-center text-lg font-medium sm:text-start md:mt-0 md:text-xl'>
-        TARGET : <span className='text-red-500'>{target}</span>
-      </p>
-      <svg viewBox='-20 20 280 138'>
-        <RecursiveApproach node={data} />
-      </svg>
+      <div className='mt-2 flex md:mt-0'>
+        <StatusColorsPlate data={bstSearchColorsData} />
+        <p className='m-0 ms-5 p-0 text-center text-lg font-medium sm:text-start md:text-xl'>
+          TARGET : <span className='text-green-600'>{target}</span>
+        </p>
+      </div>
+
+      {data ? (
+        <>
+          <svg viewBox='-20 20 280 138'>
+            <RecursiveApproach node={data} />
+          </svg>
+        </>
+      ) : (
+        <div className='flex min-h-[200px] w-full items-center justify-center'>
+          <h1 className='text-center text-4xl font-medium'>Loading...</h1>
+        </div>
+      )}
     </>
   );
 };
@@ -122,7 +96,7 @@ const RecursiveApproach: React.FC<TreeBFSRecursiveTraversalProps> = ({ node }) =
                 y1={linePos.startY}
                 x2={linePos.endX}
                 y2={linePos.endY}
-                stroke={node.isCurrent ? 'red' : node.isInvalid ? 'orange' : 'black'}
+                stroke={node.isCurrent ? '#2563EB' : node.isInvalid ? 'red' : node.isTarget ? 'green' : 'black'}
                 strokeWidth={'0.3'}
               >
                 <animate
@@ -140,13 +114,20 @@ const RecursiveApproach: React.FC<TreeBFSRecursiveTraversalProps> = ({ node }) =
           cx={node.cx!}
           cy={node.cy!}
           r={NODE_POSITION}
-          fill={node.isCurrent ? 'red' : node.isInvalid ? 'orange' : 'white'}
-          stroke={node.isCurrent ? 'white' : 'black'}
+          fill={node.isCurrent ? '#2563EB' : node.isInvalid ? 'red' : node.isTarget ? 'green' : 'white'}
+          stroke={node.isCurrent || node.isInvalid || node.isTarget ? 'white' : 'black'}
           strokeWidth={'0.2'}
         >
           <animate attributeName='r' from='4' to={5} dur='1s' begin={'0s'} />
         </circle>
-        <text x={node.cx!} y={node.cy!} dy={2} textAnchor='middle' className='text-center text-[4px]' fill={`'black`}>
+        <text
+          x={node.cx!}
+          y={node.cy!}
+          dy={2}
+          textAnchor='middle'
+          className='text-center text-[4px]'
+          fill={node.isCurrent || node.isInvalid || node.isTarget ? 'white' : 'black'}
+        >
           {node?.value || -1}
         </text>
       </g>
