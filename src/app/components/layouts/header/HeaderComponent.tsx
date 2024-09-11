@@ -1,13 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 
 const HeaderComponent = () => {
+  const ref = useRef<HTMLUListElement | null>(null);
+  const pathname = usePathname();
+
   // define local state
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
-
-  const ref = useRef<HTMLUListElement | null>(null);
 
   // This module is for to detect user outside click of the given id
   // It will help us to close our open navigation
@@ -81,9 +83,8 @@ const HeaderComponent = () => {
             <li>
               <Link
                 href='/tree'
-                className={`nav-list-item-link dark:hover:bg-initial text-center dark:hover:text-theme-dark-primary`}
+                className={`nav-list-item-link dark:hover:bg-initial text-center dark:hover:text-theme-dark-primary ${pathname === '/tree' ? 'after:w-full' : ''}`}
                 onClick={onCloseDrawerNav}
-                // data-umami-event='Tree-Navigation'
               >
                 Tree
               </Link>
@@ -91,9 +92,8 @@ const HeaderComponent = () => {
             <li className='lg:lg:mx-2'>
               <Link
                 href='/n-queens'
-                className='nav-list-item-link'
+                className={`nav-list-item-link ${pathname === '/n-queens' ? 'after:w-full' : ''}`}
                 onClick={onCloseDrawerNav}
-                // data-umami-event='N-Queens-Navigation'
               >
                 N-Queens
               </Link>
@@ -101,9 +101,8 @@ const HeaderComponent = () => {
             <li className='lg:mx-2'>
               <Link
                 href='/sorting'
-                className='nav-list-item-link'
+                className={`nav-list-item-link ${pathname === '/sorting' ? 'after:w-full' : ''}`}
                 onClick={onCloseDrawerNav}
-                // data-umami-event='Sorting-Navigation'
               >
                 Sorting
               </Link>
@@ -112,11 +111,20 @@ const HeaderComponent = () => {
             <li className='lg:mx-2'>
               <Link
                 href='/path-finding'
-                className='nav-list-item-link'
+                className={`nav-list-item-link ${pathname === '/path-finding' ? 'after:w-full' : ''}`}
                 onClick={onCloseDrawerNav}
-                // data-umami-event='Sorting-Navigation'
               >
                 Path finding
+              </Link>
+            </li>
+
+            <li className='lg:mx-2'>
+              <Link
+                href='/searching'
+                className={`nav-list-item-link ${pathname === '/searching' ? 'after:w-full' : ''}`}
+                onClick={onCloseDrawerNav}
+              >
+                Searching
               </Link>
             </li>
 
@@ -135,7 +143,7 @@ const HeaderComponent = () => {
                   viewBox='0 0 24 24'
                   fill='none'
                   xmlns='http://www.w3.org/2000/svg'
-                  className=''
+                  className='h-[95%] w-[95%]'
                 >
                   <path
                     fillRule='evenodd'
@@ -147,26 +155,6 @@ const HeaderComponent = () => {
                 </svg>
               </Link>
             </li>
-
-            {/* <li className='lg:mx-2'>
-              <Link
-                href='/blog'
-                className='nav-list-item-link'
-                onClick={onCloseDrawerNav}
-                data-umami-event={`button-blog-link`}
-              >
-                Blog
-              </Link>
-            </li>
-            <li className='lg:mx-2'>
-              <Link
-                href='/#footer-widget'
-                className='nav-list-item-link'
-                onClick={onCloseDrawerNav}
-              >
-                Contact
-              </Link>
-            </li> */}
           </ul>
         </div>
 
