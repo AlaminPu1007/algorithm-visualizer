@@ -88,4 +88,23 @@ export class LinkedList implements ITree {
     //   }
     // }
   }
+
+  // have to calculate new x, y position
+  insertNodeAtLast(value: number): void {
+    if (!this.head) {
+      this.head = new TreeNode(value);
+      return;
+    }
+
+    const newNode = new TreeNode(value);
+    let current = this.head;
+
+    // Traverse to the last node
+    while (current.next) {
+      current = current.next;
+    }
+
+    // Insert the new node at the end
+    current.next = newNode;
+  }
 }

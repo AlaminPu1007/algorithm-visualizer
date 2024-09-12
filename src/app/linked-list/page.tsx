@@ -4,25 +4,29 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { LinkedList } from '../data-structure/LinkedList/LinkedList';
 import { ITreeNode } from '../types/TreeTypeProps';
 
-const TEMP_DATA: number[] = [15, 20, 45, 87, 98, 10, 75, 68, 30, 75, 68];
+const TEMP_DATA: number[] = [15, 20];
 
 const Page = () => {
   // define component local state
   const [data] = useState<number[]>(TEMP_DATA);
-  const [node, setNode] = useState<ITreeNode | null>(null);
+  const [node, setNode] = useState<LinkedList | null>();
+  const [root, setRoot] = useState<ITreeNode | null>();
 
   useEffect(() => {
     const newList = new LinkedList(TEMP_DATA, 3, 6);
     newList.createLinkedList();
 
-    if (newList.head) {
-      setNode(newList.head);
+    if (newList) {
+      setNode(newList);
+      if (newList.head) {
+        setRoot(newList.head);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderNode = (node: ITreeNode | null): ReactNode => {
-    if (!node) return null;
+    if (!node) return;
 
     return (
       <>
@@ -41,17 +45,31 @@ const Page = () => {
     );
   };
 
+  const insertNewItem = () => {
+    if (!node) return;
+
+    // Insert the new node
+    node.insertNodeAtLast(10);
+
+    console.log(node);
+    setRoot(node.head);
+
+    // Update state with the new linked list instance
+    setNode(node);
+  };
+
   return (
     <>
       <div className='container'>
+        <button onClick={insertNewItem}>Insert</button>
         {data?.length ? (
           <div className='md:flex md:items-center md:justify-end'>
-            <p className='m-0 p-0 text-lg font-medium uppercase'>Insert Into List : </p>
-            <div className='flex items-center justify-start'>
+            <p className='text-md m-0 p-0 font-medium uppercase md:text-lg'>Insert Into List : </p>
+            <div className='flex flex-wrap items-center justify-start'>
               {data.map((item, i) => {
                 return (
                   <p
-                    className='ms-1 flex h-10 w-10 items-center justify-center rounded-sm border text-center font-semibold text-green-600'
+                    className='ms-1 flex h-10 w-10 items-center justify-center rounded-sm border text-center text-sm font-semibold text-green-600'
                     key={i}
                   >
                     {item}
@@ -61,7 +79,7 @@ const Page = () => {
             </div>
           </div>
         ) : null}
-        {data ? <svg viewBox='10 0 280 40'>{renderNode(node)}</svg> : null}
+        {root ? <svg viewBox='10 0 280 40'>{renderNode(root)}</svg> : null}
       </div>
     </>
   );
