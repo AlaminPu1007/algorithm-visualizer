@@ -10,10 +10,13 @@ import { performBST } from '@/app/algorithm/binarySearch';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import { bstSearchColorsData } from '@/app/data/mockData';
 
+interface PageProps {
+  speedRange: number;
+}
+
 const ARRAY_SIZE = 31;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const BinarySearchTreeComponent: React.FC<{ speedRange: number }> = ({ speedRange }) => {
+const BinarySearchTreeComponent: React.FC<PageProps> = ({ speedRange }) => {
   // define component local state
   const [data, setData] = useState<ITreeNode | null>(null);
   const [target, setTarget] = useState<number>(0);
@@ -27,8 +30,10 @@ const BinarySearchTreeComponent: React.FC<{ speedRange: number }> = ({ speedRang
      * all nodes in an in-order traversal. The nodes are collected and stored in the `steps` state.
      */
     const tempArr = getRandomTreeData(ARRAY_SIZE);
+    const randomIdx = Math.floor(Math.random() * ARRAY_SIZE + 1) % ARRAY_SIZE;
+
     // store the target item
-    setTarget(tempArr[Math.floor(Math.random() * 31 + 1)]);
+    setTarget(tempArr[randomIdx]);
     const newTree = new Tree(tempArr);
     // create a valid BST
     newTree.createBalancedBST();
@@ -41,7 +46,6 @@ const BinarySearchTreeComponent: React.FC<{ speedRange: number }> = ({ speedRang
     return () => {
       clearAllTimeouts();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -62,17 +66,11 @@ const BinarySearchTreeComponent: React.FC<{ speedRange: number }> = ({ speedRang
         </p>
       </div>
 
-      {data ? (
-        <>
-          <svg viewBox='-20 20 280 138'>
-            <RecursiveApproach node={data} />
-          </svg>
-        </>
-      ) : (
-        <div className='flex min-h-[200px] w-full items-center justify-center'>
-          <h1 className='text-center text-4xl font-medium'>Loading...</h1>
-        </div>
-      )}
+      <>
+        <svg viewBox='-20 20 280 138'>
+          <RecursiveApproach node={data} />
+        </svg>
+      </>
     </>
   );
 };
