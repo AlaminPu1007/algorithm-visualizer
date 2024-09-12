@@ -28,6 +28,8 @@ export interface ITreeNode {
   isSorted: boolean;
   isTarget: boolean;
   isInvalid: boolean;
+  next: ITreeNode | null;
+  isCycle: boolean;
 }
 
 /**

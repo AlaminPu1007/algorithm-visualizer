@@ -18,6 +18,7 @@ import { ITreeNode } from '@/app/types/TreeTypeProps';
 export class TreeNode implements ITreeNode {
   left: ITreeNode | null = null;
   right: ITreeNode | null = null;
+  next: ITreeNode | null = null;
   parent: ITreeNode | null = null;
   value: number | null;
   id: number | null;
@@ -29,6 +30,7 @@ export class TreeNode implements ITreeNode {
   isSorted: boolean;
   isTarget: boolean;
   isInvalid: boolean;
+  isCycle: boolean;
 
   constructor(
     value: number | null = null,
@@ -46,5 +48,6 @@ export class TreeNode implements ITreeNode {
     this.isSorted = false;
     this.isTarget = false;
     this.isInvalid = false;
+    this.isCycle = false;
   }
 }
