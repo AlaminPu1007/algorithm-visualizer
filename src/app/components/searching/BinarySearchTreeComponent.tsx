@@ -10,10 +10,12 @@ import { performBST } from '@/app/algorithm/binarySearch';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import { bstSearchColorsData } from '@/app/data/mockData';
 
+// define component Page Props
 interface PageProps {
   speedRange: number;
 }
 
+// a fixed array size
 const ARRAY_SIZE = 31;
 
 const BinarySearchTreeComponent: React.FC<PageProps> = ({ speedRange }) => {
