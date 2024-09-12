@@ -13,6 +13,10 @@ export function middleware(request: NextRequest) {
   if (process.env.NODE_ENV !== 'development' && request.nextUrl.pathname === '/') {
     return NextResponse.redirect(new URL('/tree', request.url));
   }
+  // prevent to visit linked-list, cause it's under development
+  else if (process.env.NODE_ENV !== 'development' && request.nextUrl.pathname === '/linked-list') {
+    return NextResponse.redirect(new URL('/tree', request.url));
+  }
 
   // redirect with other urls
   return NextResponse.next();
