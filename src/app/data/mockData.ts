@@ -197,16 +197,6 @@ export const noOfIslandsSortColorsData: StatusColorsDataProps[] = [
     title: 'Island',
     bg_color: 'bg-[#E99F0C]',
   },
-  // {
-  //   id: 3,
-  //   title: 'Current Item',
-  //   bg_color: 'bg-blue-600',
-  // },
-  // {
-  //   id: 4,
-  //   title: 'valid island',
-  //   bg_color: 'bg-green-600',
-  // },
 ];
 
 /**

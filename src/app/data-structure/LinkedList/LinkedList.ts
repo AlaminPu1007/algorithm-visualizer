@@ -18,12 +18,6 @@ export class LinkedList implements ITree {
   /** An array representing the node values. */
   arr: (number | null)[] = [];
 
-  /** The index of the first node to create a cycle. */
-  cycle1Index: number;
-
-  /** The index of the second node to create a cycle. */
-  cycle2Index: number;
-
   /**
    * Creates an instance of the `LinkedList` class.
    *
@@ -31,11 +25,9 @@ export class LinkedList implements ITree {
    * @param {number} cycle1_idx - The index of the first node to create a cycle.
    * @param {number} cycle2_idx - The index of the second node to create a cycle.
    */
-  constructor(arr: (number | null)[], cycle1_idx: number, cycle2_idx: number) {
+  constructor(arr: (number | null)[]) {
     this.head = null;
     this.arr = arr;
-    this.cycle1Index = cycle1_idx;
-    this.cycle2Index = cycle2_idx;
   }
 
   /**
@@ -69,24 +61,6 @@ export class LinkedList implements ITree {
       // Update CX value for positioning
       CX += 25;
     }
-
-    // Create a cycle if needed
-    // if (this.cycle1Index !== undefined && this.cycle2Index !== undefined) {
-    //   let cycle1Node = this.head;
-    //   let cycle2Node = this.head;
-
-    //   for (let i = 0; i < this.cycle1Index; i++) {
-    //     if (cycle1Node) cycle1Node = cycle1Node.next;
-    //   }
-
-    //   for (let i = 0; i < this.cycle2Index; i++) {
-    //     if (cycle2Node) cycle2Node = cycle2Node.next;
-    //   }
-
-    //   if (cycle1Node && cycle2Node) {
-    //     cycle2Node.next = cycle1Node;
-    //   }
-    // }
   }
 
   // have to calculate new x, y position
@@ -103,6 +77,9 @@ export class LinkedList implements ITree {
     while (current.next) {
       current = current.next;
     }
+
+    newNode.cx = (current.cx || 0) + 25;
+    newNode.cy = 20;
 
     // Insert the new node at the end
     current.next = newNode;
