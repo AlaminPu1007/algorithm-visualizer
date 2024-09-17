@@ -30,6 +30,7 @@ export interface ITreeNode {
   isInvalid: boolean;
   next: ITreeNode | null;
   isCycle: boolean;
+  isInsertedPosition: boolean;
 }
 
 /**

@@ -31,6 +31,7 @@ export class TreeNode implements ITreeNode {
   isTarget: boolean;
   isInvalid: boolean;
   isCycle: boolean;
+  isInsertedPosition: boolean;
 
   constructor(
     value: number | null = null,
@@ -49,5 +50,6 @@ export class TreeNode implements ITreeNode {
     this.isTarget = false;
     this.isInvalid = false;
     this.isCycle = false;
+    this.isInsertedPosition = false;
   }
 }
