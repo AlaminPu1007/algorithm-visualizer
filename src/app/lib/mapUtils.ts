@@ -33,3 +33,25 @@ export const appendToMapWithNewValue = <K, V>(originalMap: Map<K, V>, key: K, va
 export const hasKey = <K, V>(map: Map<K, V>, key: K): boolean => {
   return map.has(key);
 };
+
+/**
+ * Deletes a key from a map and returns a new map with the key removed.
+ *
+ * @template K - The type of keys in the map.
+ * @template V - The type of values in the map.
+ * @param {Map<K, V>} dataMap - The original map from which to delete the key.
+ * @param {K} key - The key to be deleted.
+ * @returns {Map<K, V>} - Returns a new map with the key removed. If the key was not found, returns the original map.
+ */
+export const deleteKey = <K, V>(dataMap: Map<K, V>, key: K): Map<K, V> => {
+  // Create a new map from the existing map
+  const newMap = new Map(dataMap);
+
+  // Check if the key exists and delete it
+  if (newMap.has(key)) {
+    newMap.delete(key);
+  }
+
+  // Return the new map
+  return newMap;
+};

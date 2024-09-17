@@ -1,8 +1,9 @@
 'use client';
 
-import { updateTreeToInsertData } from '@/app/algorithm/linked-list/singlyLinkedList';
+import { updateTreeToDeleteData, updateTreeToInsertData } from '@/app/algorithm/linked-list/singlyLinkedList';
 import { LinkedList } from '@/app/data-structure/LinkedList/LinkedList';
-import { appendToMapWithNewValue } from '@/app/lib/mapUtils';
+import { TreeNode } from '@/app/data-structure/Tree/Node';
+import { appendToMapWithNewValue, hasKey } from '@/app/lib/mapUtils';
 import { LinkedListInputProps, PageProps } from '@/app/types/linkedListProps';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
 import React, { useEffect, useState } from 'react';
@@ -17,22 +18,22 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
     insertData: '',
     insertAtLast: '',
     insertAtAnyPosition: '1',
-    deleteFromAnyPosition: '-1',
+    deleteFromAnyPosition: '1',
   });
   const [dataMap, setDataMap] = useState<Map<number, number>>(new Map());
 
   useEffect(() => {
-    const rootValue = Math.floor(Math.random() + 100);
+    const rootValue = Math.floor(Math.floor(Math.random() * 99));
     const newList = new LinkedList([rootValue]);
     newList.createLinkedList();
 
     if (newList.head) {
       setRoot(newList.head);
       // update setInsertData as well
-      setInsertedData((prv) => [...prv, rootValue]);
+      setInsertedData([rootValue]);
       // insert into map
       setDataMap(appendToMapWithNewValue(dataMap, rootValue, rootValue));
-      setInputData((prv) => ({ ...prv, insertData: String(Math.floor(Math.random() * 99 + 1)) }));
+      setInputData((prv) => ({ ...prv, insertData: String(Math.floor(Math.floor(Math.random() * 99))) }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -68,6 +69,15 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
     setInputData((prv) => ({ ...prv, insertAtAnyPosition: String(value || 0) }));
   };
 
+  const deleteItemFromAnyPositionOnChangeMethod = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const value = Number(parseInt(e.target.value));
+
+    if (value > dataMap.size || value <= 0) {
+      toast.error(`Invalid position`);
+    }
+    setInputData((prv) => ({ ...prv, deleteFromAnyPosition: String(value || 0) }));
+  };
+
   /**
    * Inserts a new node into the tree/linked list at a specified position with validation.
    *
@@ -95,17 +105,12 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
     const position = Number(insertAtAnyPosition);
     const value = Number(insertData);
 
-    if (!root) {
-      toast.error('Invalid linked list.');
-      return;
-    }
-
     if (position > dataMap.size + 1 || position <= 0) {
       toast.error('Invalid position');
       return;
     }
 
-    if (insertedData?.length > maxItems) {
+    if (insertedData?.length + 1 > maxItems) {
       toast.error(`Max limit exceeded. You can add at most ${maxItems} items.`);
       return;
     }
@@ -115,8 +120,20 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
       return;
     }
 
-    if (dataMap.has(value)) {
+    if (hasKey(dataMap, value)) {
       toast.error('This item already exists');
+      return;
+    }
+
+    // if any linked is not present, then created it
+    if (!root) {
+      const newNode = new TreeNode(value);
+      newNode.cx = 20;
+      newNode.cy = 20;
+      setRoot(newNode);
+      setInsertedData((prv) => [...prv, value]);
+      // Insert the new value into the map
+      setDataMap(appendToMapWithNewValue(dataMap, value, value));
       return;
     }
 
@@ -130,13 +147,15 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
       position,
       speedRange,
       dataMap,
-      setDataMap,
+      // setDataMap,
       setRoot
     );
 
     // Update the root with the new node
     setRoot({ ...updatedRoot });
-
+    setInsertedData((prv) => [...prv, value]);
+    // Insert the new value into the map
+    setDataMap(appendToMapWithNewValue(dataMap, value, value));
     // Reset input fields with random values
     setInputData((prev) => ({
       ...prev,
@@ -146,6 +165,66 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
 
     // Toggle loading state
     setButtonLoading((prev) => !prev);
+  };
+
+  /**
+   * Asynchronously deletes a node from a linked list at the specified position.
+   * The function validates the position, updates the linked list by removing the node at that position, and manages loading states.
+   * It also handles errors and displays appropriate messages to the user.
+   *
+   * @async
+   * @function deleteNodeFromGivenList
+   * @returns {Promise<void>} A promise that resolves when the deletion process is complete.
+   *
+   * @throws {Error} Throws an error if the position is invalid or if there's an issue with updating the tree.
+   *
+   * @description
+   * - Retrieves the position to delete from `inputData` (defaults to -1 if not provided).
+   * - Validates if the `root` of the linked list is valid and if the position is within bounds.
+   * - Sets a loading state while performing the deletion.
+   * - Calls `updateTreeToDeleteData` to handle the actual deletion process.
+   * - Updates the linked list root and state management hooks (`setRoot`, `setDataMap`, `setInsertedData`).
+   * - Catches and logs errors during the process, with development-only error logging.
+   */
+  const deleteNodeFromGivenList = async () => {
+    try {
+      const { deleteFromAnyPosition = -1 } = inputData;
+
+      // Validation checks
+      const position = Number(deleteFromAnyPosition);
+
+      if (!root) {
+        toast.error('Invalid linked list.');
+        return;
+      }
+
+      if (position > dataMap.size || position <= 0) {
+        toast.error('Invalid position');
+        return;
+      }
+
+      // Indicate loading state
+      setButtonLoading((prev) => !prev);
+
+      const updateRoot: ITreeNode | null = await updateTreeToDeleteData(
+        { ...root },
+        position,
+        speedRange,
+        setRoot,
+        dataMap,
+        setDataMap,
+        setInsertedData
+      );
+
+      setRoot(updateRoot);
+      // Indicate loading state
+      setButtonLoading((prev) => !prev);
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
+    }
   };
 
   return (
@@ -164,7 +243,6 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
                 max={999}
                 onChange={insertDataOnChangeMethod}
                 value={inputData.insertData}
-                required
                 disabled={btnLoading}
                 id='input-data'
               />
@@ -181,7 +259,6 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
                 max={999}
                 onChange={insertAtAnyPositionOnChangeMethod}
                 value={inputData.insertAtAnyPosition}
-                required
                 disabled={btnLoading}
                 id='insert-position'
               />
@@ -204,13 +281,12 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
                   type='number'
                   min={1}
                   max={999}
-                  onChange={insertAtAnyPositionOnChangeMethod}
+                  onChange={deleteItemFromAnyPositionOnChangeMethod}
                   value={inputData.deleteFromAnyPosition}
-                  required
                   disabled={btnLoading}
                 />
                 <button
-                  onClick={insertDataByPosition}
+                  onClick={deleteNodeFromGivenList}
                   className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-red-500 text-white'} `}
                 >
                   Delete Node
@@ -221,10 +297,14 @@ const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
         </div>
 
         {root ? (
-          <svg viewBox='10 0 280 40'>
+          <svg viewBox='13 0 280 40'>
             <RenderNodeRecursively node={root} />
           </svg>
-        ) : null}
+        ) : (
+          <div className='flex min-h-[200px] w-full items-center justify-center'>
+            <h1 className='text-center text-4xl font-medium'>Invalid Linked List</h1>
+          </div>
+        )}
       </div>
     </>
   );
