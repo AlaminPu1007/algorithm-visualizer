@@ -2,7 +2,7 @@
 
 import { uid } from '@/app/lib/uidGenerator';
 import React, { useState } from 'react';
-import SinglyLinkedList from './SinglyLinkedList';
+import LinkedListBasics from './LinkedListBasics';
 
 const LinkedListComponent = () => {
   // define a component local memory
@@ -58,7 +58,7 @@ const LinkedListComponent = () => {
               className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
             >
               <option data-umami-event='selection-from-linked-list-CRUD' value='linked-list-crud'>
-                Singly LinkedList
+                Linked list basics
               </option>
             </select>
 
@@ -73,7 +73,7 @@ const LinkedListComponent = () => {
       </div>
 
       <div>
-        {activeRootBtnType === 'linked-list-crud' ? <SinglyLinkedList speedRange={speedRange} key={randomKey} /> : null}
+        {activeRootBtnType === 'linked-list-crud' ? <LinkedListBasics speedRange={speedRange} key={randomKey} /> : null}
       </div>
     </div>
   );

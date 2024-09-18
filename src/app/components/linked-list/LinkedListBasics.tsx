@@ -9,7 +9,7 @@ import { ITreeNode } from '@/app/types/TreeTypeProps';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
-const SinglyLinkedList: React.FC<PageProps> = ({ speedRange }) => {
+const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
   // define component local state
   const [insertedData, setInsertedData] = useState<number[]>([]);
   const [root, setRoot] = useState<ITreeNode | null>();
@@ -317,14 +317,31 @@ const RenderNodeRecursively: React.FC<{ node: ITreeNode | null }> = ({ node }) =
     <>
       <g>
         {node?.next && (
-          <line
-            x1={node.cx!}
-            y1={node.cy!}
-            x2={node.cx! + 25}
-            y2={node.cy!}
-            stroke={node.isTarget ? 'green' : 'black'}
-            strokeWidth={'0.3'}
-          />
+          <>
+            <defs>
+              <marker
+                id='arrow'
+                viewBox='0 0 10 10'
+                refX='5'
+                refY='5'
+                markerWidth='6'
+                markerHeight='6'
+                orient='auto-start-reverse'
+                fill='black'
+              >
+                <path d='M 0 0 L 10 5 L 0 10 z' />
+              </marker>
+            </defs>
+            <line
+              x1={node.cx!}
+              y1={node.cy!}
+              x2={node.cx! + 18}
+              y2={node.cy!}
+              stroke={node.isTarget ? 'green' : 'black'}
+              strokeWidth={'0.3'}
+              markerEnd='url(#arrow)'
+            />
+          </>
         )}
 
         <circle
@@ -351,4 +368,4 @@ const RenderNodeRecursively: React.FC<{ node: ITreeNode | null }> = ({ node }) =
   );
 };
 
-export default SinglyLinkedList;
+export default LinkedListBasics;

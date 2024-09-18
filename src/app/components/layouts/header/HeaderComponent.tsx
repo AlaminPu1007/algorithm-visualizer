@@ -127,8 +127,17 @@ const HeaderComponent = () => {
                 Searching
               </Link>
             </li>
+            <li className='lg:mx-2'>
+              <Link
+                href='/linked-list'
+                className={`nav-list-item-link ${pathname === '/linked-list' ? 'after:w-full' : ''}`}
+                onClick={onCloseDrawerNav}
+              >
+                Linked list
+              </Link>
+            </li>
 
-            <li className='flex lg:mx-2'>
+            <li className='mt-2 flex lg:mx-2 lg:mt-0'>
               <Link
                 href='https://github.com/AlaminPu1007/algorithm-visualizer'
                 target='_blank'
