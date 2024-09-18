@@ -4,13 +4,13 @@
  *
  * @interface LinkedListInputProps
  *
- * @property {string} insertAtLast - The value of the node to be inserted at the end of the list.
+ * @property {string} searchItem - The value of the node to be searched from given list.
  * @property {string} insertAtAnyPosition - The position where the node should be inserted in the list.
  * @property {string} deleteFromAnyPosition - The position from which the node should be deleted in the list.
  */
 export interface LinkedListInputProps {
   insertData: string;
-  insertAtLast: string;
+  searchItem: string;
   insertAtAnyPosition: string;
   deleteFromAnyPosition: string;
 }

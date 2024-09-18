@@ -1,6 +1,10 @@
 'use client';
 
-import { updateTreeToDeleteData, updateTreeToInsertData } from '@/app/algorithm/linked-list/singlyLinkedList';
+import {
+  updateTreeToDeleteData,
+  updateTreeToInsertData,
+  updateTreeToSearchNodeData,
+} from '@/app/algorithm/linked-list/singlyLinkedListBasics';
 import { LinkedList } from '@/app/data-structure/LinkedList/LinkedList';
 import { TreeNode } from '@/app/data-structure/Tree/Node';
 import { appendToMapWithNewValue, hasKey } from '@/app/lib/mapUtils';
@@ -16,7 +20,7 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
   const [btnLoading, setButtonLoading] = useState<boolean>(false);
   const [inputData, setInputData] = useState<LinkedListInputProps>({
     insertData: '',
-    insertAtLast: '',
+    searchItem: '-1',
     insertAtAnyPosition: '1',
     deleteFromAnyPosition: '1',
   });
@@ -33,7 +37,11 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
       setInsertedData([rootValue]);
       // insert into map
       setDataMap(appendToMapWithNewValue(dataMap, rootValue, rootValue));
-      setInputData((prv) => ({ ...prv, insertData: String(Math.floor(Math.floor(Math.random() * 99))) }));
+      setInputData((prv) => ({
+        ...prv,
+        insertData: String(Math.floor(Math.floor(Math.random() * 99))),
+        searchItem: String(rootValue),
+      }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -69,6 +77,11 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
     setInputData((prv) => ({ ...prv, insertAtAnyPosition: String(value || 0) }));
   };
 
+  /**
+   * get delete node position from users
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e
+   */
   const deleteItemFromAnyPositionOnChangeMethod = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = Number(parseInt(e.target.value));
 
@@ -76,6 +89,16 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
       toast.error(`Invalid position`);
     }
     setInputData((prv) => ({ ...prv, deleteFromAnyPosition: String(value || 0) }));
+  };
+
+  /**
+   * Get search node value from users
+   *
+   * @param {React.ChangeEvent<HTMLInputElement>} e
+   */
+  const searchNodeOnChangeMethod = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const value = Number(parseInt(e.target.value));
+    setInputData((prv) => ({ ...prv, searchItem: String(value || 0) }));
   };
 
   /**
@@ -227,12 +250,65 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
     }
   };
 
+  /**
+   * Searches for a node in the linked list based on the input search item.
+   * This function updates the state to reflect the search process, including
+   * indicating the loading state and handling errors.
+   *
+   * The function performs the following tasks:
+   * 1. Validates the linked list and the existence of the node to search for.
+   * 2. Sets a loading state to indicate that the search operation is in progress.
+   * 3. Calls `updateTreeToSearchNodeData` to visually search for the node in the list.
+   * 4. Updates the input data with a new random search item.
+   * 5. Handles potential errors and logs them in development mode.
+   *
+   * @async
+   * @function
+   * @name searchNodeFromGivenList
+   * @returns {Promise<void>} - Returns a promise that resolves when the search operation is complete.
+   *
+   * @throws {Error} - Throws an error if the search process encounters issues not handled by the function.
+   */
+  const searchNodeFromGivenList = async () => {
+    try {
+      const { searchItem = -1 } = inputData;
+
+      if (!root) {
+        toast.error('Invalid linked list.');
+        return;
+      }
+
+      if (!hasKey(dataMap, Number(searchItem))) {
+        toast.error('Invalid node');
+        return;
+      }
+
+      // Indicate loading state
+      setButtonLoading((prev) => !prev);
+
+      await updateTreeToSearchNodeData({ ...root }, Number(searchItem), speedRange, setRoot);
+      const targetItem = String(insertedData[Math.floor(Math.random() + insertedData.length - 1) || 0]);
+      setInputData((prv) => ({
+        ...prv,
+        searchItem: targetItem,
+      }));
+      // setRoot(updateRoot);
+      // Indicate loading state
+      setButtonLoading((prev) => !prev);
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
+    }
+  };
+
   return (
     <>
       <div>
         <div className='items-center sm:flex'>
           <div className='flex items-end'>
-            <div className='me-4 flex flex-col'>
+            <div className='me-2 flex flex-col'>
               <label htmlFor='input-data' className='text-md font-semibold'>
                 Data
               </label>
@@ -290,6 +366,31 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
                   className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-red-500 text-white'} `}
                 >
                   Delete Node
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className='mt-3 flex items-end sm:ms-6 sm:mt-0'>
+            <div className='flex flex-col'>
+              <label htmlFor='insert-position' className='text-md font-semibold'>
+                Search node
+              </label>
+              <div>
+                <input
+                  className='w-[50px] border-[1px] border-r-[0px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                  type='number'
+                  min={1}
+                  max={999}
+                  onChange={searchNodeOnChangeMethod}
+                  value={inputData.searchItem}
+                  disabled={btnLoading}
+                />
+                <button
+                  onClick={searchNodeFromGivenList}
+                  className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-theme-btn-secondary text-white'} `}
+                >
+                  Search Node
                 </button>
               </div>
             </div>

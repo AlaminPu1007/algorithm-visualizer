@@ -212,3 +212,49 @@ const updateTreeToDeleteData = async (
 
   return root; // Return the root if the position is invalid or no deletion is performed
 };
+
+/**
+ * Asynchronously searches for a node in a linked list and updates its visual state.
+ * The search highlights each node and marks the found node as the target.
+ *
+ * @param {TreeNode} root - The root of the linked list to search within.
+ * @param {number} searchItem - The value of the node to search for.
+ * @param {number} speedRange - The speed (in ms) for visualizing the search process.
+ * @param {React.Dispatch<React.SetStateAction<ITreeNode | null | undefined>>} setRoot - A function to update the root node state.
+ * @returns {Promise<void>} - Returns nothing. The state updates and visualization are handled within the function.
+ */
+export const updateTreeToSearchNodeData = async (
+  root: TreeNode,
+  searchItem: number,
+  speedRange: number,
+  setRoot: React.Dispatch<React.SetStateAction<ITreeNode | null | undefined>>
+): Promise<void> => {
+  let currentNode: TreeNode | null = root;
+
+  if (!currentNode) {
+    return;
+  }
+
+  // Traverse the linked list
+  while (currentNode) {
+    currentNode.isCurrent = true;
+    setRoot({ ...root }); // Trigger re-render
+    await Sleep(speedRange);
+
+    currentNode.isCurrent = false;
+    setRoot({ ...root }); // Trigger re-render
+
+    if (currentNode.value === searchItem) {
+      currentNode.isTarget = true;
+      setRoot({ ...root }); // Trigger re-render
+      await Sleep(speedRange);
+
+      currentNode.isTarget = false;
+      setRoot({ ...root }); // Trigger re-render
+
+      return; // Exit the function when the node is found
+    }
+
+    currentNode = currentNode.next; // Move to the next node
+  }
+};
