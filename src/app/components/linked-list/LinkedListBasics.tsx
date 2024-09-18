@@ -7,9 +7,11 @@ import {
 } from '@/app/algorithm/linked-list/singlyLinkedListBasics';
 import { LinkedList } from '@/app/data-structure/LinkedList/LinkedList';
 import { TreeNode } from '@/app/data-structure/Tree/Node';
+import { basicLinkedListColorsPlate } from '@/app/data/mockData';
 import { appendToMapWithNewValue, hasKey } from '@/app/lib/mapUtils';
 import { LinkedListInputProps, PageProps } from '@/app/types/linkedListProps';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
+import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -161,7 +163,9 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
     }
 
     // Indicate loading state
-    setButtonLoading((prev) => !prev);
+    setButtonLoading(true);
+
+    // clearAllTimeouts();
 
     // Insert data at the specified position
     const updatedRoot = await updateTreeToInsertData(
@@ -187,7 +191,7 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
     }));
 
     // Toggle loading state
-    setButtonLoading((prev) => !prev);
+    setButtonLoading(false);
   };
 
   /**
@@ -306,94 +310,102 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
   return (
     <>
       <div>
-        <div className='items-center sm:flex'>
-          <div className='flex items-end'>
-            <div className='me-2 flex flex-col'>
-              <label htmlFor='input-data' className='text-md font-semibold'>
-                Data
-              </label>
-              <input
-                className='w-[50px] border-[1px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-                type='number'
-                min={1}
-                max={999}
-                onChange={insertDataOnChangeMethod}
-                value={inputData.insertData}
-                disabled={btnLoading}
-                id='input-data'
-              />
-            </div>
-
-            <div className='flex flex-col'>
-              <label htmlFor='insert-position' className='text-md font-semibold'>
-                Position
-              </label>
-              <input
-                className='w-[50px] border-[1px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-                type='number'
-                min={1}
-                max={999}
-                onChange={insertAtAnyPositionOnChangeMethod}
-                value={inputData.insertAtAnyPosition}
-                disabled={btnLoading}
-                id='insert-position'
-              />
-            </div>
-            <button
-              onClick={insertDataByPosition}
-              className={`ms-1 p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-theme-btn-secondary text-white'}`}
-            >
-              Insert Node
-            </button>
-          </div>
-          <div className='mt-3 flex items-end sm:ms-6 sm:mt-0'>
-            <div className='flex flex-col'>
-              <label htmlFor='insert-position' className='text-md font-semibold'>
-                Delete by position
-              </label>
-              <div>
+        <div className='flex flex-col justify-between md:flex-row md:items-center'>
+          <div className='items-center sm:flex'>
+            <div className='flex items-end'>
+              <div className='me-2 flex flex-col'>
+                <label htmlFor='input-data' className='text-md font-semibold'>
+                  Data
+                </label>
                 <input
-                  className='w-[50px] border-[1px] border-r-[0px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                  className='w-[50px] border-[1px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
                   type='number'
                   min={1}
                   max={999}
-                  onChange={deleteItemFromAnyPositionOnChangeMethod}
-                  value={inputData.deleteFromAnyPosition}
+                  onChange={insertDataOnChangeMethod}
+                  value={inputData.insertData}
                   disabled={btnLoading}
+                  id='input-data'
                 />
-                <button
-                  onClick={deleteNodeFromGivenList}
-                  className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-red-500 text-white'} `}
-                >
-                  Delete Node
-                </button>
               </div>
-            </div>
-          </div>
 
-          <div className='mt-3 flex items-end sm:ms-6 sm:mt-0'>
-            <div className='flex flex-col'>
-              <label htmlFor='insert-position' className='text-md font-semibold'>
-                Search node
-              </label>
-              <div>
+              <div className='flex flex-col'>
+                <label htmlFor='insert-position' className='text-md font-semibold'>
+                  Position
+                </label>
                 <input
-                  className='w-[50px] border-[1px] border-r-[0px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                  className='w-[50px] border-[1px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
                   type='number'
                   min={1}
                   max={999}
-                  onChange={searchNodeOnChangeMethod}
-                  value={inputData.searchItem}
+                  onChange={insertAtAnyPositionOnChangeMethod}
+                  value={inputData.insertAtAnyPosition}
                   disabled={btnLoading}
+                  id='insert-position'
                 />
-                <button
-                  onClick={searchNodeFromGivenList}
-                  className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-theme-btn-secondary text-white'} `}
-                >
-                  Search Node
-                </button>
+              </div>
+              <button
+                onClick={insertDataByPosition}
+                className={`ms-1 p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-theme-btn-secondary text-white'}`}
+                disabled={btnLoading}
+              >
+                Insert Node
+              </button>
+            </div>
+            <div className='mt-3 flex items-end sm:ms-6 sm:mt-0'>
+              <div className='flex flex-col'>
+                <label htmlFor='insert-position' className='text-md font-semibold'>
+                  Delete by position
+                </label>
+                <div>
+                  <input
+                    className='w-[50px] border-[1px] border-r-[0px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                    type='number'
+                    min={1}
+                    max={999}
+                    onChange={deleteItemFromAnyPositionOnChangeMethod}
+                    value={inputData.deleteFromAnyPosition}
+                    disabled={btnLoading}
+                  />
+                  <button
+                    onClick={deleteNodeFromGivenList}
+                    className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-red-500 text-white'} `}
+                    disabled={btnLoading}
+                  >
+                    Delete Node
+                  </button>
+                </div>
               </div>
             </div>
+
+            <div className='mt-3 flex items-end sm:ms-6 sm:mt-0'>
+              <div className='flex flex-col'>
+                <label htmlFor='insert-position' className='text-md font-semibold'>
+                  Search node
+                </label>
+                <div>
+                  <input
+                    className='w-[50px] border-[1px] border-r-[0px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                    type='number'
+                    min={1}
+                    max={999}
+                    onChange={searchNodeOnChangeMethod}
+                    value={inputData.searchItem}
+                    disabled={btnLoading}
+                  />
+                  <button
+                    onClick={searchNodeFromGivenList}
+                    className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-theme-btn-secondary text-white'} `}
+                    disabled={btnLoading}
+                  >
+                    Search Node
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='mt-3 md:mt-0'>
+            <StatusColorsPlate data={basicLinkedListColorsPlate} />
           </div>
         </div>
 

@@ -226,3 +226,26 @@ export const islandColorsPlate: string[] = [
   'bg-[#7FFF00] text-black', // Chartreuse (bright, black text)
   'bg-[#DDA0DD] text-black', // Plum (light purple, black text)
 ];
+
+/**
+ * Linked list visualization basic, inserted/delete/search color plates
+ *
+ * @type {StatusColorsDataProps[]}
+ */
+export const basicLinkedListColorsPlate: StatusColorsDataProps[] = [
+  {
+    id: 1,
+    title: 'Inserted/Delete Position',
+    bg_color: 'bg-red-600',
+  },
+  {
+    id: 2,
+    title: 'Current Item',
+    bg_color: 'bg-blue-600',
+  },
+  {
+    id: 3,
+    title: 'Target',
+    bg_color: 'bg-green-600',
+  },
+];
