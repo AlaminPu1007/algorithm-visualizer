@@ -3,10 +3,11 @@
 import { uid } from '@/app/lib/uidGenerator';
 import React, { useState } from 'react';
 import LinkedListBasics from './LinkedListBasics';
+import ReverseLinkedList from './ReverseLinkedList';
 
 const LinkedListComponent = () => {
   // define a component local memory
-  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('linked-list-crud');
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('reverse-linked-list');
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
@@ -57,8 +58,11 @@ const LinkedListComponent = () => {
               value={activeRootBtnType}
               className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
             >
-              <option data-umami-event='selection-from-linked-list-CRUD' value='linked-list-crud'>
+              <option data-umami-event='selection-from-linked-list-BASIC' value='linked-list-crud'>
                 Linked list basics
+              </option>
+              <option data-umami-event='selection-from-linked-list-reverse-list' value='reverse-linked-list'>
+                Reverse list
               </option>
             </select>
 
@@ -73,7 +77,11 @@ const LinkedListComponent = () => {
       </div>
 
       <div>
-        {activeRootBtnType === 'linked-list-crud' ? <LinkedListBasics speedRange={speedRange} key={randomKey} /> : null}
+        {activeRootBtnType === 'linked-list-crud' ? (
+          <LinkedListBasics speedRange={speedRange} key={randomKey} />
+        ) : activeRootBtnType === 'reverse-linked-list' ? (
+          <ReverseLinkedList speedRange={speedRange} key={randomKey} />
+        ) : null}
       </div>
     </div>
   );

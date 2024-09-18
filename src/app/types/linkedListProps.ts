@@ -24,4 +24,5 @@ export interface LinkedListInputProps {
  */
 export interface PageProps {
   speedRange: number;
+  updateComponentWithKey?: string;
 }
