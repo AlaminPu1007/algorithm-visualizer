@@ -12,8 +12,8 @@ const PathFind = () => {
   const [buttonType, setButtonType] = useState<string>('unique-path');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [randomKey, setRandomKey] = useState<string>('1');
-  const [speedRange, setSpeedRange] = useState<number>(200);
-  const [gridSize, setGridSize] = useState<{ rowSize: number; colSize: number }>({ rowSize: 4, colSize: 4 });
+  const [speedRange, setSpeedRange] = useState<number>(100);
+  const [gridSize, setGridSize] = useState<{ rowSize: number; colSize: number }>({ rowSize: 8, colSize: 10 });
   const [submittedGridSize, setSubmittedGridSize] = useState<{ rowSize: number; colSize: number }>(gridSize);
 
   // clear times out before component unmount
