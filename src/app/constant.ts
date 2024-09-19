@@ -56,3 +56,7 @@ export const del_col = [0, -1, +1, 0];
 export const directions = ['D', 'L', 'R', 'U']; // Direction string for consistency
 export const UNIQUE_PATH_SVG_ICON_SIZE = `w-[80%] min-[600px]:h-[20px] min-[600px]:w-[20px]`;
 export const UNIQUE_PATH_GRID_SIZE = `h-[50px] w-[50px]`;
+
+// Linked list component necessary constant thing
+export const LINKED_LIST_NODE_START_CX = 20;
+export const LINKED_LIST_NODE_START_CY = 20;

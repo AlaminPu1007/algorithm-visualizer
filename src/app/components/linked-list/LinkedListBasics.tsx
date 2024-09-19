@@ -5,6 +5,7 @@ import {
   updateTreeToInsertData,
   updateTreeToSearchNodeData,
 } from '@/app/algorithm/linked-list/singlyLinkedListBasics';
+import { LINKED_LIST_NODE_START_CX, LINKED_LIST_NODE_START_CY } from '@/app/constant';
 import { LinkedList } from '@/app/data-structure/LinkedList/LinkedList';
 import { TreeNode } from '@/app/data-structure/Tree/Node';
 import { basicLinkedListColorsPlate } from '@/app/data/mockData';
@@ -30,7 +31,7 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
 
   useEffect(() => {
     const rootValue = Math.floor(Math.floor(Math.random() * 99));
-    const newList = new LinkedList([rootValue]);
+    const newList = new LinkedList([rootValue], LINKED_LIST_NODE_START_CX);
     newList.createLinkedList();
 
     if (newList.head) {
@@ -153,8 +154,8 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
     // if any linked is not present, then created it
     if (!root) {
       const newNode = new TreeNode(value);
-      newNode.cx = 20;
-      newNode.cy = 20;
+      newNode.cx = LINKED_LIST_NODE_START_CX;
+      newNode.cy = LINKED_LIST_NODE_START_CY;
       setRoot(newNode);
       setInsertedData((prv) => [...prv, value]);
       // Insert the new value into the map

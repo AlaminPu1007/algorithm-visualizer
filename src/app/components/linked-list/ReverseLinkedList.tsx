@@ -1,10 +1,11 @@
 'use client';
 
-import { getRandomTreeData } from '@/app/constant';
+import { traverseLinkedListRecursively, reverseLinkedListWithPositions } from '@/app/algorithm/linked-list/reverseList';
+import { getRandomTreeData, LINKED_LIST_NODE_START_CX } from '@/app/constant';
 import { LinkedList } from '@/app/data-structure/LinkedList/LinkedList';
 import { TreeNode } from '@/app/data-structure/Tree/Node';
 import { reverseListColorsPlate } from '@/app/data/mockData';
-import { Sleep } from '@/app/lib/sleepMethod';
+import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import { PageProps } from '@/app/types/linkedListProps';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
@@ -12,7 +13,7 @@ import React, { useEffect, useState } from 'react';
 
 const NODE_LENGTH = 11;
 
-const ReverseLinkedList: React.FC<PageProps> = ({ speedRange }) => {
+const ReverseLinkedList: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }) => {
   // define component local state
   const [rootNode, setRootNode] = useState<ITreeNode | null>();
   const [root, setRoot] = useState<ITreeNode | null>();
@@ -20,110 +21,64 @@ const ReverseLinkedList: React.FC<PageProps> = ({ speedRange }) => {
   const [isPerformReverseOperation, setIsPerformReverseOperation] = useState<boolean>(false);
 
   useEffect(() => {
-    const newList = new LinkedList(JSON.parse(JSON.stringify(getRandomTreeData(NODE_LENGTH))));
+    // create a new linked list with default cx value
+    const newList = new LinkedList(getRandomTreeData(NODE_LENGTH), LINKED_LIST_NODE_START_CX);
     newList.createLinkedList();
-
-    if (newList.head) {
-      setRoot(newList.head);
-      setRootNode(JSON.parse(JSON.stringify(newList.head)));
+    const head = newList.head;
+    if (head) {
+      // before initialize new list, if already some macro task are holding, need to removed them first
+      clearAllTimeouts();
+      setRoot(head);
+      setRootNode(head);
       setIsPerformReverseOperation(true);
     }
+
+    return () => {
+      clearAllTimeouts();
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [updateComponentWithKey]);
 
   useEffect(() => {
-    if (root && rootNode && isPerformReverseOperation) {
-      reverseMethod();
+    if (isPerformReverseOperation) {
+      handleReverseLinkedList();
+      setIsPerformReverseOperation(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPerformReverseOperation]);
+  }, [isPerformReverseOperation, updateComponentWithKey]);
 
-  const updateListInReverse = async (node: TreeNode | null, totalNodes: number): Promise<TreeNode | null> => {
-    let prev: TreeNode | null = null;
-    let index = 0; // To manage the position index
-    const nodeSpacing = 25; // Horizontal spacing between nodes
-    const startX = 20; // Starting x position for the first node
-
-    // Reverse the linked list and update positions
-    while (node) {
-      const tempNode = node.next; // Save the next node before reversing
-      // Reverse the next pointer
-      node.next = prev;
-      // Update the node's position (cx) based on its new position in the reversed list
-      node.cx = startX + (totalNodes - index - 1) * nodeSpacing;
-      prev = node;
-      node = tempNode;
-
-      prev.isTarget = true;
-      setReverseNodes(JSON.parse(JSON.stringify(prev)));
-      await Sleep(speedRange);
-      prev.isTarget = false;
-      setReverseNodes(JSON.parse(JSON.stringify(prev)));
-
-      // Increment the index for position swapping
-      index++;
-    }
-
-    // Return the new head of the reversed list
-    return prev;
-  };
-
-  const recursiveApproachToTraverseList = async (node: TreeNode | null) => {
-    if (!node) return;
-
-    // Highlight the current node
-    // node.isCurrent = true;
-    setRoot((prevRoot) => {
-      // Create a deep copy of the root node to trigger re-render
-      const updatedRoot = JSON.parse(JSON.stringify(prevRoot));
-      let currentNode: TreeNode | null = updatedRoot as TreeNode;
-
-      while (currentNode) {
-        if (currentNode.id === node.id) {
-          currentNode.isCurrent = true;
-        } else {
-          currentNode.isCurrent = false;
-        }
-        currentNode = currentNode.next;
-      }
-      return updatedRoot;
-    });
-
-    // Delay to visualize the current node
-    await Sleep(speedRange);
-
-    // Reset the current node highlight
-    node.isCurrent = false;
-    setRoot((prevRoot) => {
-      // Create a deep copy of the root node to trigger re-render
-      const updatedRoot = JSON.parse(JSON.stringify(prevRoot));
-      let currentNode: TreeNode | null = updatedRoot as TreeNode;
-      while (currentNode) {
-        if (currentNode.id === node.id) {
-          currentNode.isCurrent = false;
-        }
-        currentNode = currentNode.next;
-      }
-      return updatedRoot;
-    });
-
-    // Recursively process the next node first
-    await recursiveApproachToTraverseList(node.next);
-  };
-
-  const reverseMethod = async () => {
+  /**
+   * Handles the process of traversing, reversing a linked list, and updating node positions.
+   *
+   * This function performs the following:
+   * 1. Traverses the linked list recursively for visual highlighting.
+   * 2. Reverses the linked list and updates the positions of each node.
+   * 3. Updates the state of the root and reversed list to trigger re-renders.
+   *
+   * @returns {Promise<void>} - A promise that resolves when the reversal and state updates are complete.
+   */
+  const handleReverseLinkedList = async (): Promise<void> => {
     try {
-      recursiveApproachToTraverseList(JSON.parse(JSON.stringify(rootNode)));
+      // Traverse the list recursively for visualizing node traversal
+      traverseLinkedListRecursively(
+        JSON.parse(JSON.stringify(rootNode)), // Deep clone of rootNode to avoid direct mutations
+        setRoot,
+        speedRange
+      );
 
-      // // Reverse the list and update node positions
-      const updatedRoot = await updateListInReverse(JSON.parse(JSON.stringify(rootNode)), NODE_LENGTH);
-      // // Update the root of the reversed list to trigger a re-render
-      setReverseNodes({ ...(updatedRoot as TreeNode) });
-      setRootNode({ ...(updatedRoot as TreeNode) });
+      // Reverse the list and update node positions
+      const reversedRoot = await reverseLinkedListWithPositions(
+        JSON.parse(JSON.stringify(rootNode)), // Deep clone of rootNode for the reversal operation
+        NODE_LENGTH, // The total number of nodes in the linked list
+        setReverseNodes, // Function to update the reversed nodes' state
+        speedRange // Delay duration for visual effects
+      );
 
-      // // update root node
-      setRoot(JSON.parse(JSON.stringify(updatedRoot)));
+      // Update the state of the reversed root node to trigger a re-render
+      setReverseNodes({ ...(reversedRoot as TreeNode) });
     } catch (error) {
+      // Log the error in development mode for debugging purposes
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
         console.error(error);
@@ -155,7 +110,7 @@ const ReverseLinkedList: React.FC<PageProps> = ({ speedRange }) => {
             </div>
           ) : (
             <div className='flex min-h-[200px] w-full items-center justify-center'>
-              <h1 className='text-center text-4xl font-medium'>Invalid Linked List</h1>
+              <h1 className='text-center text-4xl font-medium'>Loading...</h1>
             </div>
           )}
         </div>

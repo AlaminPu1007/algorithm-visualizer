@@ -7,7 +7,7 @@ import ReverseLinkedList from './ReverseLinkedList';
 
 const LinkedListComponent = () => {
   // define a component local memory
-  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('reverse-linked-list');
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('linked-list-crud');
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
@@ -80,7 +80,7 @@ const LinkedListComponent = () => {
         {activeRootBtnType === 'linked-list-crud' ? (
           <LinkedListBasics speedRange={speedRange} key={randomKey} />
         ) : activeRootBtnType === 'reverse-linked-list' ? (
-          <ReverseLinkedList speedRange={speedRange} key={randomKey} />
+          <ReverseLinkedList speedRange={speedRange} updateComponentWithKey={randomKey} />
         ) : null}
       </div>
     </div>

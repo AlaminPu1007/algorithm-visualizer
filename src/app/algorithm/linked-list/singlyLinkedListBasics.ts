@@ -1,3 +1,4 @@
+import { LINKED_LIST_NODE_START_CX, LINKED_LIST_NODE_START_CY } from '@/app/constant';
 import { TreeNode } from '@/app/data-structure/Tree/Node';
 import { deleteKey } from '@/app/lib/mapUtils';
 import { Sleep } from '@/app/lib/sleepMethod';
@@ -28,8 +29,8 @@ export const updateTreeToInsertData = async (
 ): Promise<TreeNode> => {
   let currentRoot: TreeNode | null = root;
   const newNode = new TreeNode(value);
-  newNode.cx = 20;
-  newNode.cy = 20;
+  newNode.cx = LINKED_LIST_NODE_START_CX;
+  newNode.cy = LINKED_LIST_NODE_START_CY;
 
   // If the position is 1, insert the node as the new head
   if (position === 1) {
