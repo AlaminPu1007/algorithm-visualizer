@@ -7,7 +7,7 @@ import {
 import { getRandomTreeData, LINKED_LIST_NODE_START_CX, LINKED_LIST_NODE_START_CY } from '@/app/constant';
 import { LinkedList } from '@/app/data-structure/LinkedList/LinkedList';
 import { TreeNode } from '@/app/data-structure/Tree/Node';
-import { reverseListColorsPlate } from '@/app/data/mockData';
+import { mergeTwoListColorsPlate } from '@/app/data/mockData';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { PageProps } from '@/app/types/linkedListProps';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
@@ -164,14 +164,14 @@ const MergeTwoSortedList: React.FC<PageProps> = ({ speedRange, updateComponentWi
       <div>
         <div className='mt-3 flex items-center justify-between sm:justify-start'>
           <div className='me-3'>
-            <StatusColorsPlate data={reverseListColorsPlate} />
+            <StatusColorsPlate data={mergeTwoListColorsPlate} />
           </div>
           <button
             className={`rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
             onClick={handleMergeTwoListMethod}
             disabled={btnLoading}
           >
-            Revisualize List
+            Revisualize
           </button>
         </div>
         <div className='min-h-[200px] w-full'>

@@ -19,6 +19,7 @@ const ReverseLinkedList: React.FC<PageProps> = ({ speedRange, updateComponentWit
   const [root, setRoot] = useState<ITreeNode | null>();
   const [reverseNodes, setReverseNodes] = useState<ITreeNode | null>();
   const [isPerformReverseOperation, setIsPerformReverseOperation] = useState<boolean>(false);
+  const [btnLoading, setBtnLoading] = useState<boolean>(false);
 
   useEffect(() => {
     // create a new linked list with default cx value
@@ -60,6 +61,9 @@ const ReverseLinkedList: React.FC<PageProps> = ({ speedRange, updateComponentWit
    */
   const handleReverseLinkedList = async (): Promise<void> => {
     try {
+      setBtnLoading(true);
+      clearAllTimeouts();
+
       // Traverse the list recursively for visualizing node traversal
       traverseLinkedListRecursively(
         JSON.parse(JSON.stringify(rootNode)), // Deep clone of rootNode to avoid direct mutations
@@ -83,15 +87,27 @@ const ReverseLinkedList: React.FC<PageProps> = ({ speedRange, updateComponentWit
         // eslint-disable-next-line no-console
         console.error(error);
       }
+    } finally {
+      setBtnLoading(false);
     }
   };
 
   return (
     <>
       <div>
-        <div className='mt-3'>
-          <StatusColorsPlate data={reverseListColorsPlate} />
+        <div className='mt-3 flex items-center justify-between sm:justify-start'>
+          <div className='me-3'>
+            <StatusColorsPlate data={reverseListColorsPlate} />
+          </div>
+          <button
+            className={`rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
+            onClick={handleReverseLinkedList}
+            disabled={btnLoading}
+          >
+            Revisualize
+          </button>
         </div>
+
         <div className='min-h-[200px] w-full'>
           {root ? (
             <div className='mt-8'>
