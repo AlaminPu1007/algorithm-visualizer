@@ -267,3 +267,21 @@ export const reverseListColorsPlate: StatusColorsDataProps[] = [
     bg_color: 'bg-green-600',
   },
 ];
+
+/**
+ * Linked list visualization merge two sort list
+ *
+ * @type {StatusColorsDataProps[]}
+ */
+export const mergeTwoListColorsPlate: StatusColorsDataProps[] = [
+  {
+    id: 2,
+    title: 'Target Node',
+    bg_color: 'bg-red-600',
+  },
+  {
+    id: 3,
+    title: 'Merged successfully',
+    bg_color: 'bg-green-600',
+  },
+];

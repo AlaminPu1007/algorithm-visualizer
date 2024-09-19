@@ -10,7 +10,6 @@ import NoOfIslands from './NoOfIslands';
 const PathFind = () => {
   // define local state
   const [buttonType, setButtonType] = useState<string>('unique-path');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(100);
   const [gridSize, setGridSize] = useState<{ rowSize: number; colSize: number }>({ rowSize: 8, colSize: 10 });

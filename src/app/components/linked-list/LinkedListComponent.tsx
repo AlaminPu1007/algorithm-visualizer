@@ -4,10 +4,11 @@ import { uid } from '@/app/lib/uidGenerator';
 import React, { useState } from 'react';
 import LinkedListBasics from './LinkedListBasics';
 import ReverseLinkedList from './ReverseLinkedList';
+import MergeTwoSortedList from './MergeTwoSortedList';
 
 const LinkedListComponent = () => {
   // define a component local memory
-  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('reverse-linked-list');
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('merge-two-linked-list');
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
@@ -61,6 +62,9 @@ const LinkedListComponent = () => {
               <option data-umami-event='selection-from-linked-list-reverse-list' value='reverse-linked-list'>
                 Reverse list
               </option>
+              <option data-umami-event='selection-from-linked-list-merge-two-sorted-list' value='merge-two-linked-list'>
+                Merge two sort list
+              </option>
               <option data-umami-event='selection-from-linked-list-BASIC' value='linked-list-crud'>
                 Linked list basics
               </option>
@@ -81,6 +85,8 @@ const LinkedListComponent = () => {
           <LinkedListBasics speedRange={speedRange} key={randomKey} />
         ) : activeRootBtnType === 'reverse-linked-list' ? (
           <ReverseLinkedList speedRange={speedRange} updateComponentWithKey={randomKey} />
+        ) : activeRootBtnType === 'merge-two-linked-list' ? (
+          <MergeTwoSortedList speedRange={speedRange} updateComponentWithKey={randomKey} />
         ) : null}
       </div>
     </div>

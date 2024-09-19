@@ -12,7 +12,6 @@ import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 const SortingComponent = () => {
   // define local state
   const [buttonType, setButtonType] = useState<string>('merge-sort');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [randomKey, setRandomKey] = useState<string>('');
   const [speedRange, setSpeedRange] = useState<number>(200);
 

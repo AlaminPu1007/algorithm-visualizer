@@ -25,8 +25,8 @@ export const BFS_DELAY = 600;
  * @param {number} [size=31]
  * @returns {*}
  */
-export const getRandomTreeData = (size: number = 31) =>
-  Array.from({ length: size }).map(() => Math.floor(Math.random() * 500 + 1));
+export const getRandomTreeData = (size: number = 31, range: number = 500) =>
+  Array.from({ length: size }).map(() => Math.floor(Math.random() * range + 1));
 
 // fill the check board according to the grid size
 export const fillGridArray = (size: number, defaultValue: number = 0): ICell[][] => {

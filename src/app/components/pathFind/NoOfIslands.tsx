@@ -13,8 +13,7 @@ import { toast } from 'react-toastify';
 const NoOfIslands: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, gridSize }) => {
   // define component local state
   const [data, setData] = useState<GridProps[][]>([]);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [queue, setQueue] = useState<PathFindingQueueProps[]>([]);
+  const [, setQueue] = useState<PathFindingQueueProps[]>([]);
   const [countIslands, setCountIslands] = useState<number>(0);
 
   useEffect(() => {
