@@ -358,9 +358,9 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
                 <label htmlFor='insert-position' className='text-md font-semibold'>
                   Delete by position
                 </label>
-                <div>
+                <div className='flex'>
                   <input
-                    className='w-[50px] border-[1px] border-r-[0px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                    className='h-[35px] w-[50px] border-[1px] border-r-[0px] border-black text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
                     type='number'
                     min={1}
                     max={999}
@@ -370,7 +370,7 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
                   />
                   <button
                     onClick={deleteNodeFromGivenList}
-                    className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-red-500 text-white'} `}
+                    className={`h-[35px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-red-500 text-white'} `}
                     disabled={btnLoading}
                   >
                     Delete Node
@@ -384,9 +384,9 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
                 <label htmlFor='insert-position' className='text-md font-semibold'>
                   Search node
                 </label>
-                <div>
+                <div className='flex'>
                   <input
-                    className='w-[50px] border-[1px] border-r-[0px] border-black p-[4px] text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                    className='h-[35px] w-[50px] border-[1px] border-r-[0px] border-black text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
                     type='number'
                     min={1}
                     max={999}
@@ -396,7 +396,7 @@ const LinkedListBasics: React.FC<PageProps> = ({ speedRange }) => {
                   />
                   <button
                     onClick={searchNodeFromGivenList}
-                    className={`p-[7px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-theme-btn-secondary text-white'} `}
+                    className={`h-[35px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-theme-btn-secondary text-white'} `}
                     disabled={btnLoading}
                   >
                     Search Node

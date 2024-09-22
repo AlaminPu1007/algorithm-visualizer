@@ -8,7 +8,7 @@ import MergeTwoSortedList from './MergeTwoSortedList';
 
 const LinkedListComponent = () => {
   // define a component local memory
-  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('merge-two-linked-list');
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('reverse-linked-list');
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
@@ -52,27 +52,31 @@ const LinkedListComponent = () => {
               max='1500'
             />
           </div>
-          <div className='max-[455px]:my-3'>
-            <p className='text-md m-0 p-0 font-medium'>Select type</p>
-            <select
-              onChange={handleSelectChange}
-              value={activeRootBtnType}
-              className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
-            >
-              <option data-umami-event='selection-from-linked-list-reverse-list' value='reverse-linked-list'>
-                Reverse list
-              </option>
-              <option data-umami-event='selection-from-linked-list-merge-two-sorted-list' value='merge-two-linked-list'>
-                Merge two sort list
-              </option>
-              <option data-umami-event='selection-from-linked-list-BASIC' value='linked-list-crud'>
-                Linked list basics
-              </option>
-            </select>
-
+          <div className='flex items-end max-[455px]:my-3'>
+            <div>
+              <p className='text-md m-0 p-0 font-medium'>Select type</p>
+              <select
+                onChange={handleSelectChange}
+                value={activeRootBtnType}
+                className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary'
+              >
+                <option data-umami-event='selection-from-linked-list-reverse-list' value='reverse-linked-list'>
+                  Reverse list
+                </option>
+                <option
+                  data-umami-event='selection-from-linked-list-merge-two-sorted-list'
+                  value='merge-two-linked-list'
+                >
+                  Merge two sort list
+                </option>
+                <option data-umami-event='selection-from-linked-list-BASIC' value='linked-list-crud'>
+                  Linked list basics
+                </option>
+              </select>
+            </div>
             <button
               onClick={submitMethod}
-              className={`ms-3 rounded-sm bg-theme-btn-secondary p-[8px] px-4 text-sm text-white transition-all duration-300`}
+              className={`ms-3 rounded-sm bg-theme-btn-secondary p-[7px] px-4 text-sm text-white transition-all duration-300`}
             >
               Submit
             </button>
