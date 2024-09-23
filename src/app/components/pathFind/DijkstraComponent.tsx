@@ -1,7 +1,7 @@
 'use client';
-import { MinHeap } from '@/app/data-structure/minHeap/MinHeap';
+import { findShortestPathUsingDijkstra } from '@/app/algorithm/dijkstraShortestPath';
 import { generateEdges, nodesData } from '@/app/data/shortestPathData';
-import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
+import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import { IGraphEdge, IGraphNode } from '@/app/types/shortestPathProps';
 import React, { useEffect, useState } from 'react';
 
@@ -12,121 +12,52 @@ interface PageProps {
 }
 
 const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) => {
+  // define component memory
   const [nodes, setNodes] = useState<IGraphNode[]>([]);
   const [edges, setEdges] = useState<IGraphEdge[]>([]);
   const [shortestPathEdges, setShortestPathEdges] = useState<IGraphEdge[]>([]);
   const [isReadyToPerformOperation, setIsReadyToPerformOperation] = useState<boolean>(false);
 
+  // Trigger for component mount as well as dependency changes
   useEffect(() => {
     clearAllTimeouts();
     setNodes(JSON.parse(JSON.stringify(nodesData)));
     setEdges(JSON.parse(JSON.stringify(generateEdges())));
     setShortestPathEdges([]);
     setIsReadyToPerformOperation(true);
+
+    // clear all timeout after component un-mount
+    return () => {
+      clearAllTimeouts();
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [useRandomKey]);
 
+  // Trigger for component mount as well as dependency changes
   useEffect(() => {
     if (isReadyToPerformOperation) {
-      handleDijkstra({ source: 0, destination: 4 });
+      handleDijkstra({ source: 0, destination: 4, nodeSizes: 10 });
       setIsReadyToPerformOperation(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isReadyToPerformOperation, useRandomKey, edges]);
 
   /**
-   * Executes Dijkstra's algorithm to find the shortest path in a graph.
-   * The function visualizes the algorithm's steps, updating node states
-   * and handling asynchronous animations during processing.
+   * Handles the execution of Dijkstra's algorithm to find the shortest path between a source and destination node.
+   * This function sets default values for the source, destination, and node sizes, and invokes the shortest path finding logic.
+   * It also handles any errors that might occur during execution and logs them in development mode.
    *
-   * @async
-   * @function handleDijkstra
-   * @returns {Promise<void>} A promise that resolves when the algorithm completes.
+   * @param {Object} options - Options for configuring the Dijkstra algorithm.
+   * @param {number} [options.source=0] - The ID of the source node (default is 0).
+   * @param {number} [options.destination=4] - The ID of the destination node (default is 4).
+   * @param {number} [options.nodeSizes=10] - The total number of nodes in the graph (default is 10).
    *
-   * @throws {Error} If any errors occur during the execution, they are logged in development mode.
-   *
-   * @example
-   * // To use this function, ensure that nodes and edges are defined in the context:
-   * await handleDijkstra();
+   * @returns {Promise<void>} A promise that resolves when Dijkstra's algorithm completes.
    */
-  const handleDijkstra = async ({ source = 0, destination = 4 }) => {
+  const handleDijkstra = async ({ source = 0, destination = 4, nodeSizes = 10 }): Promise<void> => {
     try {
-      const pq = new MinHeap();
-      const distances = Array(10).fill(Infinity);
-      const predecessors = Array(10).fill(null); // To track the shortest path
-
-      // Put source node into queue
-      pq.insert(source, 0);
-      distances[source] = 0;
-
-      // Visualize the current node being processed
-      setNodes((prev) => prev.map((node) => (node.id === source ? { ...node, isCurrentNode: true } : node)));
-      // Animation delay
-      await Sleep(speedRange);
-      // Reset isCurrentNode after processing
-      setNodes((prev) => prev.map((node) => (node.id === source ? { ...node, isCurrentNode: false } : node)));
-
-      while (!pq.isEmpty()) {
-        const { node: currentNodeId } = pq.extractMin()!;
-
-        // If we reached the destination, break the loop
-        if (currentNodeId === destination) {
-          break;
-        }
-
-        // Iterate through neighbors (edges connected to the current node)
-        const currentEdges = edges.filter((edge) => edge.source === currentNodeId || edge.target === currentNodeId);
-
-        // iterate over the edges using a for loop to handle async properly
-        for (const edge of currentEdges) {
-          const targetNodeId = edge.source === currentNodeId ? edge.target : edge.source;
-          const newDistance = distances[currentNodeId] + edge.weight;
-
-          // If a shorter path to the target node is found
-          if (newDistance < distances[targetNodeId]) {
-            // Visualize the current node update
-            setNodes((prev) => {
-              return prev.map((node) => (node.id === targetNodeId ? { ...node, isCurrentNode: true } : node));
-            });
-
-            // Wait for some time to simulate animation/visualization delay
-            await Sleep(speedRange);
-
-            // Optionally reset the node highlight
-            setNodes((prev) => {
-              return prev.map((node) => (node.id === targetNodeId ? { ...node, isCurrentNode: false } : node));
-            });
-
-            // Update the distances and insert the new node into the priority queue
-            distances[targetNodeId] = newDistance;
-            pq.insert(targetNodeId, newDistance);
-            // Track the predecessor of the target node
-            // or keep track of parent node
-            predecessors[targetNodeId] = currentNodeId;
-          }
-        }
-      }
-
-      // Backtrack to mark the shortest path and edges
-      let currentNode = destination;
-      while (currentNode !== null && currentNode !== source) {
-        const prevNode = predecessors[currentNode];
-        if (prevNode !== null) {
-          // Find the edge that connects currentNode and prevNode
-          const edge = edges.find(
-            (e) =>
-              (e.source === currentNode && e.target === prevNode) || (e.source === prevNode && e.target === currentNode)
-          );
-          if (edge) {
-            setShortestPathEdges((prev) => [...prev, edge]); // Track the edge
-          }
-        }
-        setNodes((prev) => prev.map((node) => (node.id === currentNode ? { ...node, isShortestPath: true } : node)));
-        await Sleep(500);
-        currentNode = predecessors[currentNode];
-      }
-
-      setNodes((prev) => prev.map((node) => (node.id === source ? { ...node, isShortestPath: true } : node)));
+      findShortestPathUsingDijkstra(source, destination, nodeSizes, speedRange, setNodes, edges, setShortestPathEdges);
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
@@ -138,8 +69,8 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
   return (
     <div className='container'>
       <div>
-        {edges?.length ? (
-          <svg viewBox='0 0 500 120' xmlns='http://www.w3.org/2000/svg'>
+        {edges?.length && nodes?.length ? (
+          <svg viewBox='10 0 400 120' xmlns='http://www.w3.org/2000/svg'>
             {/* Render Edges */}
             {edges.map((edge, index) => {
               const sourceNode = nodes.find((n) => n.id === edge.source);
@@ -167,7 +98,7 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
                   {/* Draw the weight */}
                   <text
                     x={(sourceNode.x + targetNode.x) / 2 + 3}
-                    y={(sourceNode.y + targetNode.y) / 2 - 0}
+                    y={(sourceNode.y + targetNode.y) / 2}
                     fill='red'
                     fontSize='6'
                   >
