@@ -6,10 +6,11 @@ import UniquePath from './UniquePath';
 import { gridRowColSize } from '@/app/lib/helpers';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import NoOfIslands from './NoOfIslands';
+import DijkstraComponent from './DijkstraComponent';
 
 const PathFind = () => {
   // define local state
-  const [buttonType, setButtonType] = useState<string>('unique-path');
+  const [buttonType, setButtonType] = useState<string>('dijkstra');
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(100);
   const [gridSize, setGridSize] = useState<{ rowSize: number; colSize: number }>({ rowSize: 8, colSize: 10 });
@@ -81,40 +82,42 @@ const PathFind = () => {
             />
           </div>
           <div className='items-end min-[410px]:flex'>
-            <div className='flex'>
-              <div className='max-[410px]:w-[45%]'>
-                <p className='text-md m-0 p-0 font-medium'>Row</p>
-                <select
-                  onChange={handleSelectChangeForRow}
-                  value={gridSize.rowSize}
-                  className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-full'
-                >
-                  {[...gridRowColSize(9)].map((item) => {
-                    return (
-                      <option key={item.id} value={item.value}>
-                        {item.value}
-                      </option>
-                    );
-                  })}
-                </select>
+            {buttonType !== 'dijkstra' ? (
+              <div className='flex'>
+                <div className='max-[410px]:w-[45%]'>
+                  <p className='text-md m-0 p-0 font-medium'>Row</p>
+                  <select
+                    onChange={handleSelectChangeForRow}
+                    value={gridSize.rowSize}
+                    className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-full'
+                  >
+                    {[...gridRowColSize(9)].map((item) => {
+                      return (
+                        <option key={item.id} value={item.value}>
+                          {item.value}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+                <div className='mx-3 max-[410px]:w-[45%]'>
+                  <p className='text-md m-0 p-0 font-medium'>Col</p>
+                  <select
+                    onChange={handleSelectChangeForCol}
+                    value={gridSize.colSize}
+                    className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-full'
+                  >
+                    {[...gridRowColSize(21)].map((item) => {
+                      return (
+                        <option key={item.id} value={item.value}>
+                          {item.value}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
               </div>
-              <div className='mx-3 max-[410px]:w-[45%]'>
-                <p className='text-md m-0 p-0 font-medium'>Col</p>
-                <select
-                  onChange={handleSelectChangeForCol}
-                  value={gridSize.colSize}
-                  className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-full'
-                >
-                  {[...gridRowColSize(21)].map((item) => {
-                    return (
-                      <option key={item.id} value={item.value}>
-                        {item.value}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-            </div>
+            ) : null}
             <div className='max-[410px]:mt-3'>
               <p className='text-md m-0 p-0 font-medium'>Select type</p>
               <select
@@ -127,6 +130,9 @@ const PathFind = () => {
                 </option>
                 <option data-umami-event='selection-from-path-finding-no-of-islands' value='no-of-island'>
                   No of island
+                </option>
+                <option data-umami-event='selection-from-path-finding-Dijkstra' value='dijkstra'>
+                  Disjkstra
                 </option>
               </select>
 
@@ -149,6 +155,8 @@ const PathFind = () => {
         <div className='container'>
           <NoOfIslands useRandomKey={randomKey} speedRange={speedRange} gridSize={submittedGridSize} />
         </div>
+      ) : buttonType === 'dijkstra' ? (
+        <DijkstraComponent useRandomKey={randomKey} speedRange={speedRange} />
       ) : null}
     </div>
   );
