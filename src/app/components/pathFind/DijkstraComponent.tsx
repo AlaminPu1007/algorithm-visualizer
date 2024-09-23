@@ -1,8 +1,10 @@
 'use client';
 import { findShortestPathUsingDijkstra } from '@/app/algorithm/dijkstraShortestPath';
+import { dijkstraColorsPlate } from '@/app/data/mockData';
 import { generateEdges, nodesData } from '@/app/data/shortestPathData';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import { IGraphEdge, IGraphNode } from '@/app/types/shortestPathProps';
+import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { useEffect, useState } from 'react';
 
 // define component Props
@@ -21,7 +23,8 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
   // Trigger for component mount as well as dependency changes
   useEffect(() => {
     clearAllTimeouts();
-    setNodes(JSON.parse(JSON.stringify(nodesData)));
+    const tempNodes = JSON.parse(JSON.stringify(nodesData));
+    setNodes(tempNodes);
     setEdges(JSON.parse(JSON.stringify(generateEdges())));
     setShortestPathEdges([]);
     setIsReadyToPerformOperation(true);
@@ -68,6 +71,9 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
 
   return (
     <div className='container'>
+      <div className='pb-1 pt-3'>
+        <StatusColorsPlate data={dijkstraColorsPlate} />
+      </div>
       <div>
         {edges?.length && nodes?.length ? (
           <svg viewBox='10 0 400 120' xmlns='http://www.w3.org/2000/svg'>
@@ -97,8 +103,8 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
                   />
                   {/* Draw the weight */}
                   <text
-                    x={(sourceNode.x + targetNode.x) / 2 + 3}
-                    y={(sourceNode.y + targetNode.y) / 2}
+                    x={edge?.weightPosition?.x !== -1 ? 0 : (sourceNode.x + targetNode.x) / 2 + 3}
+                    y={edge?.weightPosition?.y !== -1 ? edge?.weightPosition?.y : (sourceNode.y + targetNode.y) / 2}
                     fill='red'
                     fontSize='6'
                   >

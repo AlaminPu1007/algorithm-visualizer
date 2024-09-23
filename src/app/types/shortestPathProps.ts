@@ -10,6 +10,7 @@ export interface IGraphEdge {
   source: number;
   target: number;
   weight: number;
+  weightPosition: { x: number; y: number };
 }
 
 /**

@@ -128,19 +128,19 @@ export const nodesData: IGraphNode[] = [
  */
 export const generateEdges = (): IGraphEdge[] => {
   return [
-    { source: 0, target: 1, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 0, target: 7, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 1, target: 2, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 1, target: 7, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 2, target: 3, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 2, target: 8, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 2, target: 5, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 3, target: 4, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 3, target: 5, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 4, target: 5, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 5, target: 6, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 6, target: 7, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 6, target: 8, weight: Math.floor(Math.random() * 15 + 1) },
-    { source: 7, target: 8, weight: Math.floor(Math.random() * 15 + 1) },
+    { source: 0, target: 1, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: 45 } },
+    { source: 0, target: 7, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: -1 } },
+    { source: 1, target: 2, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: 18 } },
+    { source: 1, target: 7, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: -1 } },
+    { source: 2, target: 3, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: 18 } },
+    { source: 2, target: 8, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: 45 } },
+    { source: 2, target: 5, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: -1 } },
+    { source: 3, target: 4, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: -1 } },
+    { source: 3, target: 5, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: -1 } },
+    { source: 4, target: 5, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: 85 } },
+    { source: 5, target: 6, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: 108 } },
+    { source: 6, target: 7, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: 108 } },
+    { source: 6, target: 8, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: -1 } },
+    { source: 7, target: 8, weight: Math.floor(Math.random() * 15 + 1), weightPosition: { x: -1, y: 75 } },
   ];
 };

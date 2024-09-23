@@ -285,3 +285,21 @@ export const mergeTwoListColorsPlate: StatusColorsDataProps[] = [
     bg_color: 'bg-green-600',
   },
 ];
+
+/**
+ * Description placeholder
+ *
+ * @type {StatusColorsDataProps[]}
+ */
+export const dijkstraColorsPlate: StatusColorsDataProps[] = [
+  {
+    id: 1,
+    title: 'Valid Path',
+    bg_color: 'bg-green-600',
+  },
+  {
+    id: 2,
+    title: 'Current Node',
+    bg_color: 'bg-blue-600',
+  },
+];
