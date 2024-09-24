@@ -5,7 +5,7 @@ import { gridStyle, isPutQueen, updateGrid } from '@/app/lib/nQueens';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { ChessBoardGridInlineStyleProps } from '@/app/types/commonProps';
 import { CurrentItemProps, ICell } from '@/app/types/NQueensProps';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const SIZE: number = GRID_SIZE;
 
@@ -18,6 +18,13 @@ const ChessBoard: React.FC = () => {
   const [selectInput, setSelectInput] = useState<string>(String(SIZE));
   const [highlight, setHighlight] = useState<{ [key: string]: boolean }>({});
   const [speedRange, setSpeedRange] = useState<number>(200);
+
+  useEffect(() => {
+    solveNQueens();
+
+    return () => clearAllTimeouts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /**
    * Root Method to perform n-queen visualization
