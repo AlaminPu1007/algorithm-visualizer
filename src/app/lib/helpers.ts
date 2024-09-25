@@ -46,3 +46,13 @@ export const gridRowColSize = (maxSize: number = 12) => {
     };
   });
 };
+
+/**
+ * get a random weight for graph
+ *
+ * @returns {number}
+ */
+export const generateRandomWeight = (maxNum: number = 15): number => {
+  const timestamp = new Date().getTime(); // Get current time in milliseconds
+  return Math.floor((((timestamp % 1000) + Math.random() * maxNum + 1) % maxNum) + 1); // Use time to influence randomness
+};

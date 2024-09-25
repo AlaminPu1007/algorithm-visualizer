@@ -1,7 +1,8 @@
+/* eslint-disable indent */
 'use client';
 import { findShortestPathUsingDijkstra } from '@/app/algorithm/dijkstraShortestPath';
 import { dijkstraColorsPlate } from '@/app/data/mockData';
-import { generateEdges, nodesData } from '@/app/data/shortestPathData';
+import { generateEdges, generateEdgesForASearch, graphData } from '@/app/data/shortestPathData';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import { IGraphEdge, IGraphNode } from '@/app/types/shortestPathProps';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
@@ -12,6 +13,8 @@ interface PageProps {
   useRandomKey: string;
   speedRange: number;
 }
+// initialized a list of possible ending or destination node for graph-2
+const graphTwoDestinationNodes: number[] = [16, 11, 4, 5, 15];
 
 const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) => {
   // define component memory
@@ -19,13 +22,47 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
   const [edges, setEdges] = useState<IGraphEdge[]>([]);
   const [shortestPathEdges, setShortestPathEdges] = useState<IGraphEdge[]>([]);
   const [isReadyToPerformOperation, setIsReadyToPerformOperation] = useState<boolean>(false);
+  const [initialNodes, setInitialNodes] = useState<{ source: number; destination: number; nodeSizes: number }>({
+    source: -1,
+    destination: -1,
+    nodeSizes: -1,
+  });
 
   // Trigger for component mount as well as dependency changes
   useEffect(() => {
     clearAllTimeouts();
-    const tempNodes = JSON.parse(JSON.stringify(nodesData));
-    setNodes(tempNodes);
-    setEdges(JSON.parse(JSON.stringify(generateEdges())));
+
+    const graphRandomPosition = Math.floor(Math.random() * 2) % 2;
+    const getGraph = JSON.parse(JSON.stringify(graphData[graphRandomPosition]));
+    const tempNodes = JSON.parse(JSON.stringify(getGraph.nodes));
+
+    const sourceNode = getGraph.source;
+    const destinationNode =
+      graphRandomPosition === 1
+        ? graphTwoDestinationNodes[
+            Math.floor(Math.random() * graphTwoDestinationNodes?.length + 1) % graphTwoDestinationNodes?.length
+          ]
+        : getGraph.destination;
+
+    // modify graph for source and destination
+    const modifyGraph = tempNodes.map((i: IGraphNode) => {
+      if (i.id === sourceNode) {
+        return {
+          ...i,
+          isSource: true,
+        };
+      } else if (i.id === destinationNode) {
+        return {
+          ...i,
+          isDestination: true,
+        };
+      } else return i;
+    });
+
+    // get source & destination node
+    setInitialNodes({ source: sourceNode, destination: destinationNode, nodeSizes: getGraph.nodeSizes });
+    setNodes(modifyGraph);
+    setEdges(JSON.parse(JSON.stringify(graphRandomPosition === 0 ? generateEdges() : generateEdgesForASearch())));
     setShortestPathEdges([]);
     setIsReadyToPerformOperation(true);
 
@@ -40,11 +77,12 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
   // Trigger for component mount as well as dependency changes
   useEffect(() => {
     if (isReadyToPerformOperation) {
-      handleDijkstra({ source: 0, destination: 4, nodeSizes: 10 });
+      const { source, destination, nodeSizes } = initialNodes;
+      handleDijkstra({ source, destination, nodeSizes });
       setIsReadyToPerformOperation(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isReadyToPerformOperation, useRandomKey, edges]);
+  }, [isReadyToPerformOperation, useRandomKey, edges, initialNodes]);
 
   /**
    * Handles the execution of Dijkstra's algorithm to find the shortest path between a source and destination node.
@@ -76,7 +114,7 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
       </div>
       <div>
         {edges?.length && nodes?.length ? (
-          <svg viewBox='10 0 400 120' xmlns='http://www.w3.org/2000/svg'>
+          <svg viewBox='10 10 400 150' xmlns='http://www.w3.org/2000/svg'>
             {/* Render Edges */}
             {edges.map((edge, index) => {
               const sourceNode = nodes.find((n) => n.id === edge.source);
@@ -122,8 +160,20 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
                   cx={node.x}
                   cy={node.y}
                   r='8'
-                  fill={node.isShortestPath ? 'green' : node.isCurrentNode ? 'blue' : 'white'}
-                  stroke={node.isShortestPath || node.isCurrentNode ? 'white' : 'black'}
+                  fill={
+                    node.isSource
+                      ? '#fb7c06'
+                      : node.isDestination
+                        ? '#9458ff'
+                        : node.isShortestPath
+                          ? 'green'
+                          : node.isCurrentNode
+                            ? 'blue'
+                            : 'white'
+                  }
+                  stroke={
+                    node.isShortestPath || node.isCurrentNode || node.isDestination || node.isSource ? 'white' : 'black'
+                  }
                   strokeWidth={'0.5'}
                 />
                 {/* Node Label */}
@@ -133,7 +183,9 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
                   textAnchor='middle'
                   dy='3'
                   fontSize='7'
-                  fill={node.isCurrentNode || node.isShortestPath ? 'white' : 'black'}
+                  fill={
+                    node.isDestination || node.isSource || node.isCurrentNode || node.isShortestPath ? 'white' : 'black'
+                  }
                 >
                   {node.id}
                 </text>

@@ -302,4 +302,14 @@ export const dijkstraColorsPlate: StatusColorsDataProps[] = [
     title: 'Current Node',
     bg_color: 'bg-blue-600',
   },
+  {
+    id: 3,
+    title: 'Source Node',
+    bg_color: 'bg-[#fb7c06]',
+  },
+  {
+    id: 4,
+    title: 'Destination Node',
+    bg_color: 'bg-[#9458ff]',
+  },
 ];

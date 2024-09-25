@@ -97,9 +97,13 @@ export const findShortestPathUsingDijkstra = async (
         setShortestPathEdges((prev) => [...prev, edge]); // Track the edge
       }
     }
-    setNodes((prev) => prev.map((node) => (node.id === currentNode ? { ...node, isShortestPath: true } : node)));
+    setNodes((prev) =>
+      prev.map((node) => (node.id === currentNode ? { ...node, isShortestPath: true, isDestination: false } : node))
+    );
     await Sleep(speedRange);
     currentNode = predecessors[currentNode];
   }
-  setNodes((prev) => prev.map((node) => (node.id === source ? { ...node, isShortestPath: true } : node)));
+  setNodes((prev) =>
+    prev.map((node) => (node.id === source ? { ...node, isShortestPath: true, isSource: false } : node))
+  );
 };
