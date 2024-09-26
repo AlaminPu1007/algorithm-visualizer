@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.0 (Sep 26, 2024)
+
+- Home component hero section is integrated.
+
 ## 1.1.0 (Sep 26, 2024)
 
 ### New Features:
