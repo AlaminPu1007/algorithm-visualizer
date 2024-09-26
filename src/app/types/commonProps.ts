@@ -29,3 +29,31 @@ export interface ChessBoardGridInlineStyleProps {
   width: string;
   height: string;
 }
+
+/**
+ * Represents a single list item with an ID and a name.
+ *
+ * @interface ListProps
+ * @property {string} id - Unique identifier for the list item.
+ * @property {string} name - Name of the list item.
+ */
+export interface ListProps {
+  id: string;
+  name: string;
+}
+
+/**
+ * Represents a project schema containing details about the project, including its ID, name, associated lists, and navigation path.
+ *
+ * @interface ProjectSchema
+ * @property {string} id - Unique identifier for the project.
+ * @property {string} name - Name of the project.
+ * @property {ListProps[]} lists - Array of lists associated with the project.
+ * @property {string} navigate - Navigation path or route related to the project.
+ */
+export interface ProjectSchema {
+  id: string;
+  name: string;
+  lists: ListProps[];
+  navigate: string;
+}
