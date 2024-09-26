@@ -27,6 +27,7 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
     destination: -1,
     nodeSizes: -1,
   });
+  const [btnLoading, setBtnLoading] = useState<boolean>(false);
 
   // Trigger for component mount as well as dependency changes
   useEffect(() => {
@@ -98,20 +99,65 @@ const DijkstraComponent: React.FC<PageProps> = ({ speedRange, useRandomKey }) =>
    */
   const handleDijkstra = async ({ source = 0, destination = 4, nodeSizes = 10 }): Promise<void> => {
     try {
-      findShortestPathUsingDijkstra(source, destination, nodeSizes, speedRange, setNodes, edges, setShortestPathEdges);
+      setBtnLoading(true);
+      await findShortestPathUsingDijkstra(
+        source,
+        destination,
+        nodeSizes,
+        speedRange,
+        setNodes,
+        edges,
+        setShortestPathEdges
+      );
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
         // eslint-disable-next-line no-console
         console.error(error);
       }
+    } finally {
+      setBtnLoading(false);
     }
+  };
+
+  const handleReVisualized = async () => {
+    const { source, destination, nodeSizes } = initialNodes;
+    // initialized all at initial state
+    setNodes((prv) => {
+      return prv.map((i) => {
+        return {
+          ...i,
+          isVisited: false,
+          isCurrentNode: false,
+          isShortestPath: false,
+          isInvalidPath: false,
+          isDestination: false,
+          isSource: false,
+        };
+      });
+    });
+    setShortestPathEdges([]);
+    await handleDijkstra({ source, destination, nodeSizes });
   };
 
   return (
     <div className='container'>
-      <div className='pb-1 pt-3'>
+      {/* <div className='pb-1 pt-3'>
         <StatusColorsPlate data={dijkstraColorsPlate} />
+      </div> */}
+
+      <div className='mt-3 flex items-center justify-between pb-1 sm:justify-start'>
+        <div className='me-3'>
+          <StatusColorsPlate data={dijkstraColorsPlate} />
+        </div>
+        <button
+          className={`rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
+          onClick={handleReVisualized}
+          disabled={btnLoading}
+        >
+          Revisualize
+        </button>
       </div>
+
       <div>
         {edges?.length && nodes?.length ? (
           <svg viewBox='10 10 400 150' xmlns='http://www.w3.org/2000/svg'>
