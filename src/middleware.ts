@@ -8,12 +8,8 @@ import type { NextRequest } from 'next/server';
  * @param {NextRequest} request
  * @returns {*}
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function middleware(request: NextRequest) {
-  // prevent to visit home component
-  if (process.env.NODE_ENV !== 'development' && request.nextUrl.pathname === '/') {
-    return NextResponse.redirect(new URL('/tree', request.url));
-  }
-
   // redirect with other urls
   return NextResponse.next();
 }
