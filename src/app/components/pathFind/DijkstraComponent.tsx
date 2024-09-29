@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 'use client';
-import { findShortestPathUsingDijkstra } from '@/app/algorithm/dijkstraShortestPath';
+import { findShortestPathUsingDijkstra } from '@/app/algorithm/shortest-path/dijkstraShortestPath';
 import { dijkstraColorsPlate } from '@/app/data/mockData';
 import { generateEdges, generateEdgesForASearch, graphData } from '@/app/data/shortestPathData';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';

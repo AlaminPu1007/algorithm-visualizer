@@ -1,7 +1,7 @@
 import React from 'react';
-import { MinHeap } from '../data-structure/minHeap/MinHeap';
-import { Sleep } from '../lib/sleepMethod';
-import { IGraphEdge, IGraphNode } from '../types/shortestPathProps';
+import { MinHeap } from '../../data-structure/minHeap/MinHeap';
+import { Sleep } from '../../lib/sleepMethod';
+import { IGraphEdge, IGraphNode } from '../../types/shortestPathProps';
 
 /**
  * Finds the shortest path between a source and a destination node using Dijkstra's algorithm.
@@ -56,7 +56,7 @@ export const findShortestPathUsingDijkstra = async (
     // iterate over the edges using a for loop to handle async properly
     for (const edge of currentEdges) {
       const targetNodeId = edge.source === currentNodeId ? edge.target : edge.source;
-      const newDistance = distances[currentNodeId] + edge.weight;
+      const newDistance = Math.round(distances[currentNodeId] + edge.weight);
 
       // If a shorter path to the target node is found
       if (newDistance < distances[targetNodeId]) {

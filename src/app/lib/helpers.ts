@@ -52,7 +52,7 @@ export const gridRowColSize = (maxSize: number = 12) => {
  *
  * @returns {number}
  */
-export const generateRandomWeight = (maxNum: number = 15): number => {
+export const generateRandomWeight = (maxNum: number = 2): number => {
   const timestamp = new Date().getTime(); // Get current time in milliseconds
   return Math.floor((((timestamp % 1000) + Math.random() * maxNum + 1) % maxNum) + 1); // Use time to influence randomness
 };
