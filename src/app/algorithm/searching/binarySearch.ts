@@ -1,6 +1,6 @@
+import { Sleep } from '@/app/lib/sleepMethod';
+import { ITreeNode } from '@/app/types/TreeTypeProps';
 import React from 'react';
-import { Sleep } from '../lib/sleepMethod';
-import { ITreeNode } from '../types/TreeTypeProps';
 
 /**
  * Performs a binary search on a binary search tree (BST) and visually updates the state at each step of the search.

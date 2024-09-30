@@ -1,9 +1,11 @@
 'use client';
 
 import { LinearSearchToFindTheTarget } from '@/app/algorithm/searching/linearSearch';
+import { LinearSearchColorsProps } from '@/app/data/mockData';
 import { getRandomObject } from '@/app/lib/helpers';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { LinearSearchDataProps } from '@/app/types/commonProps';
+import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { useEffect, useState } from 'react';
 
 // define component Page Props
@@ -14,7 +16,6 @@ interface PageProps {
 
 const LinearSearchComponent: React.FC<PageProps> = ({ speedRange, ueeRandomKey }) => {
   const [data, setData] = useState<LinearSearchDataProps[]>([]);
-  const [btnLoading, setButtonLoading] = useState<boolean>(false);
   const [searchItem, setSearchItem] = useState<number>(0);
   const [steps, setSteps] = useState<number>(0);
   const [isReadyToPerformOperation, setIsReadyToPerformOperation] = useState<boolean>(false);
@@ -86,9 +87,6 @@ const LinearSearchComponent: React.FC<PageProps> = ({ speedRange, ueeRandomKey }
    */
   const handleLinearSearch = async (): Promise<void> => {
     try {
-      // Set the button to loading state to disable further interactions
-      setButtonLoading(true);
-
       // Reset the array to its initial state and get the reset data
       const resetData = await resetAllAtInitialState();
 
@@ -111,36 +109,36 @@ const LinearSearchComponent: React.FC<PageProps> = ({ speedRange, ueeRandomKey }
         // eslint-disable-next-line no-console
         console.error(error);
       }
-    } finally {
-      // Reset the button loading state after search completion or error
-      setButtonLoading(false);
     }
   };
 
   return (
     <>
       <div className='mt-2 md:absolute md:top-0 md:mt-0'>
-        <div className='flex flex-col'>
-          <label htmlFor='insert-position' className='text-md font-semibold'>
-            Find Data
-          </label>
-          <div className='flex'>
-            <input
-              className='h-[35px] w-[50px] border-[1px] border-r-[0px] border-black text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-              type='number'
-              min={1}
-              max={999}
-              onChange={handleTextInputChange}
-              value={searchItem}
-              disabled={btnLoading}
-            />
-            <button
-              onClick={handleLinearSearch}
-              className={`h-[35px] px-2 text-sm transition-all duration-300 ${btnLoading ? 'bg-gray-500 text-gray-300' : 'bg-theme-btn-secondary text-white'} `}
-              disabled={btnLoading}
-            >
-              Search
-            </button>
+        <div className='flex flex-row-reverse items-center'>
+          <div className='flex flex-col'>
+            <label htmlFor='insert-position' className='text-md font-semibold'>
+              Find Data
+            </label>
+            <div className='flex'>
+              <input
+                className='h-[35px] w-[50px] border-[1px] border-r-[0px] border-black text-center outline-none transition-all duration-300 [appearance:textfield] hover:border-theme-btn-secondary focus:border-theme-btn-secondary [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+                type='number'
+                min={1}
+                max={999}
+                onChange={handleTextInputChange}
+                value={searchItem}
+              />
+              <button
+                onClick={handleLinearSearch}
+                className={`h-[35px] bg-theme-btn-secondary px-2 text-sm text-white transition-all duration-300`}
+              >
+                Search
+              </button>
+            </div>
+          </div>
+          <div className='me-3 mt-6'>
+            <StatusColorsPlate data={LinearSearchColorsProps} />
           </div>
         </div>
       </div>

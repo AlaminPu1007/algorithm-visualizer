@@ -313,3 +313,21 @@ export const dijkstraColorsPlate: StatusColorsDataProps[] = [
     bg_color: 'bg-[#9458ff]',
   },
 ];
+
+/**
+ * Linear search colors plate mock data
+ *
+ * @type {StatusColorsDataProps[]}
+ */
+export const LinearSearchColorsProps: StatusColorsDataProps[] = [
+  {
+    id: 1,
+    title: 'Current Item',
+    bg_color: 'bg-blue-600',
+  },
+  {
+    id: 2,
+    title: 'Target',
+    bg_color: 'bg-green-600',
+  },
+];

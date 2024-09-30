@@ -6,9 +6,9 @@ import { getRandomTreeData, NODE_POSITION } from '@/app/constant';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
 import { Tree } from '@/app/data-structure/Tree/TreeNode';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
-import { performBST } from '@/app/algorithm/binarySearch';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import { bstSearchColorsData } from '@/app/data/mockData';
+import { performBST } from '@/app/algorithm/searching/binarySearch';
 
 // define component Page Props
 interface PageProps {
