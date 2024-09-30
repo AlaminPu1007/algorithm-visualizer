@@ -137,11 +137,11 @@ const HeaderComponent = () => {
               </Link>
             </li>
 
-            <li className='mt-2 flex lg:mx-2 lg:mt-0'>
+            <li className='mt-2 flex lg:mt-0 lg:ps-2'>
               <Link
                 href='https://github.com/AlaminPu1007/algorithm-visualizer'
                 target='_blank'
-                className='group me-4 cursor-pointer sm:me-5'
+                className='group me-4 cursor-pointer sm:me-auto'
                 data-testid='github-link-item'
                 data-umami-event={`nav-github-repo`}
                 onClick={onCloseDrawerNav}
@@ -152,7 +152,7 @@ const HeaderComponent = () => {
                   viewBox='0 0 24 24'
                   fill='none'
                   xmlns='http://www.w3.org/2000/svg'
-                  className='h-[95%] w-[95%]'
+                  className='h-[100%] w-[100%] lg:h-[93%] lg:w-[93%]'
                 >
                   <path
                     fillRule='evenodd'
