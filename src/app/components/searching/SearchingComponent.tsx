@@ -12,7 +12,7 @@ import LinearSearchComponent from './LinearSearchComponent';
 
 const SearchingComponent = () => {
   // define a component local memory
-  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('linear-search');
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('bst');
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
