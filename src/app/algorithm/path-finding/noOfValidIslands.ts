@@ -1,9 +1,9 @@
+import { del_col, del_row } from '@/app/constant';
+import { islandColorsPlate } from '@/app/data/mockData';
+import { isValidDirection } from '@/app/lib/helpers';
+import { Sleep } from '@/app/lib/sleepMethod';
+import { GridProps, PathFindingQueueProps } from '@/app/types/uniquePathProps';
 import React from 'react';
-import { GridProps, PathFindingQueueProps } from '../types/uniquePathProps';
-import { Sleep } from '../lib/sleepMethod';
-import { del_col, del_row } from '../constant';
-import { isValidDirection } from '../lib/helpers';
-import { islandColorsPlate } from '../data/mockData';
 
 let counter = 0;
 

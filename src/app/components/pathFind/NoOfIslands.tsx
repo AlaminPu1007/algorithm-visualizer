@@ -1,6 +1,6 @@
 'use client';
 
-import { findNoOfIslands } from '@/app/algorithm/noOfValidIslands';
+import { findNoOfIslands } from '@/app/algorithm/path-finding/noOfValidIslands';
 import { UNIQUE_PATH_GRID_SIZE } from '@/app/constant';
 import { noOfIslandsSortColorsData } from '@/app/data/mockData';
 import { createGridWithUniquePath } from '@/app/data/PathFindingGridData';

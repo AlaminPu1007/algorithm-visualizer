@@ -1,6 +1,6 @@
 'use client';
 
-import { DFSFindUniquePathMethod } from '@/app/algorithm/uniquePath';
+import { DFSFindUniquePathMethod } from '@/app/algorithm/path-finding/uniquePath';
 import { UNIQUE_PATH_GRID_SIZE, UNIQUE_PATH_SVG_ICON_SIZE } from '@/app/constant';
 import { uniquePathFindingSortColorsData } from '@/app/data/mockData';
 import { createGridWithUniquePath } from '@/app/data/PathFindingGridData';
