@@ -1,3 +1,5 @@
+import { ITreeNode } from './TreeTypeProps';
+
 /**
  * Represents a color configuration for status indicators.
  *
@@ -56,4 +58,17 @@ export interface ProjectSchema {
   name: string;
   lists: ListProps[];
   navigate: string;
+}
+
+/**
+ * Interface representing the data structure for each item in the linear search.
+ * It extends from the `ITreeNode` interface and includes an additional `data` property
+ * which is the numerical value being searched.
+ *
+ * @interface LinearSearchDataProps
+ * @extends {ITreeNode}
+ * @property {number} data - The value of the current node used in the linear search.
+ */
+export interface LinearSearchDataProps extends ITreeNode {
+  data: number; // The numerical data value to be searched in the linear search algorithm
 }

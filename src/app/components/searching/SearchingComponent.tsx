@@ -8,10 +8,11 @@ import React, { useEffect, useState } from 'react';
 import { uid } from '@/app/lib/uidGenerator';
 import BinarySearchTreeComponent from './BinarySearchTreeComponent';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
+import LinearSearchComponent from './LinearSearchComponent';
 
 const SearchingComponent = () => {
   // define a component local memory
-  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('bst');
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('linear-search');
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
@@ -47,7 +48,7 @@ const SearchingComponent = () => {
   };
 
   return (
-    <div className='container'>
+    <div className='container relative'>
       <div className='items-end justify-end md:flex'>
         <div className='mt-4 justify-between min-[455px]:flex md:mt-0 md:justify-start'>
           <div className='me-6 flex w-[160px] flex-col justify-end'>
@@ -72,6 +73,9 @@ const SearchingComponent = () => {
               <option data-umami-event='BST-from-searching' value='bst'>
                 Binary search
               </option>
+              <option data-umami-event='Linear-Search-from-searching' value='linear-search'>
+                Linear search
+              </option>
             </select>
 
             <button
@@ -86,6 +90,9 @@ const SearchingComponent = () => {
 
       <div>
         {activeRootBtnType === 'bst' ? <BinarySearchTreeComponent key={randomKey} speedRange={speedRange} /> : null}
+        {activeRootBtnType === 'linear-search' ? (
+          <LinearSearchComponent ueeRandomKey={randomKey} speedRange={speedRange} />
+        ) : null}
       </div>
     </div>
   );
