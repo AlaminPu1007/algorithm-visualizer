@@ -48,7 +48,6 @@ const HeaderComponent = () => {
         <div className='nav-wrapper flex'>
           <Link
             href='/'
-            // className='bg-custom-gradient bg-clip-text pr-4 text-4xl font-bold tracking-wider text-transparent md:pr-0'
             className='m-0 flex items-center p-0 pr-4 text-center text-3xl font-semibold tracking-wider text-theme-secondary sm:text-4xl md:pr-0 dark:text-white'
           >
             <svg
@@ -64,17 +63,36 @@ const HeaderComponent = () => {
                   d='M29.9998 24.4233C29.9998 25.1469 29.4502 25.7312 28.7738 25.7312L16.5182 29.6527C15.8418 29.6527 15.2939 29.0685 15.2939 28.3449V15.2743C15.2939 14.5508 15.8418 13.9665 16.5182 13.9665L28.7738 10.0449C29.4502 10.0449 29.9998 10.6293 29.9998 11.3527V24.4233Z'
                   fill='#42446E'
                   className='transition-colors duration-300 ease-in-out group-hover:fill-[#4db5ff]'
-                />
+                >
+                  <animate
+                    attributeName='fill'
+                    values='#42446E; #ec4899; #a855f7; #6b21a8; #ec4899; #42446E'
+                    dur='4s'
+                    repeatCount='indefinite'
+                  />
+                </path>
                 <path
                   d='M13.4169 28.3449C13.4169 29.0685 12.8967 29.6527 12.2496 29.6527L1.75149 25.7312C1.10811 25.7312 0.587891 25.1469 0.587891 24.4233V11.3527C0.587891 10.6293 1.10811 10.0449 1.75149 10.0449L12.2496 13.9665C12.8967 13.9665 13.4169 14.5508 13.4169 15.2743V28.3449Z'
                   fill='#42446E'
-                  className='transition-colors duration-300 ease-in-out group-hover:fill-[#4db5ff]'
-                />
+                >
+                  <animate
+                    attributeName='fill'
+                    values='#42446E; #a855f7; #ec4899; #6b21a8; #a855f7; #42446E'
+                    dur='4s'
+                    repeatCount='indefinite'
+                  />
+                </path>
                 <path
                   d='M30.0005 6.18386C30.0005 6.80741 28.7762 7.23874 28.7762 7.23874L16.5189 11.5309C16.5189 11.5309 15.4821 11.9623 14.6696 11.9623C13.859 11.9623 12.8737 11.5074 12.8737 11.5074L1.85162 7.29167C1.85162 7.29167 0.586914 6.87014 0.586914 6.18582C0.586914 5.50151 1.85162 5.0368 1.85162 5.0368L12.8774 0.821114C12.8774 0.821114 14.0189 0.366211 14.7046 0.366211C15.3884 0.366211 16.5244 0.801508 16.5244 0.801508L28.7707 5.0917C28.7726 5.08778 30.0005 5.55837 30.0005 6.18386Z'
                   fill='#42446E'
-                  className='transition-colors duration-300 ease-in-out group-hover:fill-[#4db5ff]'
-                />
+                >
+                  <animate
+                    attributeName='fill'
+                    values='#42446E; #6b21a8; #ec4899; #a855f7; #6b21a8; #42446E'
+                    dur='4s'
+                    repeatCount='indefinite'
+                  />
+                </path>
               </g>
             </svg>
           </Link>
