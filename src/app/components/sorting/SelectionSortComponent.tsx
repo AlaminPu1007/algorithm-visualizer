@@ -1,4 +1,4 @@
-import { selectionSortAlgo } from '@/app/algorithm/selectionSort';
+import { selectionSortAlgo } from '@/app/algorithm/sorting/selectionSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
 import { selectionSortColorsData } from '@/app/data/mockData';
 import { sortingData } from '@/app/data/SortData';

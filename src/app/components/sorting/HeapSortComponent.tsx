@@ -1,5 +1,5 @@
 'use client';
-import { heapify, HeapSortApproach } from '@/app/algorithm/heapSort';
+import { heapify, HeapSortApproach } from '@/app/algorithm/sorting/heapSort';
 import { getRandomTreeData, NODE_POSITION } from '@/app/constant';
 import { Tree } from '@/app/data-structure/Tree/TreeNode';
 import { heapSortColorsData } from '@/app/data/mockData';

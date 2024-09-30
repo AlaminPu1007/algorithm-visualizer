@@ -1,6 +1,6 @@
+import { Sleep } from '@/app/lib/sleepMethod';
+import { SortingDataProps } from '@/app/types/sortingProps';
 import React from 'react';
-import { SortingDataProps } from '../types/sortingProps';
-import { Sleep } from '../lib/sleepMethod';
 
 /**
  * A selection algorithm visualization to sort the actual data

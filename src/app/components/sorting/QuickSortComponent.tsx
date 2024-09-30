@@ -1,4 +1,4 @@
-import { quickSortAlgo } from '@/app/algorithm/quickSort';
+import { quickSortAlgo } from '@/app/algorithm/sorting/quickSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
 import { sortingData } from '@/app/data//SortData';
 import { quickSortColorsData } from '@/app/data/mockData';

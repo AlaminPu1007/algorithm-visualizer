@@ -1,4 +1,4 @@
-import { bubbleSortAlgo } from '@/app/algorithm/bubbleSort';
+import { bubbleSortAlgo } from '@/app/algorithm/sorting/bubbleSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
 import { bubbleSortColorsData } from '@/app/data/mockData';
 import { sortingData } from '@/app/data/SortData';

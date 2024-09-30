@@ -1,6 +1,6 @@
+import { Sleep } from '@/app/lib/sleepMethod';
+import { SortingDataProps } from '@/app/types/sortingProps';
 import React from 'react';
-import { SortingDataProps } from '../types/sortingProps';
-import { Sleep } from '../lib/sleepMethod';
 
 /**
  * Performs the QuickSort algorithm on the provided data array, updating the visualization

@@ -1,7 +1,7 @@
+import { Sleep } from '@/app/lib/sleepMethod';
+import { HeapSortedItemProps } from '@/app/types/sortingProps';
+import { ITreeNode } from '@/app/types/TreeTypeProps';
 import React from 'react';
-import { Sleep } from '../lib/sleepMethod';
-import { ITreeNode } from '../types/TreeTypeProps';
-import { HeapSortedItemProps } from '../types/sortingProps';
 
 /**
  * Performs heap sort on an array of tree nodes.

@@ -1,6 +1,6 @@
 'use client';
 
-import { mergeSortMethod } from '@/app/algorithm/mergeSort';
+import { mergeSortMethod } from '@/app/algorithm/sorting/mergeSort';
 import { MERGE_SORT_SVG_HEIGHT, MERGE_SORT_SVG_WIDTH } from '@/app/constant';
 import { mergeSortColorsData } from '@/app/data/mockData';
 import { sortingData } from '@/app/data/SortData';

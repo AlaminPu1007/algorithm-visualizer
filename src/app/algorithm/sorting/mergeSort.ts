@@ -1,7 +1,6 @@
+import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
+import { currentIndicesProps, SortingDataProps } from '@/app/types/sortingProps';
 import React from 'react';
-// import { MERGE_SLEEP_DELAY } from '../constant';
-import { clearAllTimeouts, Sleep } from '../lib/sleepMethod';
-import { currentIndicesProps, SortingDataProps } from '../types/sortingProps';
 
 /**
  * Initiates the merge sort algorithm.
