@@ -5,10 +5,11 @@ import React, { useState } from 'react';
 import LinkedListBasics from './LinkedListBasics';
 import ReverseLinkedList from './ReverseLinkedList';
 import MergeTwoSortedList from './MergeTwoSortedList';
+import DetectCycle from './DetectCycle';
 
 const LinkedListComponent = () => {
   // define a component local memory
-  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('reverse-linked-list');
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('cycle'); //reverse-linked-list
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
@@ -72,6 +73,9 @@ const LinkedListComponent = () => {
                 <option data-umami-event='selection-from-linked-list-BASIC' value='linked-list-crud'>
                   Linked list basics
                 </option>
+                <option data-umami-event='selection-from-linked-list-detect-cycle' value='cycle'>
+                  Detect Cycle
+                </option>
               </select>
             </div>
             <button
@@ -91,6 +95,8 @@ const LinkedListComponent = () => {
           <ReverseLinkedList speedRange={speedRange} updateComponentWithKey={randomKey} />
         ) : activeRootBtnType === 'merge-two-linked-list' ? (
           <MergeTwoSortedList speedRange={speedRange} updateComponentWithKey={randomKey} />
+        ) : activeRootBtnType === 'cycle' ? (
+          <DetectCycle speedRange={speedRange} updateComponentWithKey={randomKey} />
         ) : null}
       </div>
     </div>
