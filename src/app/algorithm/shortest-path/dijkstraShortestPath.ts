@@ -36,7 +36,15 @@ export const findShortestPathUsingDijkstra = async (
   distances[source] = 0;
 
   // Visualize the current node being processed
-  setNodes((prev) => prev.map((node) => (node.id === source ? { ...node, isCurrentNode: true } : node)));
+  setNodes((prev) =>
+    prev.map((node) =>
+      node.id === source
+        ? { ...node, isCurrentNode: true, isSource: true }
+        : node.id === destination
+          ? { ...node, isDestination: true }
+          : node
+    )
+  );
   // Animation delay
   await Sleep(speedRange);
   // Reset isCurrentNode after processing
