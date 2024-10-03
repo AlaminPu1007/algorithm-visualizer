@@ -18,13 +18,26 @@ import { ITreeNode } from '@/app/types/TreeTypeProps';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { useEffect, useState } from 'react';
 
+// Create a new type by picking only speedRange
+type SpeedRangeProps = Pick<PageProps, 'speedRange'>;
+const PEAK_START_NODES = [2, 3, 4, 5];
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }) => {
+const DetectCycle: React.FC<SpeedRangeProps> = ({ speedRange }) => {
   // define component local state
   const [lists, setLists] = useState<ITreeNode | null>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [btnLoading, setBtnLoading] = useState<boolean>(false);
   const [rootVisitedNodes, setRootVisitedNodes] = useState<Map<number, number>>(new Map());
+  const [isPerformOperation, setIsPerformOperation] = useState<boolean>(false);
+  const [cycleNode] = useState<{ start: number; end: number }>({
+    start: PEAK_START_NODES[Math.floor(Math.random() * PEAK_START_NODES.length) % PEAK_START_NODES.length],
+    end: 7,
+  });
+
+  useEffect(() => {
+    resetVisitedMap();
+  }, [speedRange]);
 
   useEffect(() => {
     insertIntoList();
@@ -32,9 +45,16 @@ const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }
     return () => {
       clearAllTimeouts();
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updateComponentWithKey]);
+  }, []);
+
+  useEffect(() => {
+    if (isPerformOperation) {
+      handleIsCyclePresent();
+      setIsPerformOperation(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPerformOperation]);
 
   /**
    * Inserts nodes into the linked list from a predefined data array.
@@ -51,6 +71,7 @@ const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }
       const head = linkedList.head;
       setLists(head);
       createACycle(head);
+      setIsPerformOperation(true);
     }
   };
 
@@ -59,7 +80,7 @@ const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }
    */
   const createACycle = (rootLists: ITreeNode) => {
     resetVisitedMap();
-    const head = createACycleMethod(2, 7, resetNodes(JSON.parse(JSON.stringify(rootLists))));
+    const head = createACycleMethod(cycleNode.start, 7, resetNodes(JSON.parse(JSON.stringify(rootLists))));
     setLists(head);
   };
 
@@ -191,24 +212,23 @@ const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }
           <button
             className={`rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
             disabled={btnLoading}
+            onClick={insertIntoList}
           >
             Revisualize
           </button>
         </div>
 
-        <button onClick={insertIntoList} className='root-btn'>
-          Insert Into node
-        </button>
-        <button onClick={handleIsCyclePresent} className='root-btn'>
-          Detect cycle
-        </button>
         {lists ? (
           <div className='bg-white'>
-            <svg viewBox='13 10 280 140'>
+            <svg viewBox='10 10 280 100'>
               <RenderNodeRecursively node={lists} visited={rootVisitedNodes} />
             </svg>
           </div>
-        ) : null}
+        ) : (
+          <div className='flex min-h-[250px] w-full items-center justify-center'>
+            <h1 className='text-center text-4xl font-medium'>Loading...</h1>
+          </div>
+        )}
       </div>
     </>
   );

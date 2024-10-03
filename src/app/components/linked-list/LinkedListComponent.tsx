@@ -7,9 +7,11 @@ import ReverseLinkedList from './ReverseLinkedList';
 import MergeTwoSortedList from './MergeTwoSortedList';
 import DetectCycle from './DetectCycle';
 
+const IS_PROD = process.env.NODE_ENV === 'production';
+
 const LinkedListComponent = () => {
   // define a component local memory
-  const [activeRootBtnType, setActiveRootBtnType] = useState<string>('cycle'); //reverse-linked-list
+  const [activeRootBtnType, setActiveRootBtnType] = useState<string>(IS_PROD ? 'reverse-linked-list' : 'cycle'); //reverse-linked-list
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(200);
 
@@ -73,9 +75,11 @@ const LinkedListComponent = () => {
                 <option data-umami-event='selection-from-linked-list-BASIC' value='linked-list-crud'>
                   Linked list basics
                 </option>
-                <option data-umami-event='selection-from-linked-list-detect-cycle' value='cycle'>
-                  Detect Cycle
-                </option>
+                {IS_PROD ? null : (
+                  <option data-umami-event='selection-from-linked-list-detect-cycle' value='cycle'>
+                    Detect Cycle
+                  </option>
+                )}
               </select>
             </div>
             <button
@@ -96,7 +100,7 @@ const LinkedListComponent = () => {
         ) : activeRootBtnType === 'merge-two-linked-list' ? (
           <MergeTwoSortedList speedRange={speedRange} updateComponentWithKey={randomKey} />
         ) : activeRootBtnType === 'cycle' ? (
-          <DetectCycle speedRange={speedRange} updateComponentWithKey={randomKey} />
+          <DetectCycle speedRange={speedRange} key={randomKey} />
         ) : null}
       </div>
     </div>
