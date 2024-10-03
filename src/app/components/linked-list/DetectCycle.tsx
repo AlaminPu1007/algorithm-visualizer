@@ -205,7 +205,7 @@ const DetectCycle: React.FC<SpeedRangeProps> = ({ speedRange }) => {
   return (
     <>
       <div>
-        <div className='mt-3 flex items-center justify-between sm:justify-start'>
+        <div className='top-5 mt-3 flex items-center justify-between sm:justify-start md:absolute'>
           <div className='me-3'>
             <StatusColorsPlate data={mergeTwoListColorsPlate} />
           </div>

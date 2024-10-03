@@ -40,7 +40,7 @@ const LinkedListComponent = () => {
   };
 
   return (
-    <div className='container'>
+    <div className='container relative'>
       <div className='mb-2 items-end justify-end md:mb-0 md:flex'>
         <div className='mt-4 justify-between min-[455px]:flex md:mt-0 md:justify-start'>
           <div className='me-6 flex w-[160px] flex-col justify-end'>
