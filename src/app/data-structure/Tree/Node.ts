@@ -32,6 +32,11 @@ export class TreeNode implements ITreeNode {
   isInvalid: boolean;
   isCycle: boolean;
   isInsertedPosition: boolean;
+  destination: { x: number | null; y: number | null };
+  slowPointer: boolean;
+  firstPointer: boolean;
+  isCycleStartPoint: boolean;
+  isCycleEndPoint: boolean;
 
   constructor(
     value: number | null = null,
@@ -51,5 +56,10 @@ export class TreeNode implements ITreeNode {
     this.isInvalid = false;
     this.isCycle = false;
     this.isInsertedPosition = false;
+    this.destination = { x: -1, y: -1 };
+    this.slowPointer = false;
+    this.firstPointer = false;
+    this.isCycleStartPoint = false;
+    this.isCycleEndPoint = false;
   }
 }

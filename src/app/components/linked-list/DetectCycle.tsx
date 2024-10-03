@@ -1,8 +1,18 @@
 'use client';
 
+import {
+  createACycleMethod,
+  findCycleEnd,
+  findCycleStart,
+  markCycleInList,
+  resetNodeFlags,
+  resetNodes,
+  updatePointersInList,
+} from '@/app/algorithm/linked-list/detectCycle';
 import { LinkedList } from '@/app/data-structure/LinkedList/LinkedList';
+import { CYCLE_NODE_DATA } from '@/app/data/linkedListData';
 import { mergeTwoListColorsPlate } from '@/app/data/mockData';
-import { clearAllTimeouts } from '@/app/lib/sleepMethod';
+import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { PageProps } from '@/app/types/linkedListProps';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
@@ -12,9 +22,10 @@ import React, { useEffect, useState } from 'react';
 const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }) => {
   // define component local state
   const [lists, setLists] = useState<ITreeNode | null>();
-  const [rootLists, setRootLists] = useState<ITreeNode | null>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [btnLoading, setBtnLoading] = useState<boolean>(false);
+  const [rootVisitedNodes, setRootVisitedNodes] = useState<Map<number, number>>(new Map());
+
   useEffect(() => {
     insertIntoList();
 
@@ -25,28 +36,149 @@ const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateComponentWithKey]);
 
+  /**
+   * Inserts nodes into the linked list from a predefined data array.
+   */
   const insertIntoList = () => {
-    const data = [
-      { x: 130, y: 20, node: 1 },
-      { x: 180, y: 30, node: 2 },
-      { x: 190, y: 60, node: 3 },
-      { x: 160, y: 90, node: 4 },
-      { x: 120, y: 80, node: 5 },
-      { x: 110, y: 50, node: 6 },
-    ];
-    const Obj = new LinkedList([], 0);
-    for (let i = 0; i < data?.length; i++) {
-      Obj.insertIntoListWithGivenPositionXY(data[i].x, data[i].y, data[i].node);
-    }
-    if (Obj.head) {
-      setLists(Obj.head);
-      setRootLists(JSON.parse(JSON.stringify(Obj.head)));
+    const linkedList = new LinkedList([], 0);
+
+    // initialized a list by nodes
+    CYCLE_NODE_DATA.forEach((item) => {
+      linkedList.insertIntoListWithGivenPositionXY(item.x, item.y, item.node);
+    });
+
+    if (linkedList.head) {
+      const head = linkedList.head;
+      setLists(head);
+      createACycle(head);
     }
   };
 
-  const createACycle = () => {
-    const head = createACycleMethod(3, 6, resetVisitedNodes(JSON.parse(JSON.stringify(rootLists))));
+  /**
+   * Creates a cycle in the linked list.
+   */
+  const createACycle = (rootLists: ITreeNode) => {
+    resetVisitedMap();
+    const head = createACycleMethod(2, 7, resetNodes(JSON.parse(JSON.stringify(rootLists))));
     setLists(head);
+  };
+
+  const handleIsCyclePresent = async () => {
+    try {
+      const sudoHead = lists as ITreeNode;
+
+      let fast: ITreeNode | null | undefined = sudoHead;
+      let slow: ITreeNode | null | undefined = sudoHead;
+
+      // Helper function to update pointers and sleep
+      const updateAndSleep = async (slow: ITreeNode, fast: ITreeNode) => {
+        resetVisitedMap();
+        setLists(() =>
+          updatePointersInList(sudoHead, slow, fast, {
+            slowPointer: true,
+            firstPointer: true,
+          })
+        );
+        await Sleep(speedRange);
+        resetVisitedMap();
+      };
+
+      while (slow && fast && fast.next) {
+        await updateAndSleep(slow, fast);
+
+        slow = slow?.next || null; // Use null as a fallback if slow is undefined
+        fast = fast.next.next || null; // Use null as a fallback if fast.next.next is undefined
+
+        if (slow === fast) {
+          // Step 2: Identify the start of the cycle
+          const startNode = findCycleStart(sudoHead, slow!);
+
+          // Step 3: Identify the end of the cycle
+          const endNode = findCycleEnd(startNode);
+
+          // Mark nodes within the cycle
+          await markAndSleepCycle(sudoHead, startNode, endNode);
+          break;
+        }
+      }
+
+      // Step 4: Reset all previous colors and pointers
+      await resetColorsAndPointers(sudoHead);
+
+      /** restored all previous color */
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
+    }
+  };
+
+  /**
+   * Resets the visited nodes map by initializing it with a new empty Map.
+   * This function is typically used to clear the current state of visited nodes
+   * before starting a new traversal or operation on the data structure.
+   */
+  const resetVisitedMap = () => setRootVisitedNodes(new Map());
+
+  /**
+   * Marks the nodes in a cycle within a linked list and pauses execution for a specified duration.
+   *
+   * This function first resets the visited nodes map, marks the start and end points of the cycle,
+   * and then pauses execution for a brief period to allow for visualization or processing.
+   * After the pause, it resets the visited nodes map again.
+   *
+   * @param head - The head of the linked list.
+   * @param startNode - The node where the cycle starts.
+   * @param endNode - The node where the cycle ends.
+   * @returns A promise that resolves after the sleep duration.
+   */
+  const markAndSleepCycle = async (head: ITreeNode, startNode: ITreeNode, endNode: ITreeNode) => {
+    resetVisitedMap();
+
+    // Mark the cycle in the linked list
+    setLists(() =>
+      markCycleInList(head, startNode, endNode, {
+        isCycleStartPoint: true,
+        isCycleEndPoint: true,
+        isCycle: true,
+      })
+    );
+
+    // Pause execution for the specified duration
+    await Sleep(speedRange);
+
+    // Reset the visited nodes map after the pause
+    resetVisitedMap();
+  };
+
+  /**
+   * Resets the color flags and pointer states of the nodes in a linked list.
+   *
+   * This function resets the visited nodes map, updates the state of each node to clear
+   * the slow and first pointer flags, pauses execution for a specified duration,
+   * and resets the visited nodes map again after the pause.
+   *
+   * @param head - The head of the linked list.
+   * @returns A promise that resolves after the sleep duration.
+   */
+  const resetColorsAndPointers = async (head: ITreeNode) => {
+    // Reset the visited nodes map
+    resetVisitedMap();
+
+    // Clear the slow and first pointer flags for all nodes in the linked list
+    setLists(() =>
+      resetNodeFlags(head, (node: ITreeNode) => {
+        node.slowPointer = false;
+        node.firstPointer = false;
+      })
+    );
+
+    // Pause execution for the specified duration
+    await Sleep(speedRange);
+
+    // Reset the visited nodes map again after the pause
+    resetVisitedMap();
   };
 
   return (
@@ -63,17 +195,17 @@ const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }
             Revisualize
           </button>
         </div>
-        <h1>I am from detect cycle</h1>
+
         <button onClick={insertIntoList} className='root-btn'>
           Insert Into node
         </button>
-        <button onClick={createACycle} className='root-btn'>
-          Circle create
+        <button onClick={handleIsCyclePresent} className='root-btn'>
+          Detect cycle
         </button>
         {lists ? (
           <div className='bg-white'>
             <svg viewBox='13 10 280 140'>
-              <RenderNodeRecursively node={lists} />
+              <RenderNodeRecursively node={lists} visited={rootVisitedNodes} />
             </svg>
           </div>
         ) : null}
@@ -82,12 +214,34 @@ const DetectCycle: React.FC<PageProps> = ({ speedRange, updateComponentWithKey }
   );
 };
 
-const radius = 6; // Circle radius
+const radius = 5; // Circle radius
 
-const RenderNodeRecursively: React.FC<{ node: ITreeNode | null }> = ({ node }) => {
+const RenderNodeRecursively: React.FC<{ node: ITreeNode | null; visited: Map<number, number> }> = ({
+  node,
+  visited,
+}) => {
   // Base case: If node is null or already visited, stop rendering
-  if (!node || node.isVisited) return null;
-  node.isVisited = true;
+  if (!node || visited.has(Number(node.id))) return null;
+
+  visited.set(Number(node.id), 1);
+
+  let cycle_fill_color = 'white';
+  let text_fill_color = 'black';
+
+  if (node.slowPointer) {
+    cycle_fill_color = `red`;
+    text_fill_color = `white`;
+  }
+
+  if (node.firstPointer) {
+    cycle_fill_color = `blue`;
+    text_fill_color = `white`;
+  }
+
+  if (node.isCycle || node.isCycleStartPoint || node.isCycleEndPoint) {
+    cycle_fill_color = `green`;
+    text_fill_color = `white`;
+  }
 
   return (
     <>
@@ -140,8 +294,8 @@ const RenderNodeRecursively: React.FC<{ node: ITreeNode | null }> = ({ node }) =
           cx={node.cx!}
           cy={node.cy!}
           r={radius}
-          fill={node.isCurrent ? 'red' : node.isTarget ? 'green' : 'white'}
-          stroke='black'
+          fill={cycle_fill_color}
+          stroke={node.isCycle || node.isCycleStartPoint || node.isCycleEndPoint ? 'white' : 'black'}
           strokeWidth='0.3'
         ></circle>
 
@@ -152,14 +306,14 @@ const RenderNodeRecursively: React.FC<{ node: ITreeNode | null }> = ({ node }) =
           dy={2}
           textAnchor='middle'
           className='text-center text-[4px]'
-          fill={node.isInsertedPosition || node.isCurrent || node.isTarget ? 'white' : 'black'}
+          fill={text_fill_color}
         >
           {node?.value}
         </text>
       </g>
 
       {/* Recursively render the next node */}
-      {node.next ? <RenderNodeRecursively node={node.next} /> : null}
+      {node.next ? <RenderNodeRecursively node={node.next} visited={visited} /> : null}
     </>
   );
 };
@@ -176,52 +330,6 @@ const calculateOffsetLine = (x1: number, y1: number, x2: number, y2: number, rad
     newX2: x2 - offsetX,
     newY2: y2 - offsetY,
   };
-};
-
-const resetVisitedNodes = (head: ITreeNode | null): ITreeNode | null => {
-  let currentNode = head; // Start from the head
-
-  while (currentNode) {
-    // Reset the property
-    currentNode.isVisited = false;
-    currentNode.isCurrent = false;
-    currentNode.isSwap = false;
-    currentNode.isSorted = false;
-    currentNode.isTarget = false;
-    currentNode.isInvalid = false;
-    currentNode.isCycle = false;
-    currentNode.isInsertedPosition = false;
-    // Move to the next node
-    currentNode = currentNode.next as ITreeNode;
-  }
-  return head;
-};
-
-const createACycleMethod = (start: number, end: number, head: ITreeNode | null | undefined): ITreeNode | null => {
-  if (!head) return null;
-
-  let startNode: ITreeNode | null = null;
-  let endNode: ITreeNode | null = null;
-
-  // Traverse the linked list to find the start and end nodes
-  let currentNode: ITreeNode | null = head; // Keep original node references
-
-  while (currentNode) {
-    if (currentNode.value === start) {
-      startNode = currentNode; // Set the start node
-    }
-    if (currentNode.value === end) {
-      endNode = currentNode; // Set the end node
-    }
-    currentNode = currentNode.next as ITreeNode; // Move to the next node
-  }
-
-  // If both startNode and endNode are found, create the cycle
-  if (endNode && startNode) {
-    endNode.next = startNode; // Create a cycle
-  }
-
-  return head; // Return the head
 };
 
 export default DetectCycle;

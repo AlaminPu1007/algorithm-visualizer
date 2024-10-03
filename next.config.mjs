@@ -3,4 +3,4 @@ const nextConfig = {
   reactStrictMode: false, // Disable Strict Mode
 };
 
-export default nextConfig;
+export default process.env.NODE_ENV === 'production' ? {} : nextConfig;

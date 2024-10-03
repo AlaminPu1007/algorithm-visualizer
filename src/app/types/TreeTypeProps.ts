@@ -31,6 +31,11 @@ export interface ITreeNode {
   next: ITreeNode | null;
   isCycle: boolean;
   isInsertedPosition: boolean;
+  destination: { x: number | null; y: number | null };
+  slowPointer: boolean;
+  firstPointer: boolean;
+  isCycleStartPoint: boolean;
+  isCycleEndPoint: boolean;
 }
 
 /**
@@ -56,4 +61,30 @@ export interface TreeDFSTraversalProps {
  */
 export interface TreeBFSTraversalProps {
   root: TreeNode | null;
+}
+
+/**
+ * Interface representing the flags used to mark nodes involved in a cycle.
+ *
+ * @interface CycleFlags
+ * @property {boolean} [isCycleStartPoint] - Indicates if the node is the start of the cycle.
+ * @property {boolean} [isCycleEndPoint] - Indicates if the node is the end of the cycle.
+ * @property {boolean} [isCycle] - Indicates if the node is part of the cycle.
+ */
+export interface CycleFlags {
+  isCycleStartPoint?: boolean;
+  isCycleEndPoint?: boolean;
+  isCycle?: boolean;
+}
+
+/**
+ * Interface representing flags used to indicate the state of pointers in a linked list traversal.
+ *
+ * @interface PointerFlags
+ * @property {boolean} [slowPointer] - Indicates if the node is currently being pointed to by the slow pointer.
+ * @property {boolean} [firstPointer] - Indicates if the node is currently being pointed to by the fast pointer.
+ */
+export interface PointerFlags {
+  slowPointer?: boolean;
+  firstPointer?: boolean;
 }
