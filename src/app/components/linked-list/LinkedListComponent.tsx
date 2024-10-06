@@ -64,6 +64,9 @@ const LinkedListComponent = () => {
                 <option data-umami-event='selection-from-linked-list-reverse-list' value='reverse-linked-list'>
                   Reverse list
                 </option>
+                <option data-umami-event='selection-from-linked-list-detect-cycle' value='cycle'>
+                  Detect Cycle
+                </option>
                 <option
                   data-umami-event='selection-from-linked-list-merge-two-sorted-list'
                   value='merge-two-linked-list'
@@ -72,9 +75,6 @@ const LinkedListComponent = () => {
                 </option>
                 <option data-umami-event='selection-from-linked-list-BASIC' value='linked-list-crud'>
                   Linked list basics
-                </option>
-                <option data-umami-event='selection-from-linked-list-detect-cycle' value='cycle'>
-                  Detect Cycle
                 </option>
               </select>
             </div>
