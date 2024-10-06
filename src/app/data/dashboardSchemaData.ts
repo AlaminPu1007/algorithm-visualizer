@@ -100,6 +100,10 @@ export const projectsData: ProjectSchema[] = [
         id: uid(),
         name: 'Basic (CRUD)',
       },
+      {
+        id: uid(),
+        name: 'Detect Cycle',
+      },
     ],
     navigate: '/linked-list',
   },

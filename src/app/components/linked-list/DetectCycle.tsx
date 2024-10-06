@@ -11,7 +11,7 @@ import {
 } from '@/app/algorithm/linked-list/detectCycle';
 import { LinkedList } from '@/app/data-structure/LinkedList/LinkedList';
 import { CYCLE_NODE_DATA } from '@/app/data/linkedListData';
-import { mergeTwoListColorsPlate } from '@/app/data/mockData';
+import { detectCycleFromGivenLinkedList } from '@/app/data/mockData';
 import { clearAllTimeouts, Sleep } from '@/app/lib/sleepMethod';
 import { PageProps } from '@/app/types/linkedListProps';
 import { ITreeNode } from '@/app/types/TreeTypeProps';
@@ -26,7 +26,6 @@ const PEAK_START_NODES = [2, 3, 4, 5];
 const DetectCycle: React.FC<SpeedRangeProps> = ({ speedRange }) => {
   // define component local state
   const [lists, setLists] = useState<ITreeNode | null>();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [btnLoading, setBtnLoading] = useState<boolean>(false);
   const [rootVisitedNodes, setRootVisitedNodes] = useState<Map<number, number>>(new Map());
   const [isPerformOperation, setIsPerformOperation] = useState<boolean>(false);
@@ -86,6 +85,8 @@ const DetectCycle: React.FC<SpeedRangeProps> = ({ speedRange }) => {
 
   const handleIsCyclePresent = async () => {
     try {
+      setBtnLoading(true);
+
       const sudoHead = lists as ITreeNode;
 
       let fast: ITreeNode | null | undefined = sudoHead;
@@ -132,6 +133,8 @@ const DetectCycle: React.FC<SpeedRangeProps> = ({ speedRange }) => {
         // eslint-disable-next-line no-console
         console.error(error);
       }
+    } finally {
+      setBtnLoading(false);
     }
   };
 
@@ -207,7 +210,7 @@ const DetectCycle: React.FC<SpeedRangeProps> = ({ speedRange }) => {
       <div>
         <div className='top-5 mt-3 flex items-center justify-between sm:justify-start md:absolute'>
           <div className='me-3'>
-            <StatusColorsPlate data={mergeTwoListColorsPlate} />
+            <StatusColorsPlate data={detectCycleFromGivenLinkedList} />
           </div>
           <button
             className={`rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
@@ -315,7 +318,11 @@ const RenderNodeRecursively: React.FC<{ node: ITreeNode | null; visited: Map<num
           cy={node.cy!}
           r={radius}
           fill={cycle_fill_color}
-          stroke={node.isCycle || node.isCycleStartPoint || node.isCycleEndPoint ? 'white' : 'black'}
+          stroke={
+            node.isCycle || node.isCycleStartPoint || node.isCycleEndPoint || node.firstPointer || node.slowPointer
+              ? 'white'
+              : 'black'
+          }
           strokeWidth='0.3'
         ></circle>
 

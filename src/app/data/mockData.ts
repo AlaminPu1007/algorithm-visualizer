@@ -331,3 +331,21 @@ export const LinearSearchColorsProps: StatusColorsDataProps[] = [
     bg_color: 'bg-green-600',
   },
 ];
+
+export const detectCycleFromGivenLinkedList: StatusColorsDataProps[] = [
+  {
+    id: 2,
+    title: 'First Pointer',
+    bg_color: 'bg-blue-600',
+  },
+  {
+    id: 3,
+    title: 'Slow Pointer',
+    bg_color: 'bg-red-600',
+  },
+  {
+    id: 1,
+    title: 'Part Of Cycle',
+    bg_color: 'bg-green-600',
+  },
+];
