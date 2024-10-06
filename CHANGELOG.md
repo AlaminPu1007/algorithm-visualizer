@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.0 (Oct 26, 2024)
+
+- **Detect cycle in linked list :** Implemented a new feature for linked lists to visualize if a list contains a cycle.
+
 ## 1.2.0 (Sep 26, 2024)
 
 - Home component hero section is integrated.

@@ -51,42 +51,6 @@ npm run dev
 - Navigate to the specific visualization from the home page.
 - Use the provided controls to interact with the algorithms and view their visualizations.
 
-## Contributing
-
-We welcome contributions from the community! To contribute to this project, please follow these steps:
-
-1. Fork the repository on GitHub.
-
-2. Create a new branch for your feature or bug fix:
-
-```bash {"id":"01J7AT1ZH6GZWCDTK6XX8T3ACR"}
-git checkout -b my-feature-branch
-
-```
-
-3. Make your changes and commit them with a descriptive message:
-
-```bash {"id":"01J7AT1ZH6GZWCDTK6XZSSNJPM"}
-git add .
-git commit -m "Add new feature or fix bug"
-
-```
-
-4. Push your changes to your fork:
-
-```bash {"id":"01J7AT1ZH7V01BT5M99R0V29BF"}
-git push origin my-feature-branch
-
-```
-
-5. Open a pull request on GitHub, describing your changes and any relevant details.
-
-Please review our [CONTRIBUTING.md](CONTRIBUTING.md) for more details on contributing.
-
-## Code of Conduct
-
-We are committed to creating a welcoming and inclusive community. Please adhere to our Code of [Conduct](CODE_OF_CONDUCT.md) while participating in this project.
-
 ## License
 
 This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/). See the [LICENSE](LICENSE) file for details.
