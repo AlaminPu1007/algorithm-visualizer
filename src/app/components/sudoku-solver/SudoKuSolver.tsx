@@ -34,8 +34,8 @@ const SudoKuSolver = () => {
   return (
     <div className='container'>
       <div className='relative'>
-        <div className='mb-3 flex flex-col-reverse justify-end min-[455px]:flex-row min-[455px]:items-end'>
-          <div className='mb-2 items-end justify-end md:mb-0 md:flex'>
+        <div className='mb-2 flex flex-col-reverse justify-end min-[455px]:flex-row min-[455px]:items-end'>
+          <div className='mb-0 items-end justify-end md:mb-0 md:flex'>
             <div className='mt-4 flex justify-between md:mt-0'>
               <div className='me-0 flex w-[160px] flex-col justify-end'>
                 <p className='m-0 mb-1 p-0 text-sm'>Speed: {speedRange} (0 to 1500)</p>

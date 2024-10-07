@@ -364,7 +364,7 @@ export const sudokuColorsPlate: StatusColorsDataProps[] = [
   {
     id: 3,
     title: 'Check Row',
-    bg_color: 'bg-orange-600',
+    bg_color: 'bg-[#D895DA]',
   },
   {
     id: 4,

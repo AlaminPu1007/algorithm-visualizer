@@ -1,5 +1,5 @@
 import { Sleep } from '@/app/lib/sleepMethod';
-import { GridInputProps, SudoKuBoardProps } from '@/app/types/sudokyProps';
+import { SudoKuBoardProps } from '@/app/types/sudokyProps';
 import React from 'react';
 import { toast } from 'react-toastify';
 
@@ -57,7 +57,7 @@ const isValidSudoku = (board: SudoKuBoardProps[][]): boolean => {
 export const Solve = async (
   board: SudoKuBoardProps[][],
   setBoard: React.Dispatch<React.SetStateAction<SudoKuBoardProps[][]>>,
-  setInputsData: React.Dispatch<React.SetStateAction<GridInputProps[][]>>,
+  setInputsData: React.Dispatch<React.SetStateAction<SudoKuBoardProps[][]>>,
   speedRange: number
 ): Promise<boolean> => {
   // Before attempting to solve, check if the provided board is already valid
@@ -156,7 +156,7 @@ const isValid = async (
   col: number,
   c: string,
   setBoard: React.Dispatch<React.SetStateAction<SudoKuBoardProps[][]>>,
-  setInputsData: React.Dispatch<React.SetStateAction<GridInputProps[][]>>,
+  setInputsData: React.Dispatch<React.SetStateAction<SudoKuBoardProps[][]>>,
   speedRange: number
 ): Promise<boolean> => {
   try {

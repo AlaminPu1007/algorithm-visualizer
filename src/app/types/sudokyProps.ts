@@ -26,16 +26,3 @@ export interface SudoKuBoardProps {
   isValidSubGridItem: boolean;
   isInvalid: boolean;
 }
-
-/**
- * Interface representing the properties for grid input fields in the Sudoku board.
- *
- * @interface GridInputProps
- *
- * @property {string} value - The current value of the input (typically a number from 1-9 or an empty string).
- * @property {string | number} id - A unique identifier for the input field.
- */
-export interface GridInputProps {
-  value: string;
-  id: string | number;
-}

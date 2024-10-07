@@ -5,7 +5,7 @@ import { sudokuColorsPlate } from '@/app/data/mockData';
 import { SUDOKU_BOARD_DATA } from '@/app/data/sudokuData';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import { addRandomHashesToBoard } from '@/app/lib/sudokuHelperMethod';
-import { GridInputProps, SudoKuBoardProps } from '@/app/types/sudokyProps';
+import { SudoKuBoardProps } from '@/app/types/sudokyProps';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange }) => {
   /** Define component local memory state */
   const [board, setBoard] = useState<SudoKuBoardProps[][]>([]);
-  const [inputsData, setInputsData] = useState<GridInputProps[][]>([]);
+  const [inputsData, setInputsData] = useState<SudoKuBoardProps[][]>([]);
   const [btnLoading, setBtnLoading] = useState<boolean>(false);
   const [isPerformOperation, setIsPerformOperation] = useState<boolean>(false);
 
@@ -61,16 +61,18 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
     }
 
     // Update the `inputsData` state with the valid value or clear it if invalid
-    setInputsData((prevData) => {
-      const updatedInputData = [...prevData];
-      updatedInputData[rowIndex][colIndex].value = validValue ? value : ''; // Set the value or clear
-      return updatedInputData;
+    setInputsData((prevBoard) => {
+      const updatedBoard = [...prevBoard];
+      updatedBoard[rowIndex][colIndex].value = validValue ? value : ''; // Set the value or clear
+      updatedBoard[rowIndex][colIndex].isValid = false; // Set the value or clear
+      return updatedBoard;
     });
 
     // Update the `board` state with the valid value or clear it if invalid
     setBoard((prevBoard) => {
       const updatedBoard = [...prevBoard];
       updatedBoard[rowIndex][colIndex].value = validValue ? value : ''; // Set the value or clear
+      updatedBoard[rowIndex][colIndex].isValid = false; // Set the value or clear
       return updatedBoard;
     });
   };
@@ -144,7 +146,7 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
           Visualize
         </button>
       </div>
-      <div className='mt-2'>
+      <div className='mt-2 sm:mt-4'>
         {board?.length ? (
           <div className='item-center flex flex-col justify-start'>
             {board.map((row, rowIndex) => (
@@ -179,7 +181,7 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
                   }
                   // for valid row check
                   if (board[rowIndex][colIndex].isValidRowItem) {
-                    BG_COLOR = `bg-orange-600 text-white`;
+                    BG_COLOR = `bg-[#D895DA] text-white`;
                   }
                   // for valid col check
                   if (board[rowIndex][colIndex].isValidColItem) {
@@ -196,7 +198,7 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
 
                   return (
                     <div
-                      className={`flex h-[60px] w-[60px] items-center justify-center ${borderStyles} ${BG_COLOR}`}
+                      className={`flex items-center justify-center sm:h-[60px] sm:w-[60px] md:h-[65px] md:w-[65px] ${borderStyles} ${BG_COLOR}`}
                       key={col.id}
                     >
                       <input
