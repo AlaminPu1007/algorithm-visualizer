@@ -63,3 +63,15 @@ body {
 .footer-nav-link {
   @apply relative inline-block px-1 pb-1 text-base text-theme-secondary duration-300 after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-theme-secondary after:duration-300 hover:after:w-full lg:text-lg dark:text-theme-dark-secondary dark:after:bg-theme-white;
 }
+
+@layer utilities {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    @apply appearance-none; /* Hide number spinner for Webkit browsers */
+  }
+
+  /* For Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield; /* Hide spinner for Firefox */
+  }
+}
