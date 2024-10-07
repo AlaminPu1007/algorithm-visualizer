@@ -10,7 +10,7 @@ export const projectsData: ProjectSchema[] = [
     id: uid(),
     name: 'Sudoku Solver',
     navigate: '/sudoku-solver',
-    lists: [
+    tags: [
       {
         id: uid(),
         name: 'DFS',
@@ -21,7 +21,7 @@ export const projectsData: ProjectSchema[] = [
     id: uid(),
     name: 'Tree',
     navigate: '/tree',
-    lists: [
+    tags: [
       {
         id: uid(),
         name: 'DFS (in-order, pre-order, post-order)',
@@ -35,13 +35,18 @@ export const projectsData: ProjectSchema[] = [
   {
     id: uid(),
     name: 'N Queens',
-    lists: [],
+    tags: [
+      {
+        id: uid(),
+        name: 'DFS',
+      },
+    ],
     navigate: '/n-queens',
   },
   {
     id: uid(),
     name: 'Sorting',
-    lists: [
+    tags: [
       {
         id: uid(),
         name: 'Merge',
@@ -68,7 +73,7 @@ export const projectsData: ProjectSchema[] = [
   {
     id: uid(),
     name: 'Path Finding',
-    lists: [
+    tags: [
       {
         id: uid(),
         name: 'Dijkstra',
@@ -87,7 +92,7 @@ export const projectsData: ProjectSchema[] = [
   {
     id: uid(),
     name: 'Searching',
-    lists: [
+    tags: [
       {
         id: uid(),
         name: 'Binary Search',
@@ -98,7 +103,7 @@ export const projectsData: ProjectSchema[] = [
   {
     id: uid(),
     name: 'Linked List',
-    lists: [
+    tags: [
       {
         id: uid(),
         name: 'Reverse list',

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.2 (Oct 07, 2024)
+
+Improved some UI in footer component & Home component.
+
 ## 1.4.0 (Oct 07, 2024)
 
 ### Added

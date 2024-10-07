@@ -56,7 +56,7 @@ export interface ListProps {
 export interface ProjectSchema {
   id: string;
   name: string;
-  lists: ListProps[];
+  tags: ListProps[];
   navigate: string;
 }
 
