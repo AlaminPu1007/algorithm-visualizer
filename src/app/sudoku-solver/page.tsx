@@ -1,10 +1,10 @@
 import React from 'react';
-import SudoKuSolverComponent from '../components/sudoku-solver/SudoKuSolverComponent';
+import SudoKuSolver from '../components/sudoku-solver/SudoKuSolver';
 
 const page = () => {
   return (
     <>
-      <SudoKuSolverComponent />
+      <SudoKuSolver />
     </>
   );
 };

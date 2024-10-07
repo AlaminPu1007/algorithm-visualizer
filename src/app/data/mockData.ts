@@ -349,3 +349,41 @@ export const detectCycleFromGivenLinkedList: StatusColorsDataProps[] = [
     bg_color: 'bg-green-600',
   },
 ];
+
+/**
+ * Sudoku solver colors plate for current or other status
+ *
+ * @type {StatusColorsDataProps[]}
+ */
+export const sudokuColorsPlate: StatusColorsDataProps[] = [
+  {
+    id: 2,
+    title: 'Current',
+    bg_color: 'bg-blue-600',
+  },
+  {
+    id: 3,
+    title: 'Check Row',
+    bg_color: 'bg-orange-600',
+  },
+  {
+    id: 4,
+    title: 'Check Col',
+    bg_color: 'bg-[#EB8317]',
+  },
+  {
+    id: 5,
+    title: 'Check Sub-grid',
+    bg_color: 'bg-purple-600',
+  },
+  {
+    id: 6,
+    title: 'Invalid',
+    bg_color: 'bg-red-600',
+  },
+  {
+    id: 1,
+    title: 'Valid',
+    bg_color: 'bg-green-600',
+  },
+];
