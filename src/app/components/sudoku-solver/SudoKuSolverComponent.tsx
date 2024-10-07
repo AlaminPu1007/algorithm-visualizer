@@ -4,7 +4,7 @@ import { Solve } from '@/app/algorithm/sudoku-solver/sudokuSolver';
 import { sudokuColorsPlate } from '@/app/data/mockData';
 import { SUDOKU_BOARD_DATA } from '@/app/data/sudokuData';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
-import { addRandomHashesToBoard } from '@/app/lib/sudokuHelperMethod';
+import { addRandomHashesToBoard, InitialGridWithDefaultValue } from '@/app/lib/sudokuHelperMethod';
 import { SudoKuBoardProps } from '@/app/types/sudokyProps';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { ReactNode, useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
   const [inputsData, setInputsData] = useState<SudoKuBoardProps[][]>([]);
   const [btnLoading, setBtnLoading] = useState<boolean>(false);
   const [isPerformOperation, setIsPerformOperation] = useState<boolean>(false);
+  const [rootData, setRootData] = useState<SudoKuBoardProps[][]>([]);
 
   // Trigger for component mount
   useEffect(() => {
@@ -23,6 +24,7 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
     const tempBoard = addRandomHashesToBoard(JSON.parse(JSON.stringify(SUDOKU_BOARD_DATA)), 4);
     setBoard(tempBoard);
     setInputsData(tempBoard);
+    setRootData(tempBoard);
     setIsPerformOperation(true);
     // Trigger for component un-mount
     return () => clearAllTimeouts();
@@ -78,28 +80,6 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
   };
 
   /**
-   * Initiate board with it's default value
-   *
-   * @param {SudoKuBoardProps[][]} board
-   * @returns {*}
-   */
-  const InitialGridWithDefaultValue = (board: SudoKuBoardProps[][]) => {
-    return JSON.parse(JSON.stringify(board)).map((row: SudoKuBoardProps[]) =>
-      row.map((cell) => ({
-        ...cell,
-        isValid: false, // Reset the validity of the cell
-        isActive: false, // Reset the active state of the cell
-        isCurrent: false, // Reset the current state of the cell
-        isTarget: false, // Reset the target state of the cell
-        isValidRowItem: false, // Reset the row validity flag
-        isValidColItem: false, // Reset the column validity flag
-        isValidSubGridItem: false, // Reset the subgrid validity flag
-        isInvalid: false, // Reset the invalid state of the cell
-      }))
-    );
-  };
-
-  /**
    * Handles the execution of the Sudoku solver algorithm.
    *
    * This function prepares the Sudoku board by resetting certain properties,
@@ -132,19 +112,37 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
     }
   };
 
+  /** Prevent to perform sudoku solver */
+  const handleStopSudokuMethod = () => {
+    clearAllTimeouts();
+    const tempBoard = JSON.parse(JSON.stringify(rootData));
+    setBoard([...tempBoard]);
+    setInputsData([...tempBoard]);
+    setBtnLoading(false);
+  };
+
   return (
     <>
       <div className='flex items-center justify-between sm:absolute sm:top-4'>
         <div className='me-3'>
           <StatusColorsPlate data={sudokuColorsPlate} />
         </div>
-        <button
-          className={`rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
-          onClick={handleSudoKuSolver}
-          disabled={btnLoading}
-        >
-          Visualize
-        </button>
+        <div className='flex items-center'>
+          <button
+            className={`rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
+            onClick={handleSudoKuSolver}
+            disabled={btnLoading}
+          >
+            Visualize
+          </button>
+          <button
+            className={`ms-2 rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${!btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
+            onClick={handleStopSudokuMethod}
+            disabled={!btnLoading}
+          >
+            Stop
+          </button>
+        </div>
       </div>
       <div className='mt-2 sm:mt-4'>
         {board?.length ? (

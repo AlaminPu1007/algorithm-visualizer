@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.3 (Oct 07, 2024)
+
+Sudoku solver stop visualization functionality is integrated.
+
 ## 1.4.2 (Oct 07, 2024)
 
 Improved some UI in footer component & Home component.

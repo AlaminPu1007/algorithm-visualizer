@@ -45,3 +45,25 @@ export const addRandomHashesToBoard = (tempBoard: SudoKuBoardProps[][], maxHashe
 
   return tempBoard;
 };
+
+/**
+ * Initiate board with it's default value
+ *
+ * @param {SudoKuBoardProps[][]} board
+ * @returns {*}
+ */
+export const InitialGridWithDefaultValue = (board: SudoKuBoardProps[][]) => {
+  return JSON.parse(JSON.stringify(board)).map((row: SudoKuBoardProps[]) =>
+    row.map((cell) => ({
+      ...cell,
+      isValid: false, // Reset the validity of the cell
+      isActive: false, // Reset the active state of the cell
+      isCurrent: false, // Reset the current state of the cell
+      isTarget: false, // Reset the target state of the cell
+      isValidRowItem: false, // Reset the row validity flag
+      isValidColItem: false, // Reset the column validity flag
+      isValidSubGridItem: false, // Reset the sub-grid validity flag
+      isInvalid: false, // Reset the invalid state of the cell
+    }))
+  );
+};
