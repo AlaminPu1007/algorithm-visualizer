@@ -4,6 +4,7 @@ import { Solve } from '@/app/algorithm/sudoku-solver/sudokuSolver';
 import { sudokuColorsPlate } from '@/app/data/mockData';
 import { SUDOKU_BOARD_DATA } from '@/app/data/sudokuData';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
+import { addRandomHashesToBoard } from '@/app/lib/sudokuHelperMethod';
 import { GridInputProps, SudoKuBoardProps } from '@/app/types/sudokyProps';
 import StatusColorsPlate from '@/app/utils/StatusColorsPlate';
 import React, { ReactNode, useEffect, useState } from 'react';
@@ -19,7 +20,7 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
   // Trigger for component mount
   useEffect(() => {
     clearAllTimeouts();
-    const tempBoard = JSON.parse(JSON.stringify(SUDOKU_BOARD_DATA));
+    const tempBoard = addRandomHashesToBoard(JSON.parse(JSON.stringify(SUDOKU_BOARD_DATA)), 4);
     setBoard(tempBoard);
     setInputsData(tempBoard);
     setIsPerformOperation(true);
@@ -131,12 +132,19 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
 
   return (
     <>
-      <div className='min-[455px]:absolute min-[455px]:top-4'>
-        <div className='mb-3 min-[455px]:mb-0 min-[455px]:me-3'>
+      <div className='flex items-center justify-between sm:absolute sm:top-4'>
+        <div className='me-3'>
           <StatusColorsPlate data={sudokuColorsPlate} />
         </div>
+        <button
+          className={`rounded-sm border px-4 py-1 text-[15px] text-white transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600' : 'bg-blue-500 hover:bg-theme-btn-secondary'}`}
+          onClick={handleSudoKuSolver}
+          disabled={btnLoading}
+        >
+          Visualize
+        </button>
       </div>
-      <div>
+      <div className='mt-2'>
         {board?.length ? (
           <div className='item-center flex flex-col justify-start'>
             {board.map((row, rowIndex) => (
