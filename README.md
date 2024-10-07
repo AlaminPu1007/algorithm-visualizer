@@ -10,10 +10,13 @@ A Next.js 14 project for visualizing famous algorithms using React, TypeScript, 
 - **Sorting Algorithms**: Visualize five sorting algorithms, including merge sort, quick sort, heap sort (with a tree graph visualization), selection sort, and bubble sort.
 - **Interactive UI**: Built with React and styled using Tailwind CSS, providing a user-friendly interface for exploring algorithms.
 - **Linked List Operations** :
+
   1. **Basic Operations** : Create, find, and delete nodes in a linked list.
   2. **Reverse Linked List** : Visualize the reversal of a linked list
   3. **Merge Two Sorted Lists** : Visualize the merging of two sorted linked lists
   4. **Cycle Detection** : Implement and visualize a cycle detection algorithm in linked lists to see if a list contains a cycle.
+
+- **Sudoku Solver**: Introduced an interactive visualization for the `Sudoku Solver problem`, allowing users to create and customize their own Sudoku boards.
 
 ## Getting Started
 

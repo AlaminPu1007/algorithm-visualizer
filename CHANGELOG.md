@@ -1,6 +1,24 @@
 # Changelog
 
-## 1.3.0 (Oct 26, 2024)
+## 1.4.0 (Oct 07, 2024)
+
+### Added
+
+- Basic functionality for users to input Sudoku puzzles.
+- Visualization of the solving process with step-by-step highlights of cell updates.
+- Reset and submit buttons for user interaction.
+
+### Changed
+
+- Updated styles to improve the visual appearance of the Sudoku grid.
+- Optimized performance for larger grids to enhance rendering speed.
+
+### Fixed
+
+- Corrected errors in the random number generation function to ensure valid placements.
+- Fixed accessibility issues for keyboard navigation in the grid.
+
+## 1.3.0 (Oct 03, 2024)
 
 - **Detect cycle in linked list :** Implemented a new feature for linked lists to visualize if a list contains a cycle.
 

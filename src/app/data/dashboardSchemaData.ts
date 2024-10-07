@@ -8,6 +8,17 @@ import { ProjectSchema } from '../types/commonProps';
 export const projectsData: ProjectSchema[] = [
   {
     id: uid(),
+    name: 'Sudoku Solver',
+    navigate: '/sudoku-solver',
+    lists: [
+      {
+        id: uid(),
+        name: 'DFS',
+      },
+    ],
+  },
+  {
+    id: uid(),
     name: 'Tree',
     navigate: '/tree',
     lists: [
