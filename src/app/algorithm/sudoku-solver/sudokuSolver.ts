@@ -22,7 +22,12 @@ const isValidSudoku = (board: SudoKuBoardProps[][]): boolean => {
       const value = board[i][j].value;
 
       // Skip empty cells
-      if (value === '#' || value === '') continue;
+      if (value === '#') continue;
+
+      // if any cell is empty, need to validate them
+      if (value.trim() === '') {
+        return false;
+      }
 
       // Create a unique key for row, column, and sub-grid checks
       const rowKey = `row-${i}-${value}`;

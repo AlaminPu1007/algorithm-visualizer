@@ -54,12 +54,16 @@ const SudoKuSolverComponent: React.FC<{ speedRange: number }> = ({ speedRange })
       return toast.error(`Only 1 number allowed at a time`);
     }
 
+    if (!value?.length) {
+      toast.error(`Field can not be empty`);
+    }
+
     // Validate input to accept only numbers 1-9 or a '#' (optional symbol for special cases)
     const validValue = /^[1-9|#]$/.test(value);
 
     // If the value is invalid (not a number between 1-9 or '#' and not empty), show an error
     if (!validValue && value !== '') {
-      toast.error(`Only numbers 1-9 are allowed.`);
+      toast.error(`Only numbers 1-9 & # are allowed.`);
     }
 
     // Update the `inputsData` state with the valid value or clear it if invalid

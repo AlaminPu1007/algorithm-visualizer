@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.4 (Oct 09, 2024)
+
+Handle error on sudoku solver component.
+
 ## 1.4.3 (Oct 07, 2024)
 
 Sudoku solver stop visualization functionality is integrated.
