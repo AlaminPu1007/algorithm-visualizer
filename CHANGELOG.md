@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.5 (Oct 10, 2024)
+
+- **Bellman-Ford Algorithm:** Implemented the Bellman-Ford algorithm for finding the shortest path in a weighted graph.
+- **Loading State Management:** Added loading state management during the execution of the algorithm.
+- **Error Handling:** Implemented error handling to log errors in development mode.
+
 ## 1.4.4 (Oct 09, 2024)
 
 Handle error on sudoku solver component.

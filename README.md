@@ -4,11 +4,20 @@ A Next.js 14 project for visualizing famous algorithms using React, TypeScript, 
 
 ## Features
 
-- **Unique Path Finding**: Visualize algorithms to find the number of unique paths in a grid and solve the number of islands problem.
+- **Path Finding Visualization**: Visualize algorithms for finding paths in a grid, including:
+
+  1. **Unique Path Finding**: Solve the unique paths problem in a grid.
+  2. **Number of Islands Problem**: Visualize the algorithm to count the number of islands.
+  3. **Shortest Path Finding**: Implementations of Bellman-Ford and Dijkstra's algorithms for shortest path calculations.
+
 - **N-Queens Problem**: Interactive visualization of the N-Queens problem, demonstrating various solutions and techniques.
+
 - **Tree and Graph Traversals**: Visualize traversal algorithms including depth-first search (DFS) with in-order, pre-order, and post-order techniques, as well as breadth-first search (BFS).
+
 - **Sorting Algorithms**: Visualize five sorting algorithms, including merge sort, quick sort, heap sort (with a tree graph visualization), selection sort, and bubble sort.
+
 - **Interactive UI**: Built with React and styled using Tailwind CSS, providing a user-friendly interface for exploring algorithms.
+
 - **Linked List Operations** :
 
   1. **Basic Operations** : Create, find, and delete nodes in a linked list.
@@ -49,9 +58,9 @@ npm install
 ```
 
 4. Start the development server:
-   `bash
-npm run dev
-`
+   ```
+   npm run dev
+   ```
    The application will be available at http://localhost:3000.
 
 ### Usage
