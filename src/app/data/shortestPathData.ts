@@ -11,22 +11,40 @@ import { IGraphEdge } from '../types/shortestPathProps';
  */
 
 export const generateEdges = (): IGraphEdge[] => {
-  return [
+  const directedEdges = [
     { source: 0, target: 1, weight: generateRandomWeight(), weightPosition: { x: -1, y: 45 } },
     { source: 0, target: 7, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
     { source: 1, target: 2, weight: generateRandomWeight(), weightPosition: { x: -1, y: 18 } },
-    { source: 1, target: 7, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
+    { source: 1, target: 7, weight: generateRandomWeight(5), weightPosition: { x: -1, y: -1 } },
     { source: 2, target: 3, weight: generateRandomWeight(), weightPosition: { x: -1, y: 18 } },
     { source: 2, target: 8, weight: generateRandomWeight(), weightPosition: { x: -1, y: 45 } },
     { source: 2, target: 5, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
-    { source: 3, target: 4, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
+    { source: 3, target: 4, weight: generateRandomWeight(5), weightPosition: { x: -1, y: -1 } },
     { source: 3, target: 5, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
-    { source: 4, target: 5, weight: generateRandomWeight(), weightPosition: { x: -1, y: 85 } },
+    { source: 4, target: 5, weight: generateRandomWeight(9), weightPosition: { x: -1, y: 85 } },
     { source: 5, target: 6, weight: generateRandomWeight(), weightPosition: { x: -1, y: 108 } },
-    { source: 6, target: 7, weight: generateRandomWeight(), weightPosition: { x: -1, y: 108 } },
+    { source: 6, target: 7, weight: generateRandomWeight(5), weightPosition: { x: -1, y: 108 } },
     { source: 6, target: 8, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
     { source: 7, target: 8, weight: generateRandomWeight(), weightPosition: { x: -1, y: 75 } },
   ];
+
+  // Create undirected edges by duplicating each directed edge
+  const undirectedEdges: IGraphEdge[] = [];
+
+  directedEdges.forEach((edge) => {
+    // Add the original directed edge
+    undirectedEdges.push(edge);
+
+    // Add the reverse directed edge to make it undirected
+    undirectedEdges.push({
+      source: edge.target,
+      target: edge.source,
+      weight: edge.weight,
+      weightPosition: edge.weightPosition, // Optionally adjust weight position for visualization
+    });
+  });
+
+  return undirectedEdges;
 };
 
 /**
@@ -38,7 +56,7 @@ export const generateEdges = (): IGraphEdge[] => {
  * containing the source node, target node, and weight.
  */
 export const generateEdgesForASearch = (): IGraphEdge[] => {
-  return [
+  const directedEdges = [
     { source: 0, target: 1, weight: generateRandomWeight(), weightPosition: { x: -1, y: 32 } },
     { source: 0, target: 7, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
     { source: 1, target: 2, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
@@ -49,7 +67,7 @@ export const generateEdgesForASearch = (): IGraphEdge[] => {
     { source: 3, target: 4, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
     { source: 11, target: 4, weight: generateRandomWeight(), weightPosition: { x: -1, y: 57 } },
     { source: 4, target: 5, weight: generateRandomWeight(), weightPosition: { x: -1, y: 85 } },
-    { source: 15, target: 6, weight: generateRandomWeight(), weightPosition: { x: -1, y: 148 } },
+    { source: 12, target: 6, weight: generateRandomWeight(), weightPosition: { x: -1, y: 148 } },
     { source: 6, target: 9, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
     { source: 3, target: 8, weight: generateRandomWeight(), weightPosition: { x: -1, y: 18 } },
     { source: 1, target: 8, weight: generateRandomWeight(5), weightPosition: { x: -1, y: 18 } },
@@ -57,15 +75,46 @@ export const generateEdgesForASearch = (): IGraphEdge[] => {
     { source: 10, target: 9, weight: generateRandomWeight(), weightPosition: { x: -1, y: 127 } },
     { source: 3, target: 11, weight: generateRandomWeight(), weightPosition: { x: -1, y: 45 } },
     { source: 5, target: 11, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
-    { source: 5, target: 15, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
+    { source: 5, target: 12, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
     { source: 6, target: 11, weight: generateRandomWeight(), weightPosition: { x: -1, y: -1 } },
-    { source: 16, target: 11, weight: generateRandomWeight(), weightPosition: { x: -1, y: 58 } },
+    { source: 13, target: 11, weight: generateRandomWeight(), weightPosition: { x: -1, y: 58 } },
   ];
+
+  // Create undirected edges by duplicating each directed edge
+  const undirectedEdges: IGraphEdge[] = [];
+
+  directedEdges.forEach((edge) => {
+    // Add the original directed edge
+    undirectedEdges.push(edge);
+
+    // Add the reverse directed edge to make it undirected
+    undirectedEdges.push({
+      source: edge.target,
+      target: edge.source,
+      weight: edge.weight,
+      weightPosition: edge.weightPosition, // Optionally adjust weight position for visualization
+    });
+  });
+
+  return undirectedEdges;
 };
 
 /**
  * Root data of graph data
  */
+// Define the common properties for nodes
+const nodeProperties = {
+  isVisited: false,
+  isCurrentNode: false,
+  isShortestPath: false,
+  isInvalidPath: false,
+  isDestination: false,
+  isSource: false,
+  distance: Number.MAX_SAFE_INTEGER,
+  isTargetNode: false,
+};
+
+// Updated graphData using the spread operator
 export const graphData = [
   {
     nodes: [
@@ -73,101 +122,56 @@ export const graphData = [
         id: 0,
         x: 50,
         y: 60,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Closer to the top-left
+        ...nodeProperties,
+      },
       {
         id: 1,
         x: 100,
         y: 20,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Top-middle-left
+        ...nodeProperties,
+      },
       {
         id: 2,
         x: 200,
         y: 20,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Top-middle-right
+        ...nodeProperties,
+      },
       {
         id: 3,
         x: 300,
         y: 20,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Top-right
+        ...nodeProperties,
+      },
       {
         id: 4,
         x: 350,
         y: 60,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Middle-right
+        ...nodeProperties,
+      },
       {
         id: 5,
         x: 300,
         y: 100,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Middle-right (above node 6)
+        ...nodeProperties,
+      },
       {
         id: 6,
         x: 200,
         y: 100,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Middle (below node 2)
+        ...nodeProperties,
+      },
       {
         id: 7,
         x: 100,
         y: 100,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Middle-left
+        ...nodeProperties,
+      },
       {
         id: 8,
         x: 200,
         y: 60,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Center
+        ...nodeProperties,
+      },
     ],
     edges: [...generateEdges()],
     source: 0,
@@ -180,160 +184,90 @@ export const graphData = [
         id: 0,
         x: 50,
         y: 60,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Closer to the top-left
+        ...nodeProperties,
+      },
       {
         id: 1,
         x: 100,
         y: 20,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Top-middle-left
+        ...nodeProperties,
+      },
       {
         id: 2,
         x: 100,
         y: 60,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Top-middle-right
+        ...nodeProperties,
+      },
       {
         id: 3,
         x: 300,
         y: 20,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Top-right
+        ...nodeProperties,
+      },
       {
         id: 4,
         x: 350,
         y: 60,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
+        ...nodeProperties,
       },
       {
         id: 5,
         x: 300,
         y: 100,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Middle-right (above node 6)
+        ...nodeProperties,
+      },
       {
         id: 6,
         x: 200,
         y: 150,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
-      }, // Middle (below node 2)
+        ...nodeProperties,
+      },
       {
         id: 7,
         x: 70,
         y: 100,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
+        ...nodeProperties,
       },
       {
         id: 8,
         x: 200,
         y: 20,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
+        ...nodeProperties,
       },
       {
         id: 9,
         x: 130,
         y: 100,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
+        ...nodeProperties,
       },
       {
         id: 10,
         x: 100,
         y: 150,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
+        ...nodeProperties,
       },
       {
         id: 11,
         x: 250,
         y: 60,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
+        ...nodeProperties,
       },
       {
-        id: 15,
+        id: 12,
         x: 350,
         y: 150,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
+        ...nodeProperties,
       },
       {
-        id: 16,
+        id: 13,
         x: 180,
         y: 60,
-        isVisited: false,
-        isCurrentNode: false,
-        isShortestPath: false,
-        isInvalidPath: false,
-        isDestination: false,
-        isSource: false,
+        ...nodeProperties,
       },
     ],
     edges: [...generateEdgesForASearch()],
     source: 0,
-    destination: 16,
-    nodeSizes: 17,
+    destination: 13,
+    nodeSizes: 14,
   },
 ];

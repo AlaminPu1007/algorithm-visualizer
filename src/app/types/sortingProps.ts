@@ -1,3 +1,5 @@
+import { IGraphNode } from './shortestPathProps';
+
 /**
  * Interface representing the structure of each item in the merge sort data array.
  *
@@ -43,4 +45,17 @@ export interface currentIndicesProps {
 export interface HeapSortedItemProps {
   data: number;
   id: number;
+}
+
+/**
+ * shortest path graph creation types
+ *
+ * @export
+ * @interface GraphNodesProps
+ * @typedef {GraphNodesProps}
+ * @extends {IGraphNode}
+ */
+export interface GraphNodesProps extends IGraphNode {
+  distance: number;
+  isTargetNode: boolean;
 }

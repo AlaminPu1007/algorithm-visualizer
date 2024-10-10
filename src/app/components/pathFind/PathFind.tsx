@@ -6,11 +6,11 @@ import UniquePath from './UniquePath';
 import { gridRowColSize } from '@/app/lib/helpers';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import NoOfIslands from './NoOfIslands';
-import DijkstraComponent from './DijkstraComponent';
+import ShortestPath from './ShortestPath';
 
 const PathFind = () => {
   // define local state
-  const [buttonType, setButtonType] = useState<string>('dijkstra');
+  const [buttonType, setButtonType] = useState<string>('shortest-path'); //dijkstra
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(100);
   const [gridSize, setGridSize] = useState<{ rowSize: number; colSize: number }>({ rowSize: 8, colSize: 10 });
@@ -82,7 +82,7 @@ const PathFind = () => {
             />
           </div>
           <div className='items-end min-[410px]:flex'>
-            {buttonType !== 'dijkstra' ? (
+            {buttonType !== 'shortest-path' ? (
               <div className='flex'>
                 <div className='max-[410px]:w-[45%]'>
                   <p className='text-md m-0 p-0 font-medium'>Row</p>
@@ -125,8 +125,8 @@ const PathFind = () => {
                 value={buttonType}
                 className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-[60%]'
               >
-                <option data-umami-event='selection-from-path-finding-Dijkstra' value='dijkstra'>
-                  Dijkstra
+                <option data-umami-event='selection-from-path-finding-shortest-path' value='shortest-path'>
+                  Shortest Path
                 </option>
                 <option data-umami-event='selection-from-path-finding-unique-path' value='unique-path'>
                   Unique Path
@@ -155,8 +155,8 @@ const PathFind = () => {
         <div className='container'>
           <NoOfIslands useRandomKey={randomKey} speedRange={speedRange} gridSize={submittedGridSize} />
         </div>
-      ) : buttonType === 'dijkstra' ? (
-        <DijkstraComponent useRandomKey={randomKey} speedRange={speedRange} />
+      ) : buttonType === 'shortest-path' ? (
+        <ShortestPath useRandomKey={randomKey} speedRange={speedRange} />
       ) : null}
     </div>
   );
