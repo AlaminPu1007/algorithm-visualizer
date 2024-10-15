@@ -84,6 +84,10 @@ export const projectsData: ProjectSchema[] = [
       },
       {
         id: uid(),
+        name: 'Floyd Warshall',
+      },
+      {
+        id: uid(),
         name: 'Rat in maze',
       },
       {
