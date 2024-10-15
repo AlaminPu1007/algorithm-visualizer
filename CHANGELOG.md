@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0 (Oct 15, 2024)
+
+- **Floyd Warshall Algorithm:** Implemented the Floyd warshall algorithm for finding the shortest path in a weighted graph.
+- **Loading State Management:** Added loading state management during the execution of the algorithm.
+- **Error Handling:** Implemented error handling to log errors in development mode.
+
 ## 1.5.5 (Oct 10, 2024)
 
 - **Bellman-Ford Algorithm:** Implemented the Bellman-Ford algorithm for finding the shortest path in a weighted graph.
