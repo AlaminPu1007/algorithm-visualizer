@@ -236,8 +236,8 @@ const ShortestPath: React.FC<PageProps> = ({ speedRange, useRandomKey }) => {
   };
 
   return (
-    <div className='container'>
-      <div className='items-center justify-start sm:flex'>
+    <div>
+      <div className='top-4 items-center justify-start sm:flex lg:absolute'>
         <div className='mt-3 flex items-center justify-start pb-1'>
           <div className='me-3'>
             <StatusColorsPlate data={dijkstraColorsPlate} />

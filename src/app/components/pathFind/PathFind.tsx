@@ -10,7 +10,7 @@ import ShortestPath from './ShortestPath';
 
 const PathFind = () => {
   // define local state
-  const [buttonType, setButtonType] = useState<string>('shortest-path'); //dijkstra
+  const [buttonType, setButtonType] = useState<string>('unique-path'); //dijkstra
   const [randomKey, setRandomKey] = useState<string>('1');
   const [speedRange, setSpeedRange] = useState<number>(100);
   const [gridSize, setGridSize] = useState<{ rowSize: number; colSize: number }>({ rowSize: 8, colSize: 10 });
@@ -66,58 +66,60 @@ const PathFind = () => {
   };
 
   return (
-    <div className='pb-5'>
-      <div className='container'>
-        <div className='items-end justify-between sm:flex'>
-          <div className='me-6 w-[160px]'>
-            <p className='m-0 mb-1 p-0 text-sm'>Speed: {speedRange} (0 to 1500)</p>
-            <input
-              value={speedRange}
-              onChange={inputRangeMethod}
-              type='range'
-              id='points'
-              name='points'
-              min='0'
-              max='1500'
-            />
-          </div>
-          <div className='items-end min-[410px]:flex'>
-            {buttonType !== 'shortest-path' ? (
-              <div className='flex'>
-                <div className='max-[410px]:w-[45%]'>
-                  <p className='text-md m-0 p-0 font-medium'>Row</p>
-                  <select
-                    onChange={handleSelectChangeForRow}
-                    value={gridSize.rowSize}
-                    className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-full'
-                  >
-                    {[...gridRowColSize(9)].map((item) => {
-                      return (
-                        <option key={item.id} value={item.value}>
-                          {item.value}
-                        </option>
-                      );
-                    })}
-                  </select>
+    <div className='container relative pb-5'>
+      <div className=''>
+        <div className='items-end justify-end sm:flex'>
+          <div className='items-end min-[600px]:flex'>
+            <div className='me-6 w-[160px]'>
+              <p className='m-0 mb-1 p-0 text-sm'>Speed: {speedRange} (0 to 1500)</p>
+              <input
+                value={speedRange}
+                onChange={inputRangeMethod}
+                type='range'
+                id='points'
+                name='points'
+                min='0'
+                max='1500'
+              />
+            </div>
+            <div>
+              {buttonType !== 'shortest-path' ? (
+                <div className='flex'>
+                  <div className='max-[600px]:w-[45%]'>
+                    <p className='text-md m-0 p-0 font-medium'>Row</p>
+                    <select
+                      onChange={handleSelectChangeForRow}
+                      value={gridSize.rowSize}
+                      className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[600px]:w-full'
+                    >
+                      {[...gridRowColSize(9)].map((item) => {
+                        return (
+                          <option key={item.id} value={item.value}>
+                            {item.value}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                  <div className='mx-3 max-[600px]:w-[45%]'>
+                    <p className='text-md m-0 p-0 font-medium'>Col</p>
+                    <select
+                      onChange={handleSelectChangeForCol}
+                      value={gridSize.colSize}
+                      className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[600px]:w-full'
+                    >
+                      {[...gridRowColSize(21)].map((item) => {
+                        return (
+                          <option key={item.id} value={item.value}>
+                            {item.value}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
                 </div>
-                <div className='mx-3 max-[410px]:w-[45%]'>
-                  <p className='text-md m-0 p-0 font-medium'>Col</p>
-                  <select
-                    onChange={handleSelectChangeForCol}
-                    value={gridSize.colSize}
-                    className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-full'
-                  >
-                    {[...gridRowColSize(21)].map((item) => {
-                      return (
-                        <option key={item.id} value={item.value}>
-                          {item.value}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              </div>
-            ) : null}
+              ) : null}
+            </div>
             <div className='max-[410px]:mt-3'>
               <p className='text-md m-0 p-0 font-medium'>Select type</p>
               <select
@@ -125,14 +127,14 @@ const PathFind = () => {
                 value={buttonType}
                 className='text-md cursor-pointer rounded-sm border-[1px] border-theme-primary px-[5px] py-[4px] outline-none transition-all duration-200 hover:border-theme-btn-secondary max-[410px]:w-[60%]'
               >
-                <option data-umami-event='selection-from-path-finding-shortest-path' value='shortest-path'>
-                  Shortest Path
-                </option>
                 <option data-umami-event='selection-from-path-finding-unique-path' value='unique-path'>
                   Unique Path
                 </option>
                 <option data-umami-event='selection-from-path-finding-no-of-islands' value='no-of-island'>
                   No of island
+                </option>
+                <option data-umami-event='selection-from-path-finding-shortest-path' value='shortest-path'>
+                  Shortest Path
                 </option>
               </select>
 

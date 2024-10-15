@@ -98,7 +98,7 @@ const UniquePath: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, g
   };
 
   return (
-    <div className='container'>
+    <>
       <div className='items-start justify-between pb-1 pt-3 sm:flex'>
         <div className='flex items-center justify-center sm:block'>
           <StatusColorsPlate data={uniquePathFindingSortColorsData} />
@@ -227,7 +227,7 @@ const UniquePath: React.FC<UniquePathPageProps> = ({ useRandomKey, speedRange, g
           </div>
         ) : null}
       </div>
-    </div>
+    </>
   );
 };
 
