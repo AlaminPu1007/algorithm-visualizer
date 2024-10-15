@@ -1,12 +1,11 @@
 /* eslint-disable indent */
 'use client';
-import {
-  findShortestPathUsingBellmanFord,
-  handleResetData,
-} from '@/app/algorithm/shortest-path/bellmanFordShortestPath';
+import { findShortestPathUsingBellmanFord } from '@/app/algorithm/shortest-path/bellmanFordShortestPath';
 import { findShortestPathUsingDijkstra } from '@/app/algorithm/shortest-path/dijkstraShortestPath';
+import { findShortestPathUsingFloydWarshall } from '@/app/algorithm/shortest-path/floydWarshall';
 import { dijkstraColorsPlate } from '@/app/data/mockData';
 import { generateEdges, generateEdgesForASearch, graphData } from '@/app/data/shortestPathData';
+import { handleResetDataForShortestPath } from '@/app/lib/graph';
 import { clearAllTimeouts } from '@/app/lib/sleepMethod';
 import { IGraphEdge, IGraphNode } from '@/app/types/shortestPathProps';
 import { GraphNodesProps } from '@/app/types/sortingProps';
@@ -158,6 +157,46 @@ const ShortestPath: React.FC<PageProps> = ({ speedRange, useRandomKey }) => {
   };
 
   /**
+   * Handles the execution of the Floyd-Warshall algorithm to find the shortest path
+   * from the source to the destination node.
+   *
+   * This function sets the loading state before initiating the algorithm, handles any
+   * errors that may occur during execution, and resets the loading state afterward.
+   *
+   * @async
+   * @param {Object} params - Parameters for the function.
+   * @param {number} [params.source=0] - The index of the source node (default is 0).
+   * @param {number} [params.destination=4] - The index of the destination node (default is 4).
+   * @param {number} [params.nodeSizes=10] - The number of nodes in the graph (default is 10).
+   *
+   * @returns {Promise<void>} A promise that resolves when the function completes.
+   */
+  const handleFloydWarshall = async ({ source = 0, destination = 4, nodeSizes = 9 }): Promise<void> => {
+    try {
+      setBtnLoading(true); // Set loading state to true while processing
+      await findShortestPathUsingFloydWarshall(
+        source, // Pass the source node
+        destination, // Pass the destination node
+        nodeSizes, // Pass the number of nodes
+        nodes, // Current nodes state
+        speedRange, // Speed range for visualization
+        setNodes, // Setter for updating nodes state
+        edges, // Current edges in the graph
+        setBtnLoading, // Setter for loading state
+        setShortestPathEdges // Setter for updating the shortest path edges
+      );
+    } catch (error) {
+      if (process.env.NODE_ENV === 'development') {
+        // Log errors in development mode
+        // eslint-disable-next-line no-console
+        console.error(error);
+      }
+    } finally {
+      setBtnLoading(false); // Reset loading state to false after processing
+    }
+  };
+
+  /**
    * Re-visualizes the graph based on the selected algorithm type.
    * Resets the graph to its initial state and calculates the shortest path
    * using either Dijkstra's algorithm or the Bellman-Ford algorithm.
@@ -171,12 +210,15 @@ const ShortestPath: React.FC<PageProps> = ({ speedRange, useRandomKey }) => {
   const handleReVisualized = async (type: string) => {
     const { source, destination, nodeSizes } = initialNodes;
     // initialized all at initial state
-    setNodes(handleResetData(nodes));
+    setNodes(handleResetDataForShortestPath(nodes));
     setShortestPathEdges([]);
+
     if (type === 'dijkstra') {
       await handleDijkstra({ source, destination, nodeSizes });
-    } else {
+    } else if (type === 'bellman-ford') {
       await handleBellmanFord({ source, destination, nodeSizes });
+    } else {
+      await handleFloydWarshall({ source, destination, nodeSizes });
     }
   };
 
@@ -201,20 +243,27 @@ const ShortestPath: React.FC<PageProps> = ({ speedRange, useRandomKey }) => {
             <StatusColorsPlate data={dijkstraColorsPlate} />
           </div>
         </div>
-        <div className='mt-2 flex items-center justify-start'>
+        <div className='mt-2 flex flex-wrap items-center justify-start'>
           <button
-            className={`mx-2 rounded-sm border px-4 py-1 text-[15px] transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600 text-white' : variationOfShortestPath === 'dijkstra' ? 'bg-theme-btn-secondary text-white' : 'bg-white text-black hover:bg-theme-btn-secondary hover:text-white'}`}
+            className={`me-2 rounded-sm border px-4 py-1 text-[15px] transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600 text-white' : variationOfShortestPath === 'dijkstra' ? 'bg-theme-btn-secondary text-white' : 'bg-white text-black hover:bg-theme-btn-secondary hover:text-white'}`}
             onClick={() => handleAlgorithmType('dijkstra')}
             disabled={btnLoading}
           >
             Dijkstra
           </button>
           <button
-            className={`rounded-sm border px-4 py-1 text-[15px] transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600 text-white' : variationOfShortestPath === 'bellman-ford' ? 'bg-theme-btn-secondary text-white' : 'bg-white text-black hover:bg-theme-btn-secondary hover:text-white'}`}
+            className={`me-2 rounded-sm border px-4 py-1 text-[15px] transition-all duration-300 ${btnLoading ? 'cursor-no-drop bg-gray-600 text-white' : variationOfShortestPath === 'bellman-ford' ? 'bg-theme-btn-secondary text-white' : 'bg-white text-black hover:bg-theme-btn-secondary hover:text-white'}`}
             onClick={() => handleAlgorithmType('bellman-ford')}
             disabled={btnLoading}
           >
             Bellman
+          </button>
+          <button
+            className={`rounded-sm border px-4 py-1 text-[15px] transition-all duration-300 max-[380px]:mt-2 ${btnLoading ? 'cursor-no-drop bg-gray-600 text-white' : variationOfShortestPath === 'floyd-warshall' ? 'bg-theme-btn-secondary text-white' : 'bg-white text-black hover:bg-theme-btn-secondary hover:text-white'}`}
+            onClick={() => handleAlgorithmType('floyd-warshall')}
+            disabled={btnLoading}
+          >
+            Floyd Warshall
           </button>
         </div>
       </div>

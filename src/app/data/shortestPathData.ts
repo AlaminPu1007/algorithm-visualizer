@@ -176,7 +176,7 @@ export const graphData = [
     edges: [...generateEdges()],
     source: 0,
     destination: 4,
-    nodeSizes: 10,
+    nodeSizes: 9,
   },
   {
     nodes: [

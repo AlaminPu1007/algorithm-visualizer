@@ -1,3 +1,4 @@
+import { handleResetDataForShortestPath } from '@/app/lib/graph';
 import { Sleep } from '@/app/lib/sleepMethod';
 import { IGraphEdge } from '@/app/types/shortestPathProps';
 import { GraphNodesProps } from '@/app/types/sortingProps';
@@ -32,7 +33,7 @@ export const findShortestPathUsingBellmanFord = async (
 ): Promise<void> => {
   try {
     // Initialize node distances and predecessors
-    const tempNodes = handleResetData(nodes);
+    const tempNodes = handleResetDataForShortestPath(nodes);
     const predecessors = new Array(nodeSizes).fill(null);
 
     // Set initial nodes and add visualization delay
@@ -74,7 +75,6 @@ export const findShortestPathUsingBellmanFord = async (
         break;
       }
     }
-
     setNodes([...tempNodes]);
 
     // Check for negative weight cycles
@@ -234,29 +234,4 @@ const backtrackShortestPath = async (
   setNodes((prev) =>
     prev.map((node) => (node.id === source ? { ...node, isShortestPath: true, isSource: false } : node))
   );
-};
-
-/**
- * Resets the properties of each node in the graph to their initial state.
- * This is useful for preparing the nodes for a new graph algorithm execution
- * by clearing previous statuses and setting default values.
- *
- * @param {GraphNodesProps[]} nodes - An array of graph nodes that need to be reset.
- * Each node should have properties like `isVisited`, `isCurrentNode`, `isShortestPath`,
- * `isInvalidPath`, `isDestination`, `isSource`, `distance`, and `isTargetNode`.
- *
- * @returns {GraphNodesProps[]} - A new array of graph nodes with reset properties.
- */
-export const handleResetData = (nodes: GraphNodesProps[]): GraphNodesProps[] => {
-  return nodes.map((node) => ({
-    ...node,
-    isVisited: false,
-    isCurrentNode: false,
-    isShortestPath: false,
-    isInvalidPath: false,
-    isDestination: false,
-    isSource: false,
-    distance: Number.MAX_SAFE_INTEGER,
-    isTargetNode: false,
-  }));
 };
